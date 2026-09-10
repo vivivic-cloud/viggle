@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>VIGGLE</title>
+<style>
+:root{
+  --bg:#fff; --ink:#111110; --body:#1A1A19; --soft:#6E6E6A; --muted:#9C9C98;
+  --line:#EDEDEB; --edge:#E2E2DF; --fill:#F4F4F2; --fill2:#EAEAE7; --red:#FF3B30;
+  --brand:38px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--body);
+  font:15px/1.45 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",system-ui,sans-serif;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  -webkit-font-smoothing:antialiased;overscroll-behavior-y:contain}
+input,textarea{-webkit-user-select:text;user-select:text}
+button{font:inherit;color:inherit}
+.brand{position:fixed;left:0;right:0;top:0;z-index:80;
+  height:calc(var(--brand) + env(safe-area-inset-top));
+  padding-top:env(safe-area-inset-top);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--bg);border-bottom:1px solid var(--line)}
+.brand svg{display:block}
+.brand b{font-size:15px;font-weight:800;letter-spacing:3.2px;color:var(--ink)}
+body{padding-top:calc(var(--brand) + env(safe-area-inset-top))}
+.wrap{max-width:430px;margin:0 auto;padding:0 20px calc(40px + env(safe-area-inset-bottom))}
+
+/* ── 머리 ───────────────────────────────────────────────── */
+.top{position:relative;height:86px}   /* 머리 전용 — 다른 곳에 top 을 붙이면 높이가 딸려간다 */
+.mode{position:absolute;left:0;top:20px;display:flex;align-items:center;gap:9px;
+  padding:6px 13px 6px 6px;border-radius:999px;background:#fff;border:1px solid var(--line);
+  box-shadow:0 6px 18px -13px rgba(0,0,0,.4);cursor:pointer}
+.mode .dot{width:36px;height:36px;border-radius:50%;background:var(--ink);
+  display:grid;place-items:center;flex:none;color:#fff}
+.mode b{font-size:16px;font-weight:600;letter-spacing:-.2px}
+.mode .chev{color:var(--soft);display:grid;place-items:center;transition:transform .18s}
+.mode.open .chev{transform:rotate(180deg)}
+.avatar{position:absolute;right:0;top:14px;width:50px;height:50px;border-radius:50%;
+  background:var(--fill2);display:grid;place-items:center;font-weight:700;font-size:17px;
+  color:var(--ink);cursor:pointer}
+
+h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-weight:700;color:var(--ink)}
+.role{display:inline-flex;align-items:center;gap:6px;vertical-align:11px;margin-left:9px;
+  border:1px solid var(--ink);border-radius:999px;padding:3px 9px;
+  font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--ink);cursor:pointer}
+.sub{margin:0 0 22px;color:var(--muted);font-size:15px}
+
+/* ── 줄 ─────────────────────────────────────────────────── */
+.bar{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
+.tbtn{display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:5px 0;
+  font-size:14px;cursor:pointer}
+.tbtn.g{color:var(--muted)}
+
+/* ── 박스 타일 ──────────────────────────────────────────── */
+.tiles{display:grid;grid-template-columns:1.02fr 1fr;gap:12px}
+.tile{position:relative;border-radius:26px;padding:17px;display:flex;flex-direction:column;
+  justify-content:space-between;overflow:hidden;cursor:pointer;border:1px solid transparent;
+  text-align:left;min-height:150px;transition:transform .12s}
+.tile:active{transform:scale(.975)}
+.tile.s1{min-height:0}
+.tile.light{background:var(--fill)}
+.tile.white{background:#fff;border-color:var(--edge)}
+.tile.dark{background:var(--ink);color:#fff}
+.tile .ico{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;flex:none;
+  background:rgba(0,0,0,.05)}
+.tile.dark .ico{background:rgba(255,255,255,.14)}
+.tile.white .ico{background:var(--fill)}
+.tile h3{margin:0;font-size:20px;line-height:1.22;letter-spacing:-.5px;font-weight:700}
+.tile.s1 h3{font-size:23px}
+.tile .pct{margin:5px 0 0;font-size:12.5px;color:var(--muted)}
+.tile.dark .pct{color:rgba(255,255,255,.5)}
+
+.red{position:absolute;right:13px;top:13px;width:9px;height:9px;border-radius:50%;
+  background:var(--red);box-shadow:0 0 0 3px #fff}
+.tile.dark .red{box-shadow:0 0 0 3px var(--ink)}
+.tile.light .red{box-shadow:0 0 0 3px var(--fill)}
+
+/* ── 최근 박스 ──────────────────────────────────────────── */
+.sec{display:flex;align-items:center;justify-content:space-between;margin:26px 0 12px}
+.sec h2{margin:0;font-size:19px;font-weight:700;letter-spacing:-.4px;color:var(--ink)}
+.list{display:flex;flex-direction:column;gap:9px}
+.row{position:relative;display:flex;align-items:center;gap:12px;background:var(--fill);
+  border-radius:999px;padding:8px 16px 8px 8px;cursor:pointer;border:0;width:100%;
+  transition:transform .12s}
+.row:active{transform:scale(.985)}
+.row .ico{width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:#fff}
+.row .ico.dark{background:var(--ink);color:#fff}
+.row .t{flex:1;min-width:0;font-size:15px;text-align:left;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .when{font-size:12px;color:var(--muted);flex:none}
+.path{display:block;font-size:11px;font-style:normal;color:var(--muted);font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.path.ontile{margin:0 0 3px;font-size:10.5px;letter-spacing:.2px}
+.tile.dark .path{color:rgba(255,255,255,.45)}
+.abox .path{margin-top:2px}
+.abox.dark .path{color:rgba(255,255,255,.45)}
+.list.dense .path{display:none}
+.row .red{right:15px;top:7px;box-shadow:0 0 0 3px var(--fill)}
+.list.dense{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.list.dense .row{flex-direction:column;gap:7px;border-radius:18px;padding:12px 8px}
+.list.dense .ico{width:38px;height:38px}
+.list.dense .t{font-size:12px;text-align:center;white-space:normal;line-height:1.25;
+  max-height:2.5em;overflow:hidden}
+.list.dense .when{display:none}
+.list.dense .red{right:8px;top:8px}
+
+.setrow{display:flex;justify-content:center;margin:16px 0 0}
+.set{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--edge);
+  border-radius:999px;padding:9px 15px;font-size:13px;color:var(--soft);cursor:pointer}
+
+/* ── 겹치는 판(모드/전체보기/검색/설정/대화) ─────────────── */
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  top:calc(var(--brand) + env(safe-area-inset-top));background:rgba(17,17,16,.34);
+  display:none;align-items:flex-end;backdrop-filter:blur(2px)}
+.sheet.on{display:flex}
+.card{background:#fff;width:100%;max-height:88vh;border-radius:26px 26px 0 0;
+  padding:8px 20px calc(20px + env(safe-area-inset-bottom));overflow:auto;
+  animation:up .22s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(24px);opacity:.6}}
+.grip{width:38px;height:4px;border-radius:2px;background:var(--edge);margin:6px auto 14px}
+.card h4{margin:0 0 12px;font-size:17px;font-weight:700;letter-spacing:-.3px}
+.mi{display:flex;align-items:center;gap:11px;width:100%;background:none;border:0;
+  padding:13px 4px;border-bottom:1px solid var(--line);cursor:pointer;font-size:15px;text-align:left}
+.mi:last-child{border-bottom:0}
+.mi .k{flex:1}
+.mi.on{font-weight:700}
+.fld{width:100%;border:1px solid var(--edge);border-radius:13px;padding:12px 14px;
+  font:inherit;font-size:15px;background:#fff;outline:none}
+.fld:focus{border-color:var(--ink)}
+
+/* 말 남기는 칸 — 여러 줄, 쓰는 만큼 늘어난다 */
+.say{position:sticky;bottom:0;background:#fff;padding:8px 0 2px;
+  display:flex;align-items:flex-end;gap:9px}
+.say textarea{flex:1;min-height:46px;max-height:180px;resize:none;overflow-y:auto;
+  border:1px solid var(--edge);border-radius:16px;padding:12px 14px;
+  font:inherit;font-size:15px;line-height:1.45;background:#fff;outline:none}
+.say textarea:focus{border-color:var(--ink)}
+.say .send{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:var(--ink);
+  color:#fff;display:grid;place-items:center;cursor:pointer}
+.say .send:disabled{background:var(--edge);color:var(--muted);cursor:default}
+
+/* 하위 박스 */
+.subs{display:flex;flex-direction:column;gap:8px;margin:2px 0 14px}
+.subs .row{background:#fff;border:1px solid var(--line)}
+.subs .row .ico{background:var(--fill)}
+.addsub{display:flex;align-items:center;gap:9px;width:100%;border:1px dashed var(--edge);
+  background:#fff;border-radius:999px;padding:11px 16px;font-size:14px;color:var(--soft);cursor:pointer}
+.head2{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px}
+.head2 span{font-size:13px;color:var(--muted)}
+.go{width:100%;margin-top:12px;border:0;border-radius:13px;background:var(--ink);color:#fff;
+  padding:14px;font-size:15px;font-weight:700;cursor:pointer}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.chip{border:1px solid var(--edge);background:#fff;border-radius:999px;padding:8px 13px;
+  font-size:13px;cursor:pointer}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.icogrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}
+.icogrid button{aspect-ratio:1;border:1px solid var(--line);background:#fff;border-radius:12px;
+  display:grid;place-items:center;cursor:pointer}
+.icogrid button.on{border-color:var(--ink);background:var(--fill)}
+
+/* 전체보기 */
+.allgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+.abox{position:relative;border-radius:20px;border:1px solid var(--edge);background:#fff;
+  padding:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:10px}
+.abox.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.abox.light{background:var(--fill);border-color:transparent}
+.abox .nm{font-size:15px;font-weight:600;line-height:1.25}
+.abox .mt{font-size:12px;color:var(--muted)}
+.abox.dark .mt{color:rgba(255,255,255,.5)}
+.newbox{border:1px dashed var(--edge);background:#fff;display:grid;place-items:center;
+  min-height:104px;border-radius:20px;cursor:pointer;color:var(--soft);gap:6px}
+
+/* 대화 — 열면 바로 대화가 보이고, 입력칸은 아래에 붙어 있다 */
+/* 대화는 한 화면을 다 쓴다 — 뒤 화면이 비치지 않는다 */
+.sheet.full{background:var(--bg);align-items:stretch;backdrop-filter:none}
+.sheet.full .card{border-radius:0;max-height:none;animation:none}
+.card.talkcard{height:calc(100dvh - var(--brand) - env(safe-area-inset-top));
+  display:flex;flex-direction:column;overflow:hidden;
+  padding:8px 20px calc(10px + env(safe-area-inset-bottom))}
+.thead{display:flex;align-items:center;gap:9px;padding:0 0 10px;border-bottom:1px solid var(--line)}
+.thead .nm{flex:1;min-width:0;font-size:17px;font-weight:700;letter-spacing:-.3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.thead button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);
+  background:#fff;display:grid;place-items:center;cursor:pointer;flex:none;color:var(--soft)}
+.thead button.back{border:0;background:none;width:32px;margin-left:-6px;color:var(--ink)}
+.card .x{position:absolute;right:16px;top:14px;width:32px;height:32px;border-radius:50%;
+  border:0;background:var(--fill);display:grid;place-items:center;cursor:pointer;color:var(--soft)}
+.card{position:relative}
+/* 박스 | 대화 전환 */
+.seg{display:flex;gap:4px;flex:none;background:var(--fill);border-radius:999px;
+  padding:3px;margin:10px 0 0}
+.seg button{flex:1;border:0;background:none;border-radius:999px;padding:8px 0;
+  font-size:13.5px;color:var(--soft);cursor:pointer}
+.seg button.on{background:#fff;color:var(--ink);font-weight:700;
+  box-shadow:0 2px 8px -5px rgba(0,0,0,.5)}
+.inbox{flex:1;min-height:0;overflow-y:auto;padding:14px 0 20px}
+.viewer{flex:1;min-height:0;width:100%;border:0;margin:12px 0 0;background:#fff}
+.outcard{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  border:1px solid var(--edge);border-radius:20px;padding:28px 22px;margin:18px 0 0}
+.outcard .ico{width:56px;height:56px;border-radius:50%;background:var(--fill);
+  display:grid;place-items:center}
+.outcard b{font-size:18px;letter-spacing:-.3px}
+.outcard .addr{font-size:12.5px;color:var(--muted);word-break:break-all}
+.outcard .goout{margin-top:6px;border:0;border-radius:13px;background:var(--ink);color:#fff;
+  padding:13px 22px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;
+  display:inline-block}
+.outcard p{margin:8px 0 0;font-size:12.5px;line-height:1.6;color:var(--muted)}
+
+/* 이 박스가 어디로 가는 길인지 — 눌러 순수 프로그램으로 간다 */
+.golink{display:flex;align-items:center;gap:8px;margin:0 0 12px;padding:10px 12px;
+  border:1px solid var(--edge);border-radius:14px;background:#fff;text-decoration:none;
+  color:var(--body);font-size:12.5px}
+.golink span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:var(--muted)}
+.golink b{font-size:12px;color:var(--body);flex:none}
+.inbox .sec{margin:22px 0 12px}
+.newline{display:flex;justify-content:center;margin:16px 0 0}
+
+.subbar{display:flex;gap:7px;overflow-x:auto;padding:10px 0;flex:none;
+  border-bottom:1px solid var(--line);scrollbar-width:none}
+.subbar::-webkit-scrollbar{display:none}
+.subbar button{position:relative;flex:none;display:inline-flex;align-items:center;gap:7px;
+  background:var(--fill);border:0;border-radius:999px;padding:7px 13px 7px 8px;
+  font-size:13px;cursor:pointer;white-space:nowrap}
+.subbar button .ico{width:26px;height:26px;border-radius:50%;background:#fff;
+  display:grid;place-items:center}
+.subbar .add{background:#fff;border:1px dashed var(--edge);color:var(--soft);padding:7px 13px}
+.subbar .red{right:5px;top:3px;width:8px;height:8px;box-shadow:0 0 0 2px var(--fill)}
+.talk{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:10px;
+  padding:14px 0 6px}
+.line{display:flex}
+.line.me{justify-content:flex-end}
+.msg{max-width:84%;padding:10px 13px;border-radius:15px;
+  font-size:14.5px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.line.me .msg{background:var(--ink);color:#fff;border-bottom-right-radius:5px}
+.line.you .msg{background:var(--fill);border-bottom-left-radius:5px}
+.msg .at{display:block;margin-top:4px;font-size:11px;opacity:.55}
+.dev .line.me .msg{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+.devtag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--soft);
+  border:1px dashed var(--edge);border-radius:999px;padding:4px 10px;margin:0 0 12px;
+  white-space:nowrap;flex:none}
+.ear{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;flex:none;
+  border-radius:999px;padding:4px 10px;white-space:nowrap;border:1px solid var(--edge)}
+.ear i{width:7px;height:7px;border-radius:50%;background:var(--muted);font-style:normal}
+.ear.on{color:var(--body);border-color:var(--edge)}
+.ear.on i{background:#1F9E4B}
+.ear.off{color:var(--red);border-color:var(--red)}
+/* 지시가 어디까지 갔는지는 따로 말하지 않고 그 지시에 도장을 찍는다 */
+.stamp{font-weight:600}
+.stamp.no{color:var(--red);opacity:1}
+.stamp.done{opacity:.75}
+.ear.off i{background:var(--red)}
+.empty{color:var(--muted);font-size:13.5px;padding:10px 2px}
+
+.press{position:fixed;z-index:70;background:#fff;border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 14px 34px -16px rgba(0,0,0,.5);padding:5px;display:none;min-width:186px}
+.press.on{display:block}
+.press button{display:flex;align-items:center;gap:9px;width:100%;background:none;border:0;
+  padding:11px 12px;border-radius:10px;font-size:14px;cursor:pointer;text-align:left}
+.press button:active{background:var(--fill)}
+</style>
+</head>
+<body>
+<div class="brand">
+  <svg width="17" height="15" viewBox="0 0 17 15" aria-hidden="true">
+    <g fill="#111110">
+      <rect x="0"  y="5"   width="2.6" height="5"   rx="1.3"/>
+      <rect x="3.6" y="2.5" width="2.6" height="10"  rx="1.3"/>
+      <rect x="7.2" y="0"   width="2.6" height="15"  rx="1.3"/>
+      <rect x="10.8" y="3.5" width="2.6" height="8"  rx="1.3"/>
+      <rect x="14.4" y="6"  width="2.6" height="3"   rx="1.3"/>
+    </g>
+  </svg>
+  <b>VIGGLE</b>
+</div>
+<div class="wrap" id="app">
+
+  <div class="top" data-area="머리">
+    <button class="mode" id="modebtn">
+      <span class="dot" id="modeico"></span>
+      <b id="modename">홈</b><span class="chev" data-i="chevron-down" data-sz="15"></span>
+    </button>
+    <div class="avatar" id="me">J</div>
+  </div>
+
+  <h1 id="hello">Hello JUN<span class="role" id="phb">PHB</span></h1>
+  <p class="sub">Make your day easy with me</p>
+
+  <div id="body"></div>
+</div>
+
+<div class="sheet" id="sheet"><div class="card" id="cardbox"></div></div>
+<div class="press" id="press"></div>
+
+<script type="module">
+/* ══ 창고 — 파이어베이스 ═════════════════════════════════════
+   예전에는 맥 안의 server.py 가 파일로 들고 있던 것이다. 맥을 없애려고
+   그 자리를 파이어베이스로 옮겼다. 부르는 이름(/api/…)은 그대로 두어
+   화면 코드는 한 줄도 바꾸지 않는다.
+
+   두는 곳
+     wt_boxes/{id}      박스 하나
+     wt_chat/{박스id}    업무 대화  { msgs:[…] }
+     wt_dev/{자리}       클로드에게 남긴 지시  { msgs:[…] }  ← 클로드가 읽는 곳
+*/
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+import { getAuth, signInAnonymously, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc,
+         deleteDoc, writeBatch, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs",
+  authDomain: "vivivic-4b7ef.firebaseapp.com",
+  projectId: "vivivic-4b7ef",
+  storageBucket: "vivivic-4b7ef.firebasestorage.app",
+  messagingSenderId: "830175660542",
+  appId: "1:830175660542:web:9054030480c8280af8d8af"
+});
+const auth = getAuth(app), db = getFirestore(app);
+const 뿌리 = ['artifacts', 'vivivic-4b7ef', 'public', 'data'];
+const 칸 = (이름, id) => id ? doc(db, ...뿌리, 이름, id) : collection(db, ...뿌리, 이름);
+
+const 지금 = () => Math.floor(Date.now() / 1000);
+const 새id = () => 'b' + Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-4);
+// 자리 이름에 '/' 가 들어가면 문서 경로가 깨진다
+const 자리키 = a => encodeURIComponent(a).replace(/%/g, '~');
+
+let 박스들 = null;                       // 한 번 받아 두고 바뀔 때만 다시 받는다
+async function 박스받기(){
+  if (박스들) return 박스들;
+  const s = await getDocs(칸('wt_boxes'));
+  박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
+  return 박스들;
+}
+onSnapshot(칸('wt_boxes'), s => {        // 다른 기기에서 고쳐도 따라온다
+  박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
+});
+
+async function 말받기(이름, id){
+  const d = await getDoc(칸(이름, 자리키(id)));
+  return d.exists() ? (d.data().msgs || []) : [];
+}
+async function 말넣기(이름, id, 말){
+  const 자리 = 칸(이름, 자리키(id));
+  const d = await getDoc(자리);
+  const msgs = d.exists() ? (d.data().msgs || []) : [];
+  msgs.push(말);
+  await setDoc(자리, { area: id, msgs, 잰때: Date.now() }, { merge: true });
+}
+
+window.창고 = async function(path, body){
+  /* ── 박스 ── */
+  if (path === '/api/boxes') return await 박스받기();
+
+  if (path === '/api/box'){
+    const act = body.act, t = 지금();
+    if (act === 'create'){
+      const x = { name: (body.name || '새 박스').slice(0, 60), icon: body.icon || 'square',
+                  tone: body.tone || 'white', parent: body.parent || '', link: body.link || '',
+                  plain: !!body.plain, used: 0, touched: t, todo: false,
+                  kind: body.kind || 'box', created: t };
+      const id = 새id();
+      await setDoc(칸('wt_boxes', id), x);
+      박스들 = null;
+      return { ok: true, box: { ...x, id } };
+    }
+    const id = body.id; if (!id) return { ok: false };
+    if (act === 'use')    await updateDoc(칸('wt_boxes', id), { used: ((await 하나(id)).used || 0) + 1, touched: t });
+    else if (act === 'update'){
+      const 넣을것 = { touched: t };
+      ['name','icon','tone','parent','link','plain'].forEach(k => { if (k in body) 넣을것[k] = body[k]; });
+      await updateDoc(칸('wt_boxes', id), 넣을것);
+    }
+    else if (act === 'todo') await updateDoc(칸('wt_boxes', id), { todo: !!body.on });
+    else if (act === 'done') await updateDoc(칸('wt_boxes', id), { todo: false });
+    else if (act === 'delete'){
+      const 다 = await 박스받기();
+      const b = writeBatch(db);
+      다.filter(x => x.id === id || x.parent === id).forEach(x => b.delete(칸('wt_boxes', x.id)));
+      await b.commit();
+    }
+    else if (act === 'merge'){
+      const b = writeBatch(db);
+      (body.ids || []).forEach(x => b.update(칸('wt_boxes', x), { parent: id }));
+      await b.commit();
+    }
+    else return { ok: false };
+    박스들 = null;
+    return { ok: true };
+  }
+
+  /* ── 업무 대화 ── */
+  if (path.startsWith('/api/boxchat')){
+    if (body){ await 말넣기('wt_chat', body.id, { who: body.who || '나', text: String(body.text).slice(0, 4000), at: 지금() }); return { ok: true }; }
+    const id = new URLSearchParams(path.split('?')[1] || '').get('id');
+    return await 말받기('wt_chat', id);
+  }
+
+  /* ── 클로드에게 남기는 지시 ── */
+  if (path.startsWith('/api/devchat')){
+    if (body){
+      await 말넣기('wt_dev', body.area,
+        { who: body.who || '나', text: String(body.text).slice(0, 4000), at: 지금(), sent: true });
+      return { ok: true };
+    }
+    const area = new URLSearchParams(path.split('?')[1] || '').get('area');
+    if (area) return await 말받기('wt_dev', area);
+    const s = await getDocs(칸('wt_dev'));                 // 자리별 갯수만 세는 데 쓰인다
+    const 다 = {};
+    s.docs.forEach(d => { const v = d.data(); if (v.area) 다[v.area] = v.msgs || []; });
+    return 다;
+  }
+
+  if (path === '/api/listening') return { on: navigator.onLine };
+  return {};
+};
+
+const 하나 = async id => { const d = await getDoc(칸('wt_boxes', id)); return d.exists() ? d.data() : {}; };
+
+/* ── 짚어서 보낸 지시를 받는 자리 (?take=1) ────────────────── */
+async function 짚은것받기(표){
+  const box = 표.get('box') || '', where = 표.get('where') || '', text = 표.get('text') || '';
+  const area = box ? 'box:' + box : '모든박스';
+  document.body.innerHTML =
+    '<div style="padding:60px 24px;text-align:center;font:16px/1.7 -apple-system,system-ui,sans-serif">' +
+    '<p style="font-size:32px;margin:0 0 12px">✋</p><p id="말">보내는 중…</p></div>';
+  try {
+    await 준비;
+    await 말넣기('wt_dev', area, { who: '나', text: (where ? '[' + where + '] ' : '') + text, at: 지금(), sent: true });
+    document.getElementById('말').innerHTML =
+      '보냈습니다.<br><span style="color:#6E6E6A;font-size:14px">이 창을 닫으면 됩니다.</span>';
+  } catch (e) {
+    document.getElementById('말').innerHTML =
+      '보내지 못했습니다.<br><span style="color:#6E6E6A;font-size:14px">' + (e.code || e.message) + '</span>';
+  }
+}
+
+/* ── 익명으로 들어가고, 준비되면 화면을 켠다 ───────────────── */
+let 준비끝; const 준비 = new Promise(r => 준비끝 = r);
+window.준비 = 준비;
+onAuthStateChanged(auth, u => { if (u) 준비끝(); else signInAnonymously(auth).catch(e => {
+  document.body.innerHTML = '<p style="padding:40px;font:15px/1.7 system-ui">' +
+    '들어가지 못했습니다 — ' + (e.code || e.message) + '</p>'; }); });
+
+const 표 = new URLSearchParams(location.search);
+if (표.get('take') === '1') 짚은것받기(표);
+</script>
+<script src="./shared/lucide.min.js"></script>
+<script>
+/* ══ 공통 ══════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const now = () => Math.floor(Date.now()/1000);
+const 나 = 'JUN';
+
+function 언제(t){
+  const m = Math.max(0, (now() - t) / 60);
+  if (m < 1) return '방금';
+  if (m < 60) return Math.round(m) + '분';
+  if (m < 1440) return Math.round(m/60) + '시간';
+  return Math.round(m/1440) + '일';
+}
+function 시각(t){
+  const d = new Date(t*1000), p = n => String(n).padStart(2,'0');
+  return `${p(d.getMonth()+1)}.${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+function ico(name, sz = 20, stroke){
+  const n = (lucide.icons || {})[toPascal(name)] || (lucide.icons || {}).Square;
+  if (!n) return '';
+  const [ , attrs, kids ] = n;
+  const a = Object.assign({}, attrs, {width:sz, height:sz, 'stroke-width':stroke || 1.7});
+  const at = Object.entries(a).map(([k,v]) => `${k}="${v}"`).join(' ');
+  const body = kids.map(([tag, p]) =>
+    `<${tag} ${Object.entries(p).map(([k,v]) => `${k}="${v}"`).join(' ')}/>`).join('');
+  return `<svg ${at}>${body}</svg>`;
+}
+const toPascal = s => String(s).split('-').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join('');
+
+/* 자료는 파이어베이스에 있다. 맥은 없다. 부르는 모양은 예전 그대로 두어
+   화면 코드는 손대지 않는다 — 아래 창고층이 그 이름들을 받아 처리한다. */
+const api = (path, body) => window.창고(path, body);
+
+/* ══ 대기함 ════════════════════════════════════════════════
+   맥이 꺼져 있거나 길이 끊기면 보내기가 실패한다. 예전에는 입력칸을 먼저
+   비우고 보냈기 때문에 그때 쓴 글이 그대로 날아갔다. 이제 못 보낸 것은
+   이 폰 안에 쌓아 두었다가, 맥이 다시 닿는 순간 저절로 보낸다. */
+const 대기칸 = 'wt.대기';
+function 대기목록(){
+  try { return JSON.parse(localStorage.getItem(대기칸) || '[]'); } catch (e) { return []; }
+}
+function 대기적기(목록){
+  try { localStorage.setItem(대기칸, JSON.stringify(목록)); } catch (e) {}
+}
+function 대기에넣기(길, 몸, 자리){
+  const 목록 = 대기목록();
+  목록.push({ id: 'q' + Date.now() + Math.random().toString(36).slice(2, 6),
+              길, 몸, 자리, at: Math.floor(Date.now() / 1000) });
+  대기적기(목록);
+}
+function 대기꺼내기(자리){ return 대기목록().filter(x => x.자리 === 자리); }
+
+let 내보내는중 = false;
+async function 대기내보내기(){
+  if (내보내는중) return false;
+  const 목록 = 대기목록();
+  if (!목록.length) return false;
+  내보내는중 = true;
+  let 보냈나 = false;
+  try {
+    for (const 것 of 목록){
+      await api(것.길, 것.몸);                    // 하나라도 실패하면 거기서 멈춘다
+      대기적기(대기목록().filter(x => x.id !== 것.id));
+      보냈나 = true;
+    }
+  } catch (e) { /* 아직 안 닿는다 — 다음 기회에 다시 */ }
+  내보내는중 = false;
+  return 보냈나;
+}
+
+/* ══ 상태 ══════════════════════════════════════════════════ */
+const MODES = [
+  {id:'home',  name:'홈',        icon:'house'},
+  {id:'all',   name:'모든 박스',  icon:'layout-grid'},
+  {id:'todo',  name:'할 일만',    icon:'circle-dot'},
+  {id:'dev',   name:'개발 지시',  icon:'terminal'},
+];
+let MODE = 'home', BOXES = [], 개수 = 6, 촘촘 = false, 듣고있음 = false;
+
+/* ══ 그리기 ════════════════════════════════════════════════ */
+/* 박스의 무게는 그 안에 든 것까지 합쳐서 잰다 */
+let 합계표 = null;
+function 합계다시(){
+  합계표 = {};
+  const 자식 = {};
+  BOXES.forEach(b => { (자식[b.parent || ''] = 자식[b.parent || ''] || []).push(b); });
+  const 재기 = b => {
+    if (합계표[b.id]) return 합계표[b.id];
+    let u = b.used || 0, t = b.touched || 0, d = !!b.todo, n = 0;
+    (자식[b.id] || []).forEach(c => {
+      const r = 재기(c);
+      u += r.used; t = Math.max(t, r.touched); d = d || r.todo; n += 1 + r.안것;
+    });
+    return (합계표[b.id] = {used:u, touched:t, todo:d, 안것:n});
+  };
+  BOXES.forEach(재기);
+}
+/* 이름은 자주 겹친다. 어디에 든 것인지 작게 보여 준다 */
+function 자리표(b){
+  if (!b || b.talk) return '';               // 최근 지시 줄은 이름에 이미 자리가 들어 있다
+  const 길 = [];
+  let cur = b.parent && BOXES.find(x => x.id === b.parent), 보호 = 0;
+  while (cur && 보호 < 10){ 길.push(cur.name); cur = cur.parent && BOXES.find(x => x.id === cur.parent); 보호++; }
+  return 길.reverse().join(' / ');
+}
+
+const 무게 = b => (합계표 && 합계표[b.id]) || {used:b.used||0, touched:b.touched||0, todo:!!b.todo, 안것:0};
+
+function 정렬사용(a, b){
+  return 무게(b).used - 무게(a).used || 무게(b).touched - 무게(a).touched;
+}
+function 정렬최근(a, b){ return 무게(b).touched - 무게(a).touched; }
+
+function 타일(b, i, 총, 칸){
+  const w = 무게(b);
+  const pct = 총 ? Math.round(w.used / 총 * 100) : 0;
+  const 높이 = i === 0 ? `grid-row:span ${칸};min-height:${칸*104 + (칸-1)*12}px`
+                       : 'min-height:104px';
+  return `<button class="tile ${b.tone} ${i===0?'s1':''}" style="${높이}"
+      data-open="${b.id}" data-area="box:${b.id}">
+    ${w.todo ? '<span class="red"></span>' : ''}
+    <span class="ico">${ico(b.icon, i===0?26:22)}</span>
+    <span>${(() => { const p = 자리표(b);
+      return p ? `<span class="path ontile">${esc(p)}</span>` : ''; })()}<h3>${esc(b.name)}</h3>${
+      총 ? `<span class="pct">${pct}%${w.안것 ? ' · ' + w.안것 + '개' : ''}</span>`
+         : (w.안것 ? `<span class="pct">${w.안것}개</span>` : '')}</span>
+  </button>`;
+}
+function 줄(b, i){
+  const w = 무게(b);
+  return `<button class="row" data-open="${b.id}" data-area="box:${b.id}">
+    ${w.todo ? '<span class="red"></span>' : ''}
+    <span class="ico ${i%2?'dark':''}">${ico(b.icon, 19)}</span>
+    <span class="t">${esc(b.name)}${(() => { const p = 자리표(b);
+      return p ? `<i class="path">${esc(p)}</i>` : ''; })()}</span>
+    <span class="when">${언제(w.touched)}</span>
+  </button>`;
+}
+
+function 그리기(){
+  $('modename').textContent = (MODES.find(m => m.id === MODE) || MODES[0]).name;
+  $('modeico').innerHTML = ico((MODES.find(m => m.id === MODE) || MODES[0]).icon, 19);
+  document.querySelector('.mode .chev').innerHTML = ico('chevron-down', 15);
+  $('hello').innerHTML = 'Hello ' + esc(나) + '<span class="role" id="phb">PHB</span>';
+
+  const 살아있는 = BOXES.filter(b => !b.parent);   // 하위 박스는 부모 안에서만 보인다
+  const 쓴것 = [...살아있는].sort(정렬사용);
+  const 총 = 쓴것.slice(0,4).reduce((n,b) => n + 무게(b).used, 0);
+  const 최근 = [...살아있는].sort(정렬최근);
+
+  if (MODE === 'dev')  return $('body').innerHTML = 개발판();
+  if (MODE === 'todo') return $('body').innerHTML = 할일판(최근.filter(b => b.todo));
+  if (MODE === 'all')  return $('body').innerHTML = 전체판(쓴것);
+
+  $('body').innerHTML = `
+    <div class="bar" data-area="찾기줄">
+      <button class="tbtn" id="searchbtn">${ico('search',15,2)} search your's</button>
+      <button class="tbtn g" id="allbtn">show all</button>
+    </div>
+    <div class="tiles" data-area="자주쓰는박스">${(() => {
+      const a = 쓴것.slice(0, 4);
+      return a.map((b,i) => 타일(b, i, 총, a.length - 1)).join('');
+    })()}</div>
+
+    <div class="sec"><h2>최근 박스</h2>
+      <button class="tbtn g" id="allbtn2">see all</button></div>
+    <div class="list ${촘촘?'dense':''}" data-area="최근박스">${
+      최근.slice(0, 개수).map((b,i) => 줄(b,i)).join('') || '<p class="empty">아직 없습니다</p>'}</div>
+
+    <div class="setrow">
+      <button class="set" id="setbtn">${ico('settings',14)} 박스설정 · ${개수}개</button>
+    </div>`;
+}
+
+function 전체판(list){
+  return `<div class="bar"><button class="tbtn" id="searchbtn">${ico('search',15,2)} search your's</button>
+    <span class="tbtn g">${list.length}개 · 사용량순</span></div>
+    <div class="allgrid" data-area="모든박스">
+      ${list.map(b => `<button class="abox ${b.tone}" data-open="${b.id}">
+        ${b.todo ? '<span class="red"></span>' : ''}
+        <span>${ico(b.icon, 22)}</span>
+        <span class="nm">${esc(b.name)}${(() => { const p = 자리표(b);
+          return p ? `<span class="path">${esc(p)}</span>` : ''; })()}</span>
+        <span class="mt">${무게(b).used}회 · ${언제(무게(b).touched)}</span></button>`).join('')}
+      <button class="newbox" id="newboxbtn">${ico('plus',22)}<span>새 박스</span></button>
+    </div>`;
+}
+
+function 할일판(list){
+  return `<div class="sec"><h2>답하지 않은 박스</h2><span class="tbtn g">${list.length}개</span></div>
+    <div class="list" data-area="할일">${
+      list.map((b,i) => 줄(b,i)).join('') || '<p class="empty">남은 일이 없습니다</p>'}</div>`;
+}
+
+function 개발판(){
+  return `<span class="devtag">${ico('terminal',13)} 개발 중에만 쓰는 화면 · 업무 대화와 분리</span>
+    <div class="list" data-area="개발지시">
+      ${Object.keys(DEV).sort().map(k => `<button class="row" data-dev="${esc(k)}">
+        <span class="ico">${ico('message-square-code',19)}</span>
+        <span class="t">${esc(영역표시(k))}</span>
+        <span class="when">${DEV[k].length}</span></button>`).join('')
+        || '<p class="empty">아무 영역이나 0.5초 길게 눌러 지시를 남기세요</p>'}
+    </div>`;
+}
+
+/* ══ 판 띄우기 ═════════════════════════════════════════════ */
+function 판(html){
+  $('cardbox').className = 'card';
+  $('cardbox').innerHTML = `<div class="grip"></div>
+    <button class="x" id="xbtn">${ico('x',18,2.2)}</button>` + html;
+  판열림();
+}
+let 밀어넣음 = false;
+function 판열림(꽉){
+  $('sheet').classList.add('on');
+  $('sheet').classList.toggle('full', !!꽉);
+  document.body.style.overflow = 'hidden';          // 뒤 화면이 따라 움직이지 않게
+  if (!밀어넣음){ history.pushState({wt:1}, ''); 밀어넣음 = true; }   // 폰 '뒤로'로도 닫히게
+}
+function 실제닫기(){
+  $('sheet').classList.remove('on'); $('sheet').classList.remove('full');
+  $('modebtn').classList.remove('open');
+  document.body.style.overflow = '';
+  열린박스 = null; 열린영역 = null;
+}
+function 판닫기(){
+  if (밀어넣음){ 밀어넣음 = false; history.back(); }   // popstate 에서 실제로 닫힌다
+  else 실제닫기();
+}
+addEventListener('popstate', () => { 밀어넣음 = false; 실제닫기(); });
+$('sheet').addEventListener('click', e => {
+  if (e.target === $('sheet') && !$('sheet').classList.contains('full')) 판닫기();
+});
+
+function 모드판(){
+  $('modebtn').classList.add('open');
+  판(`<h4>화면 모드</h4>` + MODES.map(m =>
+    `<button class="mi ${m.id===MODE?'on':''}" data-mode="${m.id}">
+      ${ico(m.icon,18)}<span class="k">${m.name}</span>${m.id===MODE?ico('check',17):''}</button>`).join(''));
+}
+
+function 검색판(){
+  판(`<h4>업무 찾기</h4>
+    <input class="fld" id="q" placeholder="박스 이름으로 찾기" autocomplete="off">
+    <div class="list" id="qr" style="margin-top:12px"></div>`);
+  const q = $('q'); q.focus();
+  const 그리기결과 = () => {
+    const s = q.value.trim().toLowerCase();
+    const r = BOXES.filter(b => !s || b.name.toLowerCase().includes(s)).sort(정렬사용).slice(0, 30);
+    $('qr').innerHTML = r.map((b,i) => 줄(b,i)).join('') || '<p class="empty">없습니다</p>';
+  };
+  q.addEventListener('input', 그리기결과); 그리기결과();
+}
+
+function 설정판(){
+  판(`<h4>박스설정</h4>
+    <p class="empty" style="padding:0 2px 8px">최근 박스를 몇 개까지 보여줄까요</p>
+    <div class="chips" id="cnts">${[3,6,9,12,16,20].map(n =>
+      `<button class="chip ${n===개수?'on':''}" data-cnt="${n}">${n}개</button>`).join('')}</div>
+    <div class="chips" style="margin-top:14px">
+      <button class="chip ${촘촘?'on':''}" id="dense">촘촘히 보기</button></div>`);
+  $('cnts').addEventListener('click', e => {
+    const b = e.target.closest('[data-cnt]'); if (!b) return;
+    개수 = +b.dataset.cnt; 촘촘 = 개수 > 6;
+    localStorage.setItem('wt.cnt', 개수); 판닫기(); 그리기();
+  });
+  $('dense').addEventListener('click', () => { 촘촘 = !촘촘; 판닫기(); 그리기(); });
+}
+
+/* 새 박스 / 박스 고치기 — 아이콘은 lucide 에서 고른다 */
+const 자주쓰는아이콘 = ['square','message-square','image','file-text','folder','layout-grid',
+  'code-xml','database','calendar','check-check','bell','bookmark','camera','cpu','globe',
+  'hammer','headphones','heart','key','lightbulb','map','mic','package','pen','phone','pie-chart',
+  'rocket','scan-barcode','send','ship','shopping-cart','star','table-2','tag','truck','users'];
+
+function 박스판(b, 부모){
+  const 새것 = !b;
+  const cur = b || {name:'', icon:'square', tone:'white'};
+  판(`<h4>${새것 ? '새 박스' : '박스설정'}</h4>
+    <input class="fld" id="bn" placeholder="박스 이름" value="${esc(cur.name)}">
+    <div class="chips" id="tones">${['white','light','dark'].map(t =>
+      `<button class="chip ${t===cur.tone?'on':''}" data-tone="${t}">${
+        {white:'흰색',light:'회색',dark:'검정'}[t]}</button>`).join('')}</div>
+    <input class="fld" id="bl" placeholder="열면 갈 곳 (주소 · 비워도 됨)"
+      value="${esc(cur.link || '')}" style="margin-top:12px" autocomplete="off">
+    <input class="fld" id="iq" placeholder="아이콘 찾기 (영문)" style="margin-top:12px">
+    <div class="icogrid" id="ig"></div>
+    ${새것 ? '' : `<button class="go" id="del" style="background:#fff;color:var(--red);
+      border:1px solid var(--edge);margin-top:10px">박스 지우기</button>`}
+    <button class="go" id="save">${새것 ? '만들기' : '저장'}</button>`);
+
+  let tone = cur.tone, icon = cur.icon;
+  $('tones').addEventListener('click', e => {
+    const t = e.target.closest('[data-tone]'); if (!t) return;
+    tone = t.dataset.tone;
+    [...$('tones').children].forEach(c => c.classList.toggle('on', c === t));
+  });
+  const 아이콘그리기 = () => {
+    const s = $('iq').value.trim().toLowerCase();
+    const all = s ? Object.keys(lucide.icons).map(k => k.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase())
+                      .filter(n => n.includes(s)).slice(0, 42)
+                  : 자주쓰는아이콘;
+    $('ig').innerHTML = all.map(n =>
+      `<button data-ic="${n}" class="${n===icon?'on':''}">${ico(n,20)}</button>`).join('');
+  };
+  $('iq').addEventListener('input', 아이콘그리기); 아이콘그리기();
+  $('ig').addEventListener('click', e => {
+    const t = e.target.closest('[data-ic]'); if (!t) return;
+    icon = t.dataset.ic;
+    [...$('ig').children].forEach(c => c.classList.toggle('on', c === t));
+  });
+  $('save').addEventListener('click', async () => {
+    const name = $('bn').value.trim() || '새 박스';
+    const link = $('bl').value.trim();
+    await api('/api/box', 새것 ? {act:'create', name, icon, tone, link, parent: 부모 || ''}
+                               : {act:'update', id:b.id, name, icon, tone, link});
+    판닫기(); await 불러오기();
+    부모 ? 박스열기(부모, '박스') : 그리기();
+  });
+  if (!새것) $('del').addEventListener('click', async () => {
+    await api('/api/box', {act:'delete', id:b.id}); 판닫기(); await 불러오기(); 그리기();
+  });
+}
+
+/* ══ 말 남기는 칸 — 여러 줄, 쓰는 만큼 늘어난다 ═══════════ */
+function 입력칸(안내){
+  return `<div class="say">
+    <textarea id="say" rows="1" placeholder="${안내}" autocomplete="off"></textarea>
+    <button class="send" id="sendbtn" disabled>${ico('arrow-up',20,2.2)}</button>
+  </div>`;
+}
+function 입력칸달기(보내기){
+  const ta = $('say'), btn = $('sendbtn');
+  if (!ta) return;
+  const 키우기 = () => { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 180) + 'px';
+    btn.disabled = !ta.value.trim(); };
+  ta.addEventListener('input', 키우기);
+  ta.addEventListener('keydown', e => {          // 줄바꿈은 엔터, 보내기는 ⌘/Ctrl+엔터
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)){ e.preventDefault(); 눌림(); }
+  });
+  const 눌림 = async () => {
+    const t = ta.value.trim(); if (!t) return;
+    btn.disabled = true;
+    try {
+      await 보내기(t);                 // 보내기가 끝난 뒤에 비운다
+      ta.value = '';
+    } catch (e) {
+      ta.value = t;                    // 못 보냈으면 쓴 글을 그대로 돌려 놓는다
+    }
+    키우기();
+  };
+  btn.addEventListener('click', 눌림);
+  키우기();
+}
+
+/* ══ 업무 대화 (실제 서비스에 남는 쪽) ═════════════════════ */
+let 열린박스 = null, 박스탭 = null;
+async function 박스열기(id, 탭){
+  const b = BOXES.find(x => x.id === id); if (!b) return;
+  열린박스 = id; 열린영역 = null;
+  await api('/api/box', {act:'use', id});
+  const 하위 = BOXES.filter(x => x.parent === id);
+  // 우리 것만 틀 안에서 보여 준다. 바깥 프로그램은 틀 안에서 로그인이 막힌다
+  // (아이폰 사파리가 다른 출처의 저장 공간을 막고, 파이어베이스 로그인은 그것을 쓴다)
+  const 바깥 = !!b.link && /^https?:/i.test(b.link);
+  const 안에서볼수있나 = !!b.link && b.link.startsWith('/');
+  const 볼것있나 = 안에서볼수있나 || 바깥;
+  // 안에 박스가 있으면 그것부터, 없고 갈 곳이 있으면 그 내용부터, 둘 다 없으면 대화
+  박스탭 = 탭 || (하위.length ? '박스' : 볼것있나 ? '보기' : '대화');
+  const msgs = 박스탭 === '대화' ? await api('/api/boxchat?id=' + encodeURIComponent(id)) : [];
+
+  $('cardbox').className = 'card talkcard';
+  $('cardbox').dataset.area = 'box:' + id;
+  $('cardbox').innerHTML = `
+    <div class="thead">
+      <button class="back" id="back">${ico('chevron-left',22,2)}</button>
+      <span class="ico" style="width:34px;height:34px;border-radius:50%;background:var(--fill);
+        display:grid;place-items:center">${ico(b.icon,18)}</span>
+      <span class="nm">${esc(b.name)}</span>
+      ${b.link ? `<button id="open" title="열기">${ico('external-link',17)}</button>` : ''}
+      <button id="done" title="완료">${ico('check',18)}</button>
+      <button id="edit" title="박스설정">${ico('settings',17)}</button>
+    </div>
+    <div class="seg">
+      ${볼것있나 ? `<button class="${박스탭==='보기'?'on':''}" data-tab="보기">보기</button>` : ''}
+      <button class="${박스탭==='박스'?'on':''}" data-tab="박스">박스 ${하위.length||''}</button>
+      <button class="${박스탭==='대화'?'on':''}" data-tab="대화">대화</button>
+      <button data-tab="지시">지시${지시수(id) ? ' ' + 지시수(id) : ''}</button>
+    </div>
+    ${박스탭 === '보기' ? (바깥 ? 바깥보기(b) : `<iframe class="viewer" src="${esc(b.link + (/^\/(code|doc)\b/.test(b.link)
+      ? (b.link.includes('?') ? '&' : '?') + 'in=1' : ''))}"></iframe>`)
+    : 박스탭 === '박스' ? 안쪽박스(b, 하위) : `
+      <div class="talk" id="tk">${말풍선(msgs, '첫 이야기를 남겨 보세요')}</div>
+      ${입력칸('메시지')}`}`;
+  판열림(true);
+
+  if (박스탭 === '대화'){
+      입력칸달기(async t => {
+      const 몸 = { id, text: t, who: 나 };
+      try {
+        await api('/api/boxchat', 몸);
+      } catch (e) {
+        대기에넣기('/api/boxchat', 몸, 'box:' + id);
+      }
+      await 대화새로(id);
+    });
+    맨아래로();
+  }
+  $('cardbox').querySelector('.seg').addEventListener('click', e => {
+    const t = e.target.closest('[data-tab]'); if (!t) return;
+    t.dataset.tab === '지시' ? 개발대화('box:' + id) : 박스열기(id, t.dataset.tab);
+  });
+  $('back').addEventListener('click', e => {          // 하위 박스면 부모로, 아니면 닫기
+    e.stopPropagation();
+    const 부모 = b.parent && BOXES.find(x => x.id === b.parent);
+    부모 ? 박스열기(부모.id) : 판닫기();
+  });
+  const 새 = $('newsub'); if (새) 새.addEventListener('click', () => 박스판(null, id));
+
+  $('done').addEventListener('click', async () => {
+    await api('/api/box', {act:'done', id}); 판닫기(); await 불러오기(); 그리기();
+  });
+  $('edit').addEventListener('click', () => 박스판(b));
+  if (b.link) $('open').addEventListener('click', () => {
+    if (!/^https?:/i.test(b.link)) return location.href = b.link;
+    const a = document.createElement('a');            // 아이폰에서 open() 이 막히는 일이 있다
+    a.href = b.link; a.target = '_blank'; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  불러오기();
+}
+
+/* 바깥 프로그램은 틀 안에 넣지 않는다. 넣으면 로그인이 막힌다 */
+function 바깥보기(b){
+  const 부모 = BOXES.find(x => x.id === b.parent);
+  const 이름 = (부모 ? 부모.name : b.name).replace(/pro$/, '');   // 에이엠티pro → 에이엠티
+  return `<div class="inbox">
+    <div class="outcard">
+      <span class="ico">${ico('external-link', 24)}</span>
+      <b>${esc(이름)}</b>
+      <span class="addr">${esc(b.link.replace(/^https?:\/\//,''))}</span>
+      <a class="goout" href="${esc(손잡이붙이기(b))}" target="_blank" rel="noopener">${esc(이름)} 열기</a>
+      <p>바이글 밖에서 열립니다. 그래야 로그인이 됩니다.</p>
+    </div>
+  </div>`;
+}
+
+/* 이 박스로 갈 수 있는 순수 프로그램 주소. 바로가기가 있으면 그 길이 순수한 길이다 */
+function 주소줄(b, 하위){
+  const 순수 = 하위.find(x => x.plain && /^https?:/i.test(x.link || ''));
+  const 길 = (순수 && 순수.link) || (/^https?:/i.test(b.link || '') ? b.link : '');
+  if (!길) return '';
+  return `<a class="golink" href="${esc(길)}" target="_blank" rel="noopener">
+    ${ico('external-link',14)}<span>${esc(decodeURI(길).replace(/^https?:\/\//,''))}</span>
+    <b>순수 프로그램</b></a>`;
+}
+
+/* 박스 안도 홈과 같은 구성 — 사용량으로 크기, 그 아래 최근순 */
+function 안쪽박스(b, 하위){
+  const 주소 = 주소줄(b, 하위);
+  if (!하위.length) return `<div class="inbox">${주소}
+    <p class="empty">아직 박스가 없습니다</p>
+    <div class="newline"><button class="set" id="newsub">${ico('plus',14)} 새 박스</button></div></div>`;
+  const 쓴것 = [...하위].sort(정렬사용).slice(0, 4);
+  const 총 = 쓴것.reduce((n,b) => n + 무게(b).used, 0);
+  const 최근 = [...하위].sort(정렬최근);
+  return `<div class="inbox">${주소}
+    <div class="tiles">${쓴것.map((b,i) => 타일(b, i, 총, 쓴것.length - 1)).join('')}</div>
+    ${하위.length > 1 ? `<div class="sec"><h2>최근</h2><span class="tbtn g">${하위.length}개</span></div>
+      <div class="list">${최근.map((b,i) => 줄(b,i)).join('')}</div>` : ''}
+    <div class="newline"><button class="set" id="newsub">${ico('plus',14)} 새 박스</button></div>
+  </div>`;
+}
+
+function 말풍선(msgs, 빈말){
+  return msgs.map(m => `<div class="line ${m.who===나||m.who==='나'?'me':'you'}">
+    <span class="msg">${esc(m.text)}<span class="at">${esc(m.who)} · ${시각(m.at)}</span></span>
+  </div>`).join('') || `<p class="empty">${빈말}</p>`;
+}
+
+function 맨아래로(){
+  const tk = $('tk'); if (tk) tk.scrollTop = tk.scrollHeight;
+}
+
+async function 대화새로(id, 조용히){
+  let msgs;
+  try { msgs = await api('/api/boxchat?id=' + encodeURIComponent(id)); } catch (e) { return; }
+  const tk = $('tk'); if (!tk) return;
+  if (조용히 && tk.querySelectorAll('.line').length === msgs.length) return;   // 바뀐 게 없으면 둔다
+  tk.innerHTML = 말풍선(msgs, '첫 이야기를 남겨 보세요');
+  맨아래로();
+}
+
+/* ══ 개발 지시 대화 (완성되면 걷어낼 쪽) ═══════════════════ */
+let DEV = {}, 열린영역 = null;
+async function 개발대화(area){
+  열린영역 = area; 열린박스 = null;
+  const msgs = await api('/api/devchat?area=' + encodeURIComponent(area));
+  $('cardbox').className = 'card talkcard';
+  $('cardbox').innerHTML = `
+    <div class="thead">
+      <button class="back" id="back">${ico('chevron-left',22,2)}</button>
+      <span class="ico" style="width:34px;height:34px;border-radius:50%;background:var(--fill);
+        display:grid;place-items:center">${ico('terminal',17)}</span>
+      <span class="nm">${esc(영역표시(area))}</span>
+      <span class="ear" id="ear"><i></i>확인 중</span>
+    </div>
+    <div class="talk dev" id="tk">${개발말(msgs)}</div>
+    ${입력칸('클로드에게 지시')}`;
+  판열림(true);
+  입력칸달기(async t => {
+    const 몸 = { area, text: t };
+    try {
+      await api('/api/devchat', 몸);
+    } catch (e) {
+      대기에넣기('/api/devchat', 몸, area);   // 맥에 못 닿았다 — 폰에 쌓아 둔다
+    }
+    await 개발새로(area);
+  });
+  맨아래로();
+  듣고있나().then(() => { const tk = $('tk'); if (tk) tk.innerHTML = 개발말(msgs, area); 맨아래로(); });
+}
+
+/* 맥이 지금 듣고 있는지 — 옛 지시에 sent 가 없을 때 도장의 기준이 된다 */
+/* 클라우드에 쌓인다 — 맥이 켜져 있는지 볼 일이 없어졌다.
+   대신 지시가 클로드에게 닿을 자리에 들어갔는지를 보여 준다. */
+async function 듣고있나(){
+  듣고있음 = navigator.onLine;
+  const el = $('ear'); if (!el) return;
+  el.className = 'ear ' + (듣고있음 ? 'on' : 'off');
+  el.innerHTML = '<i></i>' + (듣고있음 ? '클로드 지시함에 쌓임' : '연결 없음 — 이 폰에 보관');
+}
+
+function 지시수(id){ return (DEV['box:' + id] || []).length; }
+function 영역표시(area){
+  if (area.startsWith('box:')){
+    const b = BOXES.find(x => x.id === area.slice(4));
+    return (b ? b.name : area.slice(4)) + ' · 코드 지시';
+  }
+  return area;
+}
+
+/* 지시 하나하나에 어디까지 갔는지를 적는다 — 따로 채팅을 보내지 않는다.
+   미전송: 맥이 안 듣고 있어 닿지 않았다 · 전송완료: 닿았으나 아직 답이 없다 · 답변완료 */
+function 도장(m, 답있음){
+  if (m.who !== '나') return '';
+  if (답있음) return ' · <span class="stamp done">답변완료</span>';
+  const 닿음 = m.sent === undefined ? 듣고있음 : m.sent;
+  return 닿음 ? ' · <span class="stamp">전송완료</span>'
+              : ' · <span class="stamp no">미전송</span>';
+}
+
+function 개발말(msgs, area){
+  const 대기 = area ? 대기꺼내기(area) : [];
+  if (!msgs.length && !대기.length)
+    return '<p class="empty">이 영역에 대해 지시를 남기면 맥의 클로드가 바로 받습니다</p>';
+  const 답끝 = msgs.map(m => m.who).lastIndexOf('클로드');   // 이 뒤의 내 말은 아직 답이 없다
+  const 한줄 = (글, at, 도) => `<div class="line me">
+    <span class="msg">${esc(글)}<span class="at">나 · ${시각(at)}${도}</span></span></div>`;
+  return msgs.map((m, i) => m.who === '나'
+      ? 한줄(m.text, m.at, 도장(m, i < 답끝))
+      : `<div class="line you"><span class="msg">${esc(m.text)}<span class="at">${
+          esc(m.who)} · ${시각(m.at)}</span></span></div>`).join('')
+    // 맥에 아직 못 보낸 것 — 폰 안에 남아 있고, 닿는 순간 저절로 나간다
+    + 대기.map(q => 한줄(q.몸.text, q.at,
+        ' · <span class="stamp no">못 보냄 · 이 폰에 보관 중</span>')).join('');
+}
+
+async function 개발새로(area, 조용히){
+  let msgs;
+  try { msgs = await api('/api/devchat?area=' + encodeURIComponent(area)); }
+  catch (e) { const tk0 = $('tk'); if (tk0) tk0.innerHTML = 개발말(DEV[area] || [], area); return; }
+  const tk = $('tk'); if (!tk) return;
+  const 대기수 = 대기꺼내기(area).length;
+  if (조용히 && tk.querySelectorAll('.line').length === msgs.length + 대기수) return;
+  tk.innerHTML = 개발말(msgs, area);
+  맨아래로();
+  try { DEV = await api('/api/devchat'); } catch (e) {}
+}
+
+/* 갈 곳만 있는 박스는 판을 거치지 않고 바로 연다 */
+async function 바로열기(b){
+  api('/api/box', {act:'use', id:b.id});
+  const a = document.createElement('a');       // 아이폰에서 open() 이 막히는 일이 있다
+  a.href = 손잡이붙이기(b);
+  a.target = '_blank'; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* 바이글에서 열면 얹은 모습으로 — 프로그램 안에서 짚어 지시할 수 있게 표를 붙인다 */
+function 손잡이붙이기(b){
+  if (b.plain) return b.link;                       // 바로가기 — 순수한 모습 그대로
+  if (!/^https?:/i.test(b.link || '')) return b.link;
+  const 부모 = BOXES.find(x => x.id === b.parent);
+  const u = new URL(b.link);
+  u.searchParams.set('viggle', '1');
+  u.searchParams.set('box', (부모 && 부모.id) || b.id);
+  u.searchParams.set('vg', location.origin + location.pathname + '?take=1');
+  if (부모) u.searchParams.set('name', 부모.name.replace(/pro$/, ''));
+  return u.toString();
+}
+
+/* ══ 0.5초 길게 누르기 → 목록 ══════════════════════════════ */
+let 누름 = null, 눌린영역 = '';
+function 영역이름(el){
+  const a = el.closest('[data-area]');
+  return a ? a.dataset.area : '화면';
+}
+function 목록띄우기(x, y){
+  const p = $('press');
+  const 박스id = (눌린영역 || '').startsWith('box:') ? 눌린영역.slice(4) : '';
+  const 그박스 = BOXES.find(x => x.id === 박스id);
+  p.innerHTML = `
+    ${그박스 ? `<button data-act="open">${ico('square-arrow-out-up-right',17)} 박스 열기</button>` : ''}
+    <button data-act="dev">${ico('terminal',17)} 클로드에게 지시하기</button>
+    <button data-act="new">${ico('plus',17)} 여기에 새 박스</button>
+    <button data-act="copy">${ico('type',17)} 이름 복사</button>`;
+  p.classList.add('on');
+  const w = p.offsetWidth, h = p.offsetHeight;
+  p.style.left = Math.max(10, Math.min(x - w/2, innerWidth - w - 10)) + 'px';
+  p.style.top  = Math.max(10, Math.min(y + 8, innerHeight - h - 10)) + 'px';
+}
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest('.press')) return;
+  if (e.target.closest('textarea, input, .seg, .thead')) return;   // 글 쓰는 칸·머리글은 빼고
+  눌린영역 = 영역이름(e.target);
+  const x = e.clientX, y = e.clientY;
+  누름 = setTimeout(() => { 누름 = null; 목록띄우기(x, y); }, 500);
+}, true);
+['pointerup','pointermove','pointercancel','scroll'].forEach(t =>
+  document.addEventListener(t, () => { clearTimeout(누름); 누름 = null; }, true));
+document.addEventListener('pointerdown', e => {
+  if (!e.target.closest('.press')) $('press').classList.remove('on');
+});
+$('press').addEventListener('click', async e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  $('press').classList.remove('on');
+  if (b.dataset.act === 'open') return 박스열기(눌린영역.slice(4));
+  if (b.dataset.act === 'dev')  return 개발대화(눌린영역);
+  if (b.dataset.act === 'new')  return 박스판(null);
+  if (b.dataset.act === 'copy') { try { await navigator.clipboard.writeText(눌린영역); } catch(e){} }
+});
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+/* ══ 누르기 ════════════════════════════════════════════════ */
+document.addEventListener('click', e => {
+  if (e.target.closest('#xbtn')) return 판닫기();
+  if (e.target.closest('#back') && 열린영역){                    // 박스에서 온 지시면 그 박스로
+    const a = 열린영역;
+    return a.startsWith('box:') ? 박스열기(a.slice(4)) : 판닫기();
+  }
+  const m = e.target.closest('[data-mode]');
+  if (m){ MODE = m.dataset.mode; localStorage.setItem('wt.mode', MODE); 판닫기(); 그리기(); return; }
+  const o = e.target.closest('[data-open]');
+  if (o){
+    const b = BOXES.find(x => x.id === o.dataset.open);
+    if (b && (b.link || '').startsWith('지시:')) return 개발대화(b.link.slice(3));
+    const 바깥 = b && /^https?:/i.test(b.link || '');
+    const 안에것 = b && BOXES.some(x => x.parent === b.id);
+    if (바깥 && !안에것) return 바로열기(b);      // 한 번 눌러 바로 그 프로그램으로
+    return 박스열기(o.dataset.open);
+  }
+  const d = e.target.closest('[data-dev]');
+  if (d) return 개발대화(d.dataset.dev);
+  if (e.target.closest('#modebtn'))  return 모드판();
+  if (e.target.closest('#searchbtn'))return 검색판();
+  if (e.target.closest('#allbtn') || e.target.closest('#allbtn2')){
+    MODE = 'all'; 그리기(); return; }
+  if (e.target.closest('#setbtn'))   return 설정판();
+  if (e.target.closest('#newboxbtn'))return 박스판(null);
+  if (e.target.closest('#phb')){
+    e.stopPropagation();
+    return 판(`<h4>PHB</h4>
+      <p style="font-size:20px;font-weight:700;letter-spacing:-.4px;margin:0 0 6px">
+        Pointy-Handed Boss</p>
+      <p style="color:var(--soft);margin:0 0 14px">코드는 안 쓰고, 화면을 짚어서 시키는 사람.</p>
+      <p style="color:var(--muted);font-size:13.5px;margin:0">
+        개발자들이 기술을 모르는 상사를 비웃던 말 Pointy-Haired Boss 를 한 글자 바꿨습니다.
+        머리 모양이 아니라 손이 하는 일을 가리킵니다. 짚는 것이 곧 일을 시키는 방법입니다.</p>`);
+  }
+  if (e.target.closest('#me'))       return 모드판();
+});
+
+/* ══ 시작 ══════════════════════════════════════════════════ */
+async function 불러오기(){
+  BOXES = await api('/api/boxes');
+  DEV = await api('/api/devchat');
+  합계다시();
+}
+
+
+(async () => {
+  if (new URLSearchParams(location.search).get('take') === '1') return;   // 짚은 것 받는 화면
+  await window.준비;
+  개수 = +(localStorage.getItem('wt.cnt') || 6); 촘촘 = 개수 > 6;
+  MODE = localStorage.getItem('wt.mode') || 'home';
+  try { await 불러오기(); } catch (e) {}
+  그리기();
+  대기내보내기();
+  setInterval(async () => {
+    const 나갔나 = await 대기내보내기();          // 맥이 다시 닿으면 쌓아 둔 지시부터 보낸다
+    if ($('sheet').classList.contains('on')){
+      if (열린박스) 대화새로(열린박스, true);   // 대화 중이면 새 말만 붙인다
+      if (열린영역){ 개발새로(열린영역, 나갔나 ? false : true); 듣고있나(); }
+      return;
+    }
+    try { await 불러오기(); 그리기(); } catch (e) {}   // 맥이 없어도 화면은 그대로 둔다
+  }, 5000);
+})();
+</script>
+</body>
+</html>
