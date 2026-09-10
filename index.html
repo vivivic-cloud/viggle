@@ -331,13 +331,18 @@ const 새id = () => 'b' + Math.random().toString(36).slice(2, 8) + Date.now().to
 const 자리키 = a => encodeURIComponent(a).replace(/%/g, '~');
 
 let 박스들 = null;                       // 한 번 받아 두고 바뀔 때만 다시 받는다
+// 아직 파이어베이스에 못 닿으면 빈손으로 온다. 그것을 "다 받았다"로 치면
+// 박스가 하나도 없는 화면이 그대로 굳는다. 빈손은 안 받은 것으로 둔다.
+const 빈손 = s => s.empty && s.metadata.fromCache;
 async function 박스받기(){
   if (박스들) return 박스들;
   const s = await getDocs(칸('wt_boxes'));
+  if (빈손(s)) return [];                // 굳히지 않는다 — 다음 차례에 다시 받는다
   박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
   return 박스들;
 }
 onSnapshot(칸('wt_boxes'), s => {        // 다른 기기에서 고쳐도 따라온다
+  if (빈손(s)) return;                   // 빈손으로 덮지 않는다
   박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
 });
 
