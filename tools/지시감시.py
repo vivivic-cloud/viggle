@@ -44,9 +44,29 @@ def 지시들(tok):
     return 나온것
 
 
+본것쪽 = os.environ.get("VG_SEEN") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), ".본지시")
+
 tok, 딴때 = 토큰()
-본것 = {k for k, *_ in 지시들(tok)}          # 켤 때 있던 것은 이미 본 것으로 친다
-print(f"[감시] 시작 — 이미 있던 지시 {len(본것)}건은 넘어간다", flush=True)
+
+# 감시는 이따금 끊긴다. 끊긴 동안 들어온 지시를 다시 켤 때 '이미 본 것' 으로
+# 치면 그 지시는 영영 안 나온다 — 조용히 사라진다. 그래서 본 것을 파일에
+# 남겨 두고, 다시 켤 때는 그 파일만 믿는다. 파일이 없을 때(맨 처음)만
+# 지금 있는 것을 이미 본 것으로 친다.
+if os.path.exists(본것쪽):
+    with open(본것쪽, encoding="utf-8") as f:
+        본것 = {줄.strip() for 줄 in f if 줄.strip()}
+    print(f"[감시] 시작 — 본 것 {len(본것)}건은 넘어간다 (끊긴 동안 들어온 것은 이제 알린다)", flush=True)
+else:
+    본것 = {k for k, *_ in 지시들(tok)}      # 맨 처음 한 번만
+    with open(본것쪽, "w", encoding="utf-8") as f:
+        f.write("\n".join(sorted(본것)))
+    print(f"[감시] 처음 켬 — 이미 있던 지시 {len(본것)}건은 넘어간다", flush=True)
+
+
+def 본것적기():
+    with open(본것쪽, "w", encoding="utf-8") as f:
+        f.write("\n".join(sorted(본것)))
 
 while True:
     time.sleep(사이)
@@ -57,6 +77,7 @@ while True:
             if 표 in 본것:
                 continue
             본것.add(표)
+            본것적기()                       # 알린 것만 적는다 — 알리기 전에 죽으면 다음에 다시 알린다
             when = time.strftime("%m-%d %H:%M", time.localtime(at))
             print(f"새 지시 · {when} · {자리} · {글}".replace("\n", " ")[:600], flush=True)
     except Exception as e:
