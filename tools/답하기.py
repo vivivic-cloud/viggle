@@ -15,6 +15,9 @@
 """
 import json, os, re, sys, time, urllib.request, urllib.parse
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from 지시셈 import 밀린것
+
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
 뿌리  = f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
@@ -69,7 +72,9 @@ except Exception:
 msgs = f.setdefault("msgs", [])
 
 # 밀린 지시에 답한때를 찍는다. 기본은 가장 오래된 하나, --모두 면 전부.
-밀린 = [m for m in msgs if m.get("who") == "나" and not m.get("답한때")]
+# 무엇이 밀린 것인지는 지시셈 한 군데서 가린다 — 예전에는 여기서 따로 세다가
+# 며칠 전 말에 도장이 가고 정작 방금 온 지시는 밀린 채로 남았다.
+밀린, _묵은것 = 밀린것(msgs)
 맡은것 = 밀린 if 모두 else 밀린[:1]
 for m in 맡은것:
     m["답한때"] = 지금
@@ -83,5 +88,6 @@ body = json.dumps({"fields": {k: 값(v) for k, v in f.items()}}).encode()
 urllib.request.urlopen(urllib.request.Request(
     url, body, {"Authorization": "Bearer " + tok, "Content-Type": "application/json"},
     method="PATCH")).read()
-남은 = len([m for m in f["msgs"] if m.get("who") == "나" and not m.get("답한때")])
-print(f"답 붙임 · {자리} · {이름} · 맡은 지시 {len(맡은것)}건 · 아직 밀린 것 {남은}건")
+남은, 묵은것 = 밀린것(f["msgs"])
+print(f"답 붙임 · {자리} · {이름} · 맡은 지시 {len(맡은것)}건 · 아직 밀린 것 {len(남은)}건"
+      + (f" · 묵은 것 {len(묵은것)}건" if 묵은것 else ""))

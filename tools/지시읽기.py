@@ -11,6 +11,9 @@
 """
 import json, os, sys, time, urllib.request, urllib.parse
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from 지시셈 import 밀린것
+
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
 뿌리  = f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
@@ -44,38 +47,6 @@ def 자리들(tok):
         if 자리:
             나온것[자리] = sorted(f.get("msgs", []), key=lambda m: m.get("at", 0))
     return 나온것
-
-
-묵힘 = 6 * 3600   # 이만큼 지나도록 답이 없으면 그 지시는 '묵은 것' 으로 따로 뺀다
-
-
-def 밀린것(ms, 지금=None):
-    """답이 안 붙은 지시를 골라 낸다. → (밀림, 묵은것)
-
-    답하기.py 가 '답한때' 를 찍은 지시는 확실히 답한 것이다.
-    표가 없는 옛 말은 순서대로 짝짓는다 — 다만 한참 전 것이 줄에 남아 있으면
-    뒤에 온 지시까지 밀린 것처럼 보인다. 그래서 묵은 것은 줄에서 빼 따로 센다.
-    """
-    지금 = 지금 or time.time()
-    줄, 묵은것 = [], []
-    def 묵은것빼기(때):
-        while 줄 and 때 - 줄[0].get("at", 0) > 묵힘:
-            묵은것.append(줄.pop(0))
-    for m in ms:
-        때 = m.get("at", 0)
-        if m.get("who") == "나":
-            if m.get("답한때"):
-                continue
-            묵은것빼기(때)
-            줄.append(m)
-        else:
-            묵은것빼기(때)
-            if "맡은수" in m:
-                continue       # 새 답 — 맡은 지시에 이미 표를 찍었다. 또 짝짓지 않는다
-            if 줄:
-                줄.pop(0)      # 표가 없는 옛 답 하나가 지시 하나를 맡은 것으로 본다
-    묵은것빼기(지금)
-    return 줄, 묵은것
 
 
 def 답한이(ms):
