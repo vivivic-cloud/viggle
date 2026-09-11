@@ -116,6 +116,14 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
   top:calc(var(--brand) + env(safe-area-inset-top));background:rgba(17,17,16,.34);
   display:none;align-items:flex-end;backdrop-filter:blur(2px)}
 .sheet.on{display:flex}
+/* 새 박스는 '모든 박스' 화면에만 있었다. 홈에서도 할 일에서도 만들 수 있게
+   바닥에 늘 띄운다. 판이 열리면 그 판의 일에 집중하도록 숨는다. */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;
+  width:56px;height:56px;border-radius:50%;background:var(--ink);color:#fff;border:0;
+  display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 6px 20px rgba(17,17,16,.26)}
+.fab:active{transform:scale(.94)}
+.sheet.on ~ .fab{display:none}
 .card{background:#fff;width:100%;max-height:88vh;border-radius:26px 26px 0 0;
   padding:8px 20px calc(20px + env(safe-area-inset-bottom));overflow:auto;
   animation:up .22s cubic-bezier(.2,.9,.3,1)}
@@ -298,6 +306,7 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 </div>
 
 <div class="sheet" id="sheet"><div class="card" id="cardbox"></div></div>
+<button class="fab" id="fab" aria-label="새 박스" title="새 박스"></button>
 <div class="press" id="press"></div>
 
 <script type="module">
@@ -1159,7 +1168,7 @@ document.addEventListener('click', e => {
   if (e.target.closest('#allbtn') || e.target.closest('#allbtn2')){
     MODE = 'all'; 그리기(); return; }
   if (e.target.closest('#setbtn'))   return 설정판();
-  if (e.target.closest('#newboxbtn'))return 박스판(null);
+  if (e.target.closest('#newboxbtn') || e.target.closest('#fab')) return 박스판(null);
   if (e.target.closest('#phb')){
     e.stopPropagation();
     return 판(`<h4>PHB</h4>
@@ -1184,6 +1193,7 @@ async function 불러오기(){
 (async () => {
   if (new URLSearchParams(location.search).get('take') === '1') return;   // 짚은 것 받는 화면
   await window.준비;
+  $('fab').innerHTML = ico('plus', 26);
   개수 = +(localStorage.getItem('wt.cnt') || 6); 촘촘 = 개수 > 6;
   MODE = localStorage.getItem('wt.mode') || 'home';
   try { await 불러오기(); } catch (e) {}
