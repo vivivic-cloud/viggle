@@ -345,19 +345,33 @@ const 새id = () => 'b' + Math.random().toString(36).slice(2, 8) + Date.now().to
 const 자리키 = a => encodeURIComponent(a).replace(/%/g, '~');
 
 let 박스들 = null;                       // 한 번 받아 두고 바뀔 때만 다시 받는다
+// 박스가 안 보일 때 왜 안 보이는지 여기에 적어 둔다. 예전에는 조용히 빈
+// 화면만 나와서, 파이어베이스에 못 닿은 것인지 정말 박스가 없는 것인지
+// 사장님도 나도 알 수가 없었다.
+window.박스탈 = '';
 // 아직 파이어베이스에 못 닿으면 빈손으로 온다. 그것을 "다 받았다"로 치면
 // 박스가 하나도 없는 화면이 그대로 굳는다. 빈손은 안 받은 것으로 둔다.
 const 빈손 = s => s.empty && s.metadata.fromCache;
 async function 박스받기(){
   if (박스들) return 박스들;
-  const s = await getDocs(칸('wt_boxes'));
-  if (빈손(s)) return [];                // 굳히지 않는다 — 다음 차례에 다시 받는다
+  let s;
+  try { s = await getDocs(칸('wt_boxes')); }
+  catch (e){ window.박스탈 = '파이어베이스가 거절했습니다 — ' + (e.code || e.message); return []; }
+  if (빈손(s)){                          // 굳히지 않는다 — 다음 차례에 다시 받는다
+    window.박스탈 = '파이어베이스에 아직 못 닿았습니다';
+    return [];
+  }
+  window.박스탈 = s.empty ? '파이어베이스에 박스가 하나도 없습니다' : '';
   박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
   return 박스들;
 }
 onSnapshot(칸('wt_boxes'), s => {        // 다른 기기에서 고쳐도 따라온다
   if (빈손(s)) return;                   // 빈손으로 덮지 않는다
   박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
+  window.박스탈 = '';
+  // 늦게 닿았을 때. 예전에는 여기서 받아만 두고 화면은 그대로 두어,
+  // 처음에 빈손이었으면 '아직 없습니다' 가 그대로 굳어 있었다.
+  if (window.늦게왔다) window.늦게왔다(박스들);
 });
 
 async function 말받기(이름, id){
@@ -638,7 +652,8 @@ function 그리기(){
     <div class="sec"><h2>최근 박스</h2>
       <button class="tbtn g" id="allbtn2">see all</button></div>
     <div class="list ${촘촘?'dense':''}" data-area="최근박스">${
-      최근.slice(0, 개수).map((b,i) => 줄(b,i)).join('') || '<p class="empty">아직 없습니다</p>'}</div>
+      최근.slice(0, 개수).map((b,i) => 줄(b,i)).join('') || `<p class="empty">${
+        esc(window.박스탈 || '아직 없습니다')}</p>`}</div>
 
     <div class="setrow">
       <button class="set" id="setbtn">${ico('settings',14)} 박스설정 · ${개수}개</button>
@@ -1192,12 +1207,19 @@ async function 불러오기(){
 
 (async () => {
   if (new URLSearchParams(location.search).get('take') === '1') return;   // 짚은 것 받는 화면
+  // 로그인이 안 붙으면 아래가 통째로 멈춰 화면이 빈 채로 남는다. 그때도
+  // 왜 멈췄는지는 보여야 한다 — 앱 안에 딸린 브라우저에서 흔히 그렇다.
+  const 늦음 = setTimeout(() => { $('body').innerHTML =
+    '<p class="empty">로그인이 붙지 않습니다 — 사파리에서 열어 보세요</p>'; }, 8000);
   await window.준비;
+  clearTimeout(늦음);
   $('fab').innerHTML = ico('plus', 26);
   개수 = +(localStorage.getItem('wt.cnt') || 6); 촘촘 = 개수 > 6;
   MODE = localStorage.getItem('wt.mode') || 'home';
   try { await 불러오기(); } catch (e) {}
   그리기();
+  // 파이어베이스가 늦게 닿아 박스가 그때 오면, 그 자리에서 다시 그린다
+  window.늦게왔다 = 다 => { if (!BOXES.length && 다.length){ BOXES = 다; 합계다시(); 그리기(); } };
   대기내보내기();
   setInterval(async () => {
     const 나갔나 = await 대기내보내기();          // 맥이 다시 닿으면 쌓아 둔 지시부터 보낸다
