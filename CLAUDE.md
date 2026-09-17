@@ -107,6 +107,37 @@ VG_WHO=에이엠티 python3 tools/답하기.py "box:amt" "고쳤습니다 …"
    환경은 `env_019ykFbFRXU2HmffPCuqddpG` (여기에 `/home/user/viggle` 이 딸려 와
    `tools/답하기.py` 를 쓸 수 있다). 만들고 나면 **매시 쓸기 명단에 넣는다.**
 
+## 작업자 명단 — 어느 박스를 누가 맡는가
+
+사장님 말씀(09-17): *"작업대에 생성되는 모든 박스에 짚어서 지시하기 기능
+넣어주고 - 해당 작업자 지정해줘"*
+
+**규칙은 프로그램에만 걸려 있었다. 사장님은 「모든 박스」라고 하셨다.**
+`kind: program` 이 아닌 그냥 박스(ENGCHINA 같은)도 짚으면 `box:<id>` 로
+지시가 쌓인다. 받을 사람이 없으면 그 지시는 아무 데도 안 간다.
+
+| 박스 | 작업자 세션 |
+|---|---|
+| `box:amt` 에이엠티 | `session_01PvHiSq9H3x7mYGaK7W2obd` |
+| `box:johon` 조혼가구 | `session_01SEB6MGEqyJZ3pSCHu2f1gk` |
+| `box:workorder` 작업지시서 | `session_01NBv6biU2CcE4YSFiR5qmws` |
+| `box:docs` 서류관리 | `session_01KLMLRZ9gbKxmEEj6ruBj5j` |
+| `box:panel` 판재도면기 | `session_01QwAAQZiDdeK9FnFeM5c4sC` |
+| `box:cabinet-studio` | `session_01EKNRGFHGrx8LhDAjWNMSSY` |
+| `box:cartoon` | `session_015Rp7RfecbAP5SxPoqDzzY8` |
+| `box:worktable` 작업대 · `화면` | **내가(관리자) 직접 한다** — 작업대는 남에게 안 맡긴다 |
+
+**나머지 박스에는 작업자를 미리 앉히지 않는다.** 09-17 에 세어 보니 지시가
+온 박스는 위 일곱뿐이고, 나머지 열한 곳(반품스캔·중국 발주·이카운트등록·
+서류 동기화·중국어 책 분석·가구 디자이너·가구 발주 도구·언어 연습·sentend·
+Cad to simple·작업지시서 커스텀)은 **한 건도 온 적이 없다.** 빈 작업자를
+열한 명 앉히는 것은 돈만 든다.
+
+**대신 이 규칙을 지킨다 — 작업자 없는 박스에 첫 지시가 오면, 그 자리에서
+작업자를 만들고 나서 넘긴다.** 매시 쓸기가 `남은것.py` 로 `wt_dev` 를 통째로
+훑으므로 새 자리는 반드시 눈에 띈다. 사장님을 기다리게 하지 않는다.
+만든 작업자는 위 표와 매시 쓸기 명단에 **바로 적는다.**
+
 **답을 올렸다고 일이 끝난 것이 아니다.** `남은것.py` 는 답만 센다. 작업자가
 여러 건 중 일부만 하고 답하면 나머지가 0건으로 숨는다 — 실제로 세 건이
 사라질 뻔했다. 그래서 쓸기는 작업자가 **멈춰 있는지**도 함께 본다.
