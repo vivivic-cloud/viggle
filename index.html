@@ -168,6 +168,7 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 .icogrid button{aspect-ratio:1;border:1px solid var(--line);background:#fff;border-radius:12px;
   display:grid;place-items:center;cursor:pointer}
 .icogrid button.on{border-color:var(--ink);background:var(--fill)}
+.flagico{line-height:1;display:block}
 /* 아이콘이 많아졌다. 이름으로 갈라 두고, 판이 화면을 넘지 않게 안에서 굴린다 */
 .icogrid{max-height:46vh;overflow-y:auto;padding-right:2px}
 .icohead{grid-column:1/-1;margin:10px 0 0;font-size:11.5px;font-weight:800;color:var(--muted);
@@ -502,7 +503,23 @@ function 시각(t){
   const d = new Date(t*1000), p = n => String(n).padStart(2,'0');
   return `${p(d.getMonth()+1)}.${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
+/* 국기 — lucide 는 선 그림이라 나라 깃발이 없다. 이모지로 그린다(아이폰에서 제대로 나온다).
+   박스에는 'flag:KR' 처럼 적어 둔다. 두 글자 나라코드를 지역문자로 바꾸면 깃발이 된다. */
+const 국기들 = [
+  ['KR','한국'],['CN','중국'],['US','미국'],['JP','일본'],['VN','베트남'],['TW','대만'],
+  ['HK','홍콩'],['TH','태국'],['ID','인도네시아'],['MY','말레이시아'],['SG','싱가포르'],
+  ['PH','필리핀'],['IN','인도'],['GB','영국'],['DE','독일'],['FR','프랑스'],['IT','이탈리아'],
+  ['ES','스페인'],['NL','네덜란드'],['SE','스웨덴'],['PL','폴란드'],['TR','튀르키예'],
+  ['RU','러시아'],['CA','캐나다'],['MX','멕시코'],['BR','브라질'],['AU','호주'],
+  ['NZ','뉴질랜드'],['AE','아랍에미리트'],['SA','사우디'],['EU','유럽연합'],
+];
+const 국기그림 = c => String.fromCodePoint(...[...String(c).toUpperCase()]
+                        .map(x => 0x1F1E6 + x.charCodeAt(0) - 65));
+const 국기인가 = n => String(n).startsWith('flag:');
+
 function ico(name, sz = 20, stroke){
+  if (국기인가(name))
+    return `<span class="flagico" style="font-size:${Math.round(sz * 1.08)}px">${국기그림(String(name).slice(5))}</span>`;
   const n = (lucide.icons || {})[toPascal(name)] || (lucide.icons || {}).Square;
   if (!n) return '';
   const [ , attrs, kids ] = n;
@@ -761,6 +778,7 @@ function 설정판(){
 const 아이콘묶음 = [
   ['자주 쓰는 것', ['square','layout-grid','folder','file-text','message-square','star',
     'check-check','bell','tag','bookmark','pin','flag']],
+  ['국기', 국기들.map(([c]) => 'flag:' + c)],
   ['프로그램·화면', ['monitor','smartphone','app-window','panel-left','table-2','list',
     'kanban','sliders-horizontal','toggle-right','mouse-pointer-click']],
   ['서류·문서', ['files','folder-open','clipboard-list','receipt','notebook-pen','book-open',
@@ -803,13 +821,17 @@ function 박스판(b, 부모){
     tone = t.dataset.tone;
     [...$('tones').children].forEach(c => c.classList.toggle('on', c === t));
   });
-  const 있는것 = n => !!(lucide.icons || {})[toPascal(n)];   // 없는 이름은 빈 칸으로 남는다
+  const 있는것 = n => 국기인가(n) || !!(lucide.icons || {})[toPascal(n)];   // 없는 이름은 빈 칸으로 남는다
   const 한칸 = n => `<button data-ic="${n}" class="${n===icon?'on':''}">${ico(n,20)}</button>`;
   const 아이콘그리기 = () => {
     const s = $('iq').value.trim().toLowerCase();
     if (s){
-      const all = Object.keys(lucide.icons).map(k => k.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase())
-                    .filter(n => n.includes(s)).slice(0, 60);
+      // 찾기 칸은 영문만 받던 곳이라 '한국' 을 쳐도 국기가 안 나왔다. 우리말 이름도 본다
+      const 깃발 = 국기들.filter(([c, 나]) => 나.includes(s) || c.toLowerCase().includes(s))
+                     .map(([c]) => 'flag:' + c);
+      const all = 깃발.concat(
+        Object.keys(lucide.icons).map(k => k.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase())
+          .filter(n => n.includes(s))).slice(0, 60);
       $('ig').innerHTML = all.length ? all.map(한칸).join('')
                                      : '<p class="empty" style="grid-column:1/-1">그런 아이콘이 없습니다</p>';
       return;
