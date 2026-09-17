@@ -1136,15 +1136,25 @@ function 목록띄우기(x, y){
   p.style.left = Math.max(10, Math.min(x - w/2, innerWidth - w - 10)) + 'px';
   p.style.top  = Math.max(10, Math.min(y + 8, innerHeight - h - 10)) + 'px';
 }
+let 누름시작 = null;
 document.addEventListener('pointerdown', e => {
   if (e.target.closest('.press')) return;
   if (e.target.closest('textarea, input, .seg, .thead')) return;   // 글 쓰는 칸·머리글은 빼고
   눌린영역 = 영역이름(e.target);
   const x = e.clientX, y = e.clientY;
+  누름시작 = { x, y };
   누름 = setTimeout(() => { 누름 = null; 목록띄우기(x, y); }, 500);
 }, true);
-['pointerup','pointermove','pointercancel','scroll'].forEach(t =>
-  document.addEventListener(t, () => { clearTimeout(누름); 누름 = null; }, true));
+const 누름그만 = () => { clearTimeout(누름); 누름 = null; 누름시작 = null; };
+// 손가락은 가만히 있어도 1px 씩 떨린다. 예전에는 pointermove 가 오기만 하면
+// 곧바로 껐고, 그래서 작업대에서만 짚어서 지시가 좀처럼 안 걸렸다.
+// 프로그램 쪽 손잡이(shared/viggle.js)와 같은 10px 자를 쓴다.
+document.addEventListener('pointermove', e => {
+  if (!누름 || !누름시작) return;
+  if (Math.abs(e.clientX - 누름시작.x) > 10 || Math.abs(e.clientY - 누름시작.y) > 10) 누름그만();
+}, true);
+['pointerup','pointercancel','scroll'].forEach(t =>
+  document.addEventListener(t, 누름그만, true));
 document.addEventListener('pointerdown', e => {
   if (!e.target.closest('.press')) $('press').classList.remove('on');
 });
