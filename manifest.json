@@ -1,7 +1,7 @@
 {
   "name": "상시가동 작업대",
   "short_name": "작업대",
-  "start_url": "./작업대.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#EFF2F0",
