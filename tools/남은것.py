@@ -12,6 +12,9 @@
 """
 import json, os, sys, time, urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from 지시셈 import 밀린것
+
 기준때 = 1789121209          # 2026-09-11 — 여기서부터 한 건도 안 놓친다
 
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
@@ -43,11 +46,12 @@ d = json.load(urllib.request.urlopen(urllib.request.Request(
 for doc in d.get("documents", []):
     f = {k: 풀기(v) for k, v in doc["fields"].items()}
     자리 = f.get("area", "")
-    for m in f.get("msgs", []):
-        if m.get("who") != "나":          # 사장님 말만 센다
-            continue
+    # 셈은 지시셈 한 군데서만 한다. 예전에는 여기서 '답한때' 만 보았는데,
+    # 표를 안 찍은 옛 답이 붙은 지시를 밀린 것으로 잘못 세어 지시읽기와 어긋났다.
+    밀림, _ = 밀린것(f.get("msgs", []))
+    for m in 밀림:
         때 = m.get("at", 0)
-        if 때 < 기준때 or m.get("답한때"):
+        if 때 < 기준때:
             continue
         남은.append((때, 자리, (m.get("text", "") or "").replace("\n", " ")))
 
