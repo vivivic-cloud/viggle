@@ -1286,9 +1286,28 @@ document.addEventListener('pointerdown', e => {
   눌린짚은자리 = 짚은자리이름(e.target);
   const x = e.clientX, y = e.clientY;
   누름시작 = { x, y };
+  눌릴때자리 = 스크롤자리(e.target);
   누름 = setTimeout(() => { 누름 = null; 목록띄우기(x, y); }, 500);
 }, true);
-const 누름그만 = () => { clearTimeout(누름); 누름 = null; 누름시작 = null; };
+const 누름그만 = () => { clearTimeout(누름); 누름 = null; 누름시작 = null; 눌릴때자리 = []; };
+/* 손가락 밑에 있는 스크롤 상자들의 자리를 적어 둔다.
+   사장님이 짚으셨다(09-30: 「짚어서 지시하기도 안먹혀」) — 「내가 시킨 것」 판은
+   스크롤되는 상자(.card·.talk) 안에 줄이 있어서, 손가락을 얹기만 해도 폰이
+   scroll 을 한 번 흘린다. 그걸 움직인 것으로 보고 취소해 버렸다.
+   **진짜로 밀렸을 때만** 그만둔다. 10px 자는 그대로 둔다. */
+let 눌릴때자리 = [];
+function 스크롤자리(el){
+  const 다 = [];
+  for (let n = el; n && n.nodeType === 1; n = n.parentElement){
+    const st = getComputedStyle(n);
+    if (/(auto|scroll)/.test(st.overflowY + ' ' + st.overflowX))
+      다.push([n, n.scrollTop, n.scrollLeft]);
+  }
+  const d = document.scrollingElement || document.documentElement;
+  다.push([d, d.scrollTop, d.scrollLeft]);
+  return 다;
+}
+const 밀렸나 = () => 눌릴때자리.some(([n, t, l]) => n.scrollTop !== t || n.scrollLeft !== l);
 // 손가락은 가만히 있어도 1px 씩 떨린다. 예전에는 pointermove 가 오기만 하면
 // 곧바로 껐고, 그래서 작업대에서만 짚어서 지시가 좀처럼 안 걸렸다.
 // 프로그램 쪽 손잡이(shared/viggle.js)와 같은 10px 자를 쓴다.
@@ -1296,8 +1315,9 @@ document.addEventListener('pointermove', e => {
   if (!누름 || !누름시작) return;
   if (Math.abs(e.clientX - 누름시작.x) > 10 || Math.abs(e.clientY - 누름시작.y) > 10) 누름그만();
 }, true);
-['pointerup','pointercancel','scroll'].forEach(t =>
+['pointerup','pointercancel'].forEach(t =>
   document.addEventListener(t, 누름그만, true));
+document.addEventListener('scroll', () => { if (누름 && 밀렸나()) 누름그만(); }, true);
 document.addEventListener('pointerdown', e => {
   if (!e.target.closest('.press')) $('press').classList.remove('on');
 });
@@ -1314,8 +1334,10 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 /* ══ 누르기 ════════════════════════════════════════════════ */
 document.addEventListener('click', e => {
   if (e.target.closest('#xbtn')) return 판닫기();
-  if (e.target.closest('#back') && 열린영역){                    // 박스에서 온 지시면 그 박스로
-    const a = 열린영역;
+  /* 열린 자리가 없는 판(「내가 시킨 것」 따위)에서는 이 단추가 아무 일도 안 했다.
+     사장님이 짚으셨다(09-30: 「뒤로가기 키도 안먹히고」). 자리가 없으면 그냥 닫는다. */
+  if (e.target.closest('#back')){
+    const a = 열린영역 || '';
     return a.startsWith('box:') ? 박스열기(a.slice(4)) : 판닫기();
   }
   const m = e.target.closest('[data-mode]');
