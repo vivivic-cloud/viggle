@@ -462,6 +462,12 @@ window.창고 = async function(path, body){
     return 다;
   }
 
+  /* ── 내가 시킨 것 — 제 칸에 담는다(wt_asked). wt_dev 와 섞지 않는다 ── */
+  if (path === '/api/asked'){
+    const s = await getDocs(칸('wt_asked'));
+    return s.docs.map(d => ({ id: d.id, ...d.data() }));
+  }
+
   if (path === '/api/listening') return { on: navigator.onLine };
   return {};
 };
@@ -593,7 +599,6 @@ const MODES = [
 ];
 let MODE = 'home', BOXES = [], 개수 = 6, 촘촘 = false, 듣고있음 = false;
 let 시킨것개수 = 8;        // 「더 보기」 를 누르면 늘어난다
-let 지시못읽음 = false;    // 못 읽었으면 판이 사라지는 대신 그렇다고 적는다
 
 /* ══ 그리기 ════════════════════════════════════════════════ */
 /* 박스의 무게는 그 안에 든 것까지 합쳐서 잰다 */
@@ -670,17 +675,12 @@ const 상태표 = {
   여쭘:   {키:'hold', 말:'여쭤 둠'},
   못함:   {키:'no',   말:'못 함'},
 };
+/* 기록은 이 박스 제 칸(wt_asked)에 담는다. wt_dev 의 채팅을 훑어 만들지 않는다 —
+   사장님이 「그안에 저장시키고 방금 지시한 엔알에스 내용 부터 넣어 지난건 넣지마」
+   하셨다. 옛 349건은 거슬러 담지 않았다. */
+let 시킨것 = [], 시킨것읽음 = false;
 function 시킨것들(){
-  const 다 = [];
-  Object.keys(DEV || {}).forEach(자리 => {
-    const ms = [...(DEV[자리] || [])].sort((a,b) => (a.at||0) - (b.at||0));
-    ms.forEach((m, i) => {
-      if (m.who !== '나') return;
-      const 답 = ms.slice(i+1).find(x => x.who !== '나');
-      다.push({ 자리, m, 답 });
-    });
-  });
-  return 다.sort((a,b) => (b.m.at||0) - (a.m.at||0));
+  return [...시킨것].sort((a,b) => (b.때||0) - (a.때||0));
 }
 /* 「[짚은 자리] 말씀」 으로 오니 대괄호를 떼어 갈라 놓는다 */
 function 말갈라(text){
@@ -694,32 +694,49 @@ function 프로그램이름(자리){
   return b ? b.name : id;
 }
 function 시킨줄(것, i){
-  const { m, 답 } = 것;
-  const 쪼갠 = 말갈라(m.text);
-  const 한줄 = (m.한줄 || 쪼갠.말 || '(빈 말)');
-  const st = 상태표[m.상태] || (m.답한때 || 답 ? {키:'', 말:'답함'} : {키:'', 말:'안 함'});
-  return `<button class="row" data-dev="${esc(것.자리)}">
+  const st = 상태표[것.상태] || {키:'', 말:것.상태 || '안 함'};
+  return `<button class="row" data-dev="${esc(것.자리 || '')}">
     <span class="ico ${i%2?'dark':''}">${ico('message-square-code', 19)}</span>
-    <span class="t">${esc(한줄)}<i class="said">${
-      /* 짚으신 자리에 이미 프로그램 이름이 붙어 온다(「NRS · 측판 내밈」).
-         자리 이름을 또 적으면 같은 것이 두 번 나온다 — 있으면 그것만 쓴다. */
-      esc(쪼갠.자리 || 프로그램이름(것.자리))}</i></span>
+    <span class="t">${esc(것.한줄 || '(빈 말)')}<i class="said">${
+      /* 짚으신 자리에 프로그램 이름이 이미 붙어 온다(「NRS · 측판 내밈」).
+         자리 이름을 또 적으면 같은 것이 두 번 나온다. */
+      esc(것.짚은자리 || 프로그램이름(것.자리 || ''))}</i></span>
     <span class="st ${st.키}"><b></b>${esc(st.말)}</span>
-    <span class="when">${언제(m.at || 0)}</span>
+    <span class="when">${언제(것.때 || 0)}</span>
   </button>`;
 }
-function 시킨것판(){
+function 시킨것속(){
   const 다 = 시킨것들();
-  if (!다.length) return 지시못읽음
-    ? `<div class="sec"><h2>내가 시킨 것</h2></div>
-       <p class="empty">아직 읽어 오지 못했습니다</p>`
-    : '';
+  if (!다.length) return `<p class="empty">${
+    시킨것읽음 ? '아직 아무것도 없습니다' : '아직 읽어 오지 못했습니다'}</p>`;
   const 봄 = 다.slice(0, 시킨것개수);
-  return `<div class="sec"><h2>내가 시킨 것</h2>
-      <span class="tbtn g">${다.length}건</span></div>
-    <div class="list" data-area="내가시킨것">${봄.map(시킨줄).join('')}</div>` +
+  return `<div class="list" data-area="내가시킨것">${봄.map(시킨줄).join('')}</div>` +
     (다.length > 봄.length
       ? `<div class="bar"><button class="tbtn g" id="시킨것더">더 보기</button></div>` : '');
+}
+/* 박스를 누르면 열리는 화면. 개발대화 와 같은 꼴을 그대로 쓴다 — 새 모양은 없다. */
+async function 시킨것보기(){
+  열린영역 = null; 열린박스 = null;
+  await 시킨것받기();
+  const 그리자 = () => {
+    $('cardbox').className = 'card talkcard';
+    $('cardbox').innerHTML = `
+      <div class="thead">
+        <button class="back" id="back">${ico('chevron-left',22,2)}</button>
+        <span class="ico" style="width:34px;height:34px;border-radius:50%;background:var(--fill);
+          display:grid;place-items:center">${ico('list-checks',17)}</span>
+        <span class="nm">내가 시킨 것</span>
+        <span class="ear"><i></i>${시킨것들().length}건</span>
+      </div>
+      <div class="talk" id="tk" style="padding:14px 12px 20px">${시킨것속()}</div>`;
+  };
+  그리자();
+  판열림(true);
+  window.시킨것다시 = 그리자;
+}
+async function 시킨것받기(){
+  try { 시킨것 = await api('/api/asked'); 시킨것읽음 = true; }
+  catch (e) { 시킨것읽음 = false; }
 }
 
 function 그리기(){
@@ -742,8 +759,6 @@ function 그리기(){
       <button class="tbtn" id="searchbtn">${ico('search',15,2)} search your's</button>
       <button class="tbtn g" id="allbtn">show all</button>
     </div>
-    ${시킨것판()}
-
     <div class="tiles" data-area="자주쓰는박스">${(() => {
       const a = 쓴것.slice(0, 4);
       return a.map((b,i) => 타일(b, i, 총, a.length - 1)).join('');
@@ -1289,11 +1304,15 @@ document.addEventListener('click', e => {
   }
   const m = e.target.closest('[data-mode]');
   if (m){ MODE = m.dataset.mode; localStorage.setItem('wt.mode', MODE); 판닫기(); 그리기(); return; }
-  if (e.target.closest('#시킨것더')){ 시킨것개수 += 12; 그리기(); return; }
+  if (e.target.closest('#시킨것더')){
+    시킨것개수 += 12;
+    if (window.시킨것다시) window.시킨것다시(); else 그리기();
+    return; }
   const o = e.target.closest('[data-open]');
   if (o){
     const b = BOXES.find(x => x.id === o.dataset.open);
     if (b && (b.link || '').startsWith('지시:')) return 개발대화(b.link.slice(3));
+    if (b && b.link === '시킨것:') return 시킨것보기();     // 「내가 시킨 것」 박스
     const 바깥 = b && /^https?:/i.test(b.link || '');
     const 안에것 = b && BOXES.some(x => x.parent === b.id);
     if (바깥 && !안에것) return 바로열기(b);      // 한 번 눌러 바로 그 프로그램으로
@@ -1327,15 +1346,13 @@ document.addEventListener('click', e => {
    아무 말 없이 사라진다 — 되는 척하는 꼴이다. */
 async function 불러오기(){
   try { BOXES = await api('/api/boxes');   } catch (e) {}
-  try { DEV   = await api('/api/devchat'); 지시못읽음 = !Object.keys(DEV).length; }
-  catch (e) { 지시못읽음 = true; }
+  try { DEV   = await api('/api/devchat'); } catch (e) {}
   합계다시();
 }
 async function 지시다시(){
   if (Object.keys(DEV).length) return false;
   try { DEV = await api('/api/devchat'); } catch (e) { return false; }
-  지시못읽음 = !Object.keys(DEV).length;
-  return !지시못읽음;
+  return !!Object.keys(DEV).length;
 }
 
 
