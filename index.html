@@ -691,10 +691,16 @@ function 전체판(list){
     </div>`;
 }
 
+/* 걸러 보는 판이 비면 박스가 사라진 것처럼 보인다. 실제로 사장님이
+   「바이글에 아무 박스도 안나타나고 있어」 라고 하셨고, 박스 122개는
+   그대로 있었다 — 「할 일만」 으로 보고 계셨을 뿐이다. 이 판은 고른 모드가
+   기억되어 새로 고쳐도 그대로다. 그래서 빈 자리에 돌아가는 단추를 둔다. */
 function 할일판(list){
   return `<div class="sec"><h2>답하지 않은 박스</h2><span class="tbtn g">${list.length}개</span></div>
     <div class="list" data-area="할일">${
-      list.map((b,i) => 줄(b,i)).join('') || '<p class="empty">남은 일이 없습니다</p>'}</div>`;
+      list.map((b,i) => 줄(b,i)).join('') ||
+      `<p class="empty">남은 일이 없습니다 — 지금 「할 일만」 으로 보고 있습니다</p>
+       <div class="bar"><button class="tbtn" id="allbtn">모든 박스 보기</button></div>`}</div>`;
 }
 
 function 개발판(){
@@ -705,7 +711,8 @@ function 개발판(){
         <span class="t">${esc(영역표시(k))}</span>
         <span class="when">${DEV[k].length}</span></button>`).join('')
         || '<p class="empty">아무 영역이나 0.5초 길게 눌러 지시를 남기세요</p>'}
-    </div>`;
+    </div>
+    <div class="bar"><button class="tbtn" id="allbtn">모든 박스 보기</button></div>`;
 }
 
 /* ══ 판 띄우기 ═════════════════════════════════════════════ */
