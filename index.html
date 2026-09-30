@@ -695,7 +695,11 @@ function 프로그램이름(자리){
 }
 function 시킨줄(것, i){
   const st = 상태표[것.상태] || {키:'', 말:것.상태 || '안 함'};
-  return `<button class="row" data-dev="${esc(것.자리 || '')}">
+  /* 줄을 길게 누르면 **그 일이 있는 프로그램 자리**로 지시가 간다(새 자리를 만들지 않는다).
+     그리고 무엇을 짚으셨는지 그 줄의 한 줄이 「짚은 자리」 로 붙는다. */
+  return `<button class="row" data-dev="${esc(것.자리 || '')}"
+    data-area="${esc(것.자리 || 'box:worktable')}"
+    data-짚은자리="${esc((것.한줄 || '') + (것.짚은자리 ? ' · ' + 것.짚은자리 : ''))}">
     <span class="ico ${i%2?'dark':''}">${ico('message-square-code', 19)}</span>
     <span class="t">${esc(것.한줄 || '(빈 말)')}<i class="said">${
       /* 짚으신 자리에 프로그램 이름이 이미 붙어 온다(「NRS · 측판 내밈」).
@@ -710,7 +714,7 @@ function 시킨것속(){
   if (!다.length) return `<p class="empty">${
     시킨것읽음 ? '아직 아무것도 없습니다' : '아직 읽어 오지 못했습니다'}</p>`;
   const 봄 = 다.slice(0, 시킨것개수);
-  return `<div class="list" data-area="내가시킨것">${봄.map(시킨줄).join('')}</div>` +
+  return `<div class="list">${봄.map(시킨줄).join('')}</div>` +
     (다.length > 봄.length
       ? `<div class="bar"><button class="tbtn g" id="시킨것더">더 보기</button></div>` : '');
 }
@@ -728,7 +732,8 @@ async function 시킨것보기(){
         <span class="nm">내가 시킨 것</span>
         <span class="ear"><i></i>${시킨것들().length}건</span>
       </div>
-      <div class="talk" id="tk" style="padding:14px 12px 20px">${시킨것속()}</div>`;
+      <div class="talk" id="tk" data-area="box:worktable"
+        style="padding:14px 12px 20px">${시킨것속()}</div>`;
   };
   그리자();
   판열림(true);
@@ -1135,9 +1140,9 @@ async function 대화새로(id, 조용히){
 }
 
 /* ══ 개발 지시 대화 (완성되면 걷어낼 쪽) ═══════════════════ */
-let DEV = {}, 열린영역 = null;
-async function 개발대화(area){
-  열린영역 = area; 열린박스 = null;
+let DEV = {}, 열린영역 = null, 열린짚은자리 = '';
+async function 개발대화(area, 짚은자리){
+  열린영역 = area; 열린박스 = null; 열린짚은자리 = 짚은자리 || '';
   const msgs = await api('/api/devchat?area=' + encodeURIComponent(area));
   $('cardbox').className = 'card talkcard';
   $('cardbox').innerHTML = `
@@ -1152,7 +1157,9 @@ async function 개발대화(area){
     ${입력칸('클로드에게 지시')}`;
   판열림(true);
   입력칸달기(async t => {
-    const 몸 = { area, text: t };
+    /* 짚으신 자리를 지시 앞에 붙인다 — 다른 프로그램이 보내는 꼴과 같게 맞춘다.
+       그래야 나중에 무엇을 짚으셨는지 알아볼 수 있다. */
+    const 몸 = { area, text: (열린짚은자리 ? '[' + 열린짚은자리 + '] ' : '') + t };
     try {
       await api('/api/devchat', 몸);
     } catch (e) {
@@ -1244,7 +1251,15 @@ function 손잡이붙이기(b){
 }
 
 /* ══ 0.5초 길게 누르기 → 목록 ══════════════════════════════ */
-let 누름 = null, 눌린영역 = '';
+let 누름 = null, 눌린영역 = '', 눌린짚은자리 = '';
+/* 작업대 제 화면에서는 「짚은 자리」 를 안 적고 있었다 — 다른 프로그램은
+   손잡이(shared/viggle.js)가 적어 주는데 작업대만 빠져 있었다. 그래서 무엇을
+   짚으셨는지가 남지 않았다(사장님 09-30: 「여기도 짚어서 지시하기 만들어」).
+   줄에 data-짚은자리 가 있으면 그것을 지시 앞에 붙인다. */
+function 짚은자리이름(el){
+  const a = el.closest('[data-짚은자리]');
+  return a ? a.dataset.짚은자리 : '';
+}
 function 영역이름(el){
   const a = el.closest('[data-area]');
   return a ? a.dataset.area : '화면';
@@ -1268,6 +1283,7 @@ document.addEventListener('pointerdown', e => {
   if (e.target.closest('.press')) return;
   if (e.target.closest('textarea, input, .seg, .thead')) return;   // 글 쓰는 칸·머리글은 빼고
   눌린영역 = 영역이름(e.target);
+  눌린짚은자리 = 짚은자리이름(e.target);
   const x = e.clientX, y = e.clientY;
   누름시작 = { x, y };
   누름 = setTimeout(() => { 누름 = null; 목록띄우기(x, y); }, 500);
@@ -1289,7 +1305,7 @@ $('press').addEventListener('click', async e => {
   const b = e.target.closest('[data-act]'); if (!b) return;
   $('press').classList.remove('on');
   if (b.dataset.act === 'open') return 박스열기(눌린영역.slice(4));
-  if (b.dataset.act === 'dev')  return 개발대화(눌린영역);
+  if (b.dataset.act === 'dev')  return 개발대화(눌린영역, 눌린짚은자리);
   if (b.dataset.act === 'new')  return 박스판(null);
   if (b.dataset.act === 'copy') { try { await navigator.clipboard.writeText(눌린영역); } catch(e){} }
 });
