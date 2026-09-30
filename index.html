@@ -281,6 +281,11 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 .ear.off i{background:var(--red)}
 .empty{color:var(--muted);font-size:13.5px;padding:10px 2px}
 
+/* 무엇을 짚었는지 그 자리에서 보여 준다 — 프로그램 쪽 손잡이의 「짚은 것 · …」 과 같다.
+   안 보여 주면 짚혔는지 안 짚혔는지를 알 수가 없다(사장님 09-30). */
+.press .what{font-size:11.5px;color:var(--muted);font-weight:600;padding:9px 12px 7px;
+  border-bottom:1px solid var(--line);max-width:250px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .press{position:fixed;z-index:70;background:#fff;border:1px solid var(--line);border-radius:14px;
   box-shadow:0 14px 34px -16px rgba(0,0,0,.5);padding:5px;display:none;min-width:186px}
 .press.on{display:block}
@@ -1258,17 +1263,45 @@ let 누름 = null, 눌린영역 = '', 눌린짚은자리 = '';
    줄에 data-짚은자리 가 있으면 그것을 지시 앞에 붙인다. */
 function 짚은자리이름(el){
   const a = el.closest('[data-짚은자리]');
-  return a ? a.dataset.짚은자리 : '';
+  if (a && a.dataset.짚은자리) return a.dataset.짚은자리;
+  return 무엇짚었나(el);          // 달아 둔 것이 없으면 손가락 밑 글자를 적는다
 }
+/* 짚은 자리가 없는 데를 짚으면 「화면」 이라는 떠돌이 자리로 갔고, 무엇을 짚으셨는지도
+   안 남았다. 사장님이 두 번 짚으셨다(09-30: 「짚어서 지시하기 내가시킨것에서도 여전히
+   안되고있다」 — 그 지시가 「화면」 자리로 들어왔다).
+   **떠돌이 자리를 만들지 않는다.** 걸리는 자리가 없으면 지금 열려 있는 판의 자리,
+   그것도 없으면 작업대 자리(box:worktable)로 보낸다. */
 function 영역이름(el){
   const a = el.closest('[data-area]');
-  return a ? a.dataset.area : '화면';
+  if (a && a.dataset.area && a.dataset.area !== '화면') return a.dataset.area;
+  if (열린영역) return 열린영역;
+  if (열린박스 && 열린박스.id) return 'box:' + 열린박스.id;
+  return 'box:worktable';
+}
+/* 짚은 것이 무엇인지 사람이 알아볼 말로 적는다.
+   프로그램 쪽 손잡이(shared/viggle.js 의 무엇())를 그대로 베꼈다 — 두 곳이 달라지면 안 된다. */
+function 무엇짚었나(el){
+  const 다듬 = t => (t || '').trim().replace(/\s+/g, ' ');
+  // ① 제 몸에 바로 붙은 글자 — 단추·알약처럼 글자를 직접 든 것이 여기서 잡힌다
+  const 제글 = 다듬([...el.childNodes].filter(n => n.nodeType === 3).map(n => n.textContent).join(' '));
+  if (제글) return 제글.slice(0, 60);
+  const 글 = 다듬(el.innerText || el.value || el.placeholder || '');
+  // ② 속에 아무것도 안 든 것이면 그 글자를 쓴다
+  if (글 && !el.querySelector('*')) return 글.slice(0, 60);
+  // ③ 여러 줄이 든 **통**이면 그 통의 글자를 전부 긁어오지 않는다 — 판 이름을 적는다.
+  //    안 그러면 「내가 시킨 것 4건 뒤로가기·짚기 고치고… 하는 중 13」 처럼 지저분해진다.
+  if (글 && 글.length <= 60 && el.children.length <= 2) return 글;
+  const 판 = document.querySelector('.card.talkcard .thead .nm') || document.querySelector('.card h4');
+  if (판) return 다듬(판.textContent).slice(0, 50) + ' 판';
+  const t = (el.tagName || '').toLowerCase();
+  return ({ button:'단추', input:'입력칸', select:'고르는 칸', img:'그림', svg:'그림' })[t] || t || '화면';
 }
 function 목록띄우기(x, y){
   const p = $('press');
   const 박스id = (눌린영역 || '').startsWith('box:') ? 눌린영역.slice(4) : '';
   const 그박스 = BOXES.find(x => x.id === 박스id);
   p.innerHTML = `
+    ${눌린짚은자리 ? `<div class="what">짚은 것 · ${esc(눌린짚은자리)}</div>` : ''}
     ${그박스 ? `<button data-act="open">${ico('square-arrow-out-up-right',17)} 박스 열기</button>` : ''}
     <button data-act="dev">${ico('terminal',17)} 클로드에게 지시하기</button>
     <button data-act="new">${ico('plus',17)} 여기에 새 박스</button>
