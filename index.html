@@ -690,7 +690,10 @@ function 시킨줄(것, i){
   const st = 상태표[것.상태] || {키:'', 말:것.상태 || '안 함'};
   /* 줄을 길게 누르면 **그 일이 있는 프로그램 자리**로 지시가 간다(새 자리를 만들지 않는다).
      그리고 무엇을 짚으셨는지 그 줄의 한 줄이 「짚은 자리」 로 붙는다. */
-  return `<button class="row" data-dev="${esc(것.자리 || '')}"
+  /* 누르면 **사장님이 쓰신 말씀만** 보인다 — 그 프로그램의 지시 페이지로 가지 않는다.
+     사장님 말씀(10-01): 「내가시킨 목록박스를 누르면 해당프로의 지시 페이지가 아닌
+     내가 실제 작성한 질문만 나오게 해줘 일단」. */
+  return `<button class="row" data-시킨것="${esc(것.id || '')}"
     data-area="${esc(것.자리 || 'box:worktable')}"
     data-짚은자리="${esc((것.한줄 || '') + (것.짚은자리 ? ' · ' + 것.짚은자리 : ''))}">
     <span class="ico ${i%2?'dark':''}">${ico('message-square-code', 19)}</span>
@@ -731,6 +734,14 @@ async function 시킨것보기(){
   그리자();
   판열림(true);
   window.시킨것다시 = 그리자;
+}
+/* 사장님이 쓰신 말씀만 보여 준다. 다른 것을 붙이지 않는다. */
+function 쓰신말씀(id){
+  const 것 = 시킨것.find(x => x.id === id);
+  if (!것) return;
+  판(`<h4>${esc(것.한줄 || '내가 시킨 것')}</h4>
+    <p style="font-size:16px;line-height:1.6;white-space:pre-wrap;margin:0 0 4px">${
+      esc(것.말 || '(적힌 말씀이 없습니다)')}</p>`);
 }
 async function 시킨것받기(){
   try { 시킨것 = await api('/api/asked'); 시킨것읽음 = true; }
@@ -1297,6 +1308,8 @@ document.addEventListener('click', e => {
     if (바깥 && !안에것) return 바로열기(b);      // 한 번 눌러 바로 그 프로그램으로
     return 박스열기(o.dataset.open);
   }
+  const k = e.target.closest('[data-시킨것]');
+  if (k) return 쓰신말씀(k.dataset.시킨것);
   const d = e.target.closest('[data-dev]');
   if (d) return 개발대화(d.dataset.dev);
   if (e.target.closest('#modebtn'))  return 모드판();
