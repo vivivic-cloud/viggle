@@ -110,6 +110,7 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
   font-weight:700;letter-spacing:-.2px;color:var(--soft);background:#fff;
   border-radius:999px;padding:4px 9px}
 .row .st b{width:7px;height:7px;border-radius:50%;background:var(--muted);display:block}
+.row .st.got b{background:var(--ink)} .row .st.got{color:var(--soft)}
 .row .st.done b{background:#1FA35B} .row .st.done{color:#1FA35B}
 .row .st.run  b{background:#0A84FF} .row .st.run{color:#0A84FF}
 .row .st.ask  b{background:#FF9F0A} .row .st.ask{color:#B06E00}
@@ -667,6 +668,7 @@ function 줄(b, i){
    「답이 붙었나」 와 (앞으로 적는) 「상태」. 그래서 상태가 적힌 지시는 그 상태로,
    안 적힌 옛 지시는 「답함 / 안 함」 으로만 보인다. 되는 척하지 않는다. */
 const 상태표 = {
+  받음:   {키:'got',  말:'받음'},     // 손잡이가 보내면서 적어 둔 것 — 아직 안 넘겼다
   됐음:   {키:'done', 말:'됐음'},
   하는중: {키:'run',  말:'하는 중'},
   확인:   {키:'ask',  말:'확인 필요'},

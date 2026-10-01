@@ -6,14 +6,18 @@
 
 사장님 말씀(09-30): 「지금 이 채팅창에서 지시한 이내용도 내가 시킨것에 있어야지」.
 **짚어서 오신 것만 적으면 반쪽이다.** 채팅으로 주신 것도 같은 자리에 적는다.
-상태는 다섯뿐이다 — 하는중 · 됐음 · 확인 · 여쭘 · 못함.
+상태는 여섯이다 — 받음 · 하는중 · 됐음 · 확인 · 여쭘 · 못함.
+
+⚠ 짚어서 오신 지시는 **손잡이(shared/viggle.js)가 보내면서 스스로 「받음」 으로 적는다.**
+   그러니 그것을 또 넣지 마라 — 「고치기」 로 상태만 올려라(받음 → 하는중 → 됐음).
+   이 「넣기」 는 **채팅으로 주신 지시**에 쓴다(그건 손잡이를 안 거친다).
 """
 import json, os, sys, time, urllib.request, urllib.parse
 
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
 뿌리 = f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
-상태들 = ("하는중", "됐음", "확인", "여쭘", "못함")
+상태들 = ("받음", "하는중", "됐음", "확인", "여쭘", "못함")
 
 
 def 토큰():
