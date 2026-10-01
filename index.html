@@ -764,6 +764,7 @@ function 그프로그램(것){
     const u = new URL(location.href);
     u.searchParams.set('viggle', '1'); u.searchParams.set('box', 'worktable');
     u.searchParams.set('name', '작업대'); u.searchParams.set('vg지난', '1');
+    if (것.때) u.searchParams.set('vg때', String(것.때));
     return { 지금이화면: true, 채팅주소: u.toString() };
   }
   const b = BOXES.find(x => x.id === id);
@@ -776,7 +777,9 @@ function 그프로그램(것){
   return 쓸것
     ? { 박스: b, 열것: 쓸것,
         주소: 손잡이붙이기(쓸것, { 'vg페이지': 것.페이지 || '' }),
-        채팅주소: 손잡이붙이기(쓸것, { 'vg지난': '1' }) }
+        // 사장님 말씀(10-01): 「이곳을 눌렀을때 내가 본 상세 위치를 보여 줄수는 없는건가요?」
+        // 그 말의 때를 함께 보낸다 — 손잡이가 그 줄로 굴러가 테를 두른다
+        채팅주소: 손잡이붙이기(쓸것, { 'vg지난': '1', 'vg때': String(것.때 || '') }) }
     : { 박스: b, 열것: null, 주소: '', 채팅주소: '' };
 }
 function 질문속(){
