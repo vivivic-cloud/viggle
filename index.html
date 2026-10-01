@@ -1273,7 +1273,14 @@ function 짚은자리이름(el){
    그것도 없으면 작업대 자리(box:worktable)로 보낸다. */
 function 영역이름(el){
   const a = el.closest('[data-area]');
-  if (a && a.dataset.area && a.dataset.area !== '화면') return a.dataset.area;
+  const 자리 = a && a.dataset.area !== '화면' ? a.dataset.area : '';
+  // 박스를 짚었으면 그 박스가 이긴다. 「모든 박스」 판은 겉에 자리표(모든박스)가 붙어
+  // 있어서 그것이 먼저 잡혔고, 박스를 짚어도 그 박스를 못 알아봤다.
+  if (!자리.startsWith('box:')){
+    const o = el.closest('[data-open]');
+    if (o && o.dataset.open) return 'box:' + o.dataset.open;
+  }
+  if (자리) return 자리;
   if (열린영역) return 열린영역;
   if (열린박스 && 열린박스.id) return 'box:' + 열린박스.id;
   return 'box:worktable';
@@ -1312,15 +1319,44 @@ function 목록띄우기(x, y){
   p.style.top  = Math.max(10, Math.min(y + 8, innerHeight - h - 10)) + 'px';
 }
 let 누름시작 = null;
-document.addEventListener('pointerdown', e => {
-  if (e.target.closest('.press')) return;
-  if (e.target.closest('textarea, input, .seg, .thead')) return;   // 글 쓰는 칸·머리글은 빼고
-  눌린영역 = 영역이름(e.target);
-  눌린짚은자리 = 짚은자리이름(e.target);
-  const x = e.clientX, y = e.clientY;
+/* ⚠ 아이폰에서 작업대만 짚기가 안 걸리던 까닭 —
+   프로그램 손잡이(shared/viggle.js)는 **touch** 사건을 쓰는데 작업대는 **pointer** 사건을
+   쓰고 있었다. 아이폰은 스크롤되는 상자 안에서 길게 누르면 `pointercancel` 을 던지고,
+   작업대는 그것을 「손 뗐다」 로 보고 시계를 껐다. 프로그램 쪽은 그 사건을 안 듣는다.
+   사장님이 세 번 짚으셨다(09-30: 「바이글자체에 짚어서 지시하기 기능이 없어」).
+   **손잡이와 같은 사건을 쓴다.** 손가락은 touch, 마우스는 pointer 로 갈라 듣는다. */
+function 누르기시작(target, x, y){
+  if (target.closest && target.closest('.press')) return;
+  if (target.closest && target.closest('textarea, input, .seg, .thead')) return;  // 글 쓰는 칸·머리글은 빼고
+  눌린영역 = 영역이름(target);
+  눌린짚은자리 = 짚은자리이름(target);
   누름시작 = { x, y };
-  눌릴때자리 = 스크롤자리(e.target);
-  누름 = setTimeout(() => { 누름 = null; 목록띄우기(x, y); }, 500);
+  눌릴때자리 = 스크롤자리(target);
+  clearTimeout(누름);
+  누름 = setTimeout(() => {
+    누름 = null;
+    try { const sel = getSelection && getSelection(); sel && sel.removeAllRanges(); } catch (e) {}
+    목록띄우기(x, y);
+  }, 500);
+}
+/* 손가락 — 손잡이와 같은 사건·같은 자 */
+document.addEventListener('touchstart', e => {
+  if (e.touches && e.touches.length > 1) return 누름그만();   // 두 손가락은 확대다
+  const p = e.touches ? e.touches[0] : e;
+  누르기시작(e.target, p.clientX, p.clientY);
+}, true);
+document.addEventListener('touchmove', e => {
+  if (!누름 || !누름시작) return;
+  if (e.touches && e.touches.length > 1) return 누름그만();
+  const p = e.touches ? e.touches[0] : e;
+  if (Math.abs(p.clientX - 누름시작.x) > 10 || Math.abs(p.clientY - 누름시작.y) > 10) 누름그만();
+}, true);
+/* 감쌈 — 누름그만 은 아래에서 만들어진다. 바로 넘기면 화면이 켜지다 죽는다(내가 겪었다). */
+['touchend','touchcancel'].forEach(t => document.addEventListener(t, () => 누름그만(), true));
+/* 마우스 — 손가락 사건이 이미 왔으면 겹쳐 걸지 않는다 */
+document.addEventListener('pointerdown', e => {
+  if (e.pointerType === 'touch') return;
+  누르기시작(e.target, e.clientX, e.clientY);
 }, true);
 const 누름그만 = () => { clearTimeout(누름); 누름 = null; 누름시작 = null; 눌릴때자리 = []; };
 /* 손가락 밑에 있는 스크롤 상자들의 자리를 적어 둔다.
@@ -1345,11 +1381,12 @@ const 밀렸나 = () => 눌릴때자리.some(([n, t, l]) => n.scrollTop !== t ||
 // 곧바로 껐고, 그래서 작업대에서만 짚어서 지시가 좀처럼 안 걸렸다.
 // 프로그램 쪽 손잡이(shared/viggle.js)와 같은 10px 자를 쓴다.
 document.addEventListener('pointermove', e => {
+  if (e.pointerType === 'touch') return;
   if (!누름 || !누름시작) return;
   if (Math.abs(e.clientX - 누름시작.x) > 10 || Math.abs(e.clientY - 누름시작.y) > 10) 누름그만();
 }, true);
-['pointerup','pointercancel'].forEach(t =>
-  document.addEventListener(t, 누름그만, true));
+/* pointercancel 은 듣지 않는다 — 아이폰이 이것을 던져서 짚기가 꺼졌다. 손가락은 touchend·touchcancel 이 끈다. */
+document.addEventListener('pointerup', e => { if (e.pointerType !== 'touch') 누름그만(); }, true);
 document.addEventListener('scroll', () => { if (누름 && 밀렸나()) 누름그만(); }, true);
 document.addEventListener('pointerdown', e => {
   if (!e.target.closest('.press')) $('press').classList.remove('on');
