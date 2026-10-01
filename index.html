@@ -752,15 +752,20 @@ function 쓰신말씀(id){
 }
 /* 그 지시가 어느 프로그램 것인지 찾아, 그 프로그램을 여는 길을 만든다.
    사장님 말씀(10-01): 「자 이질문 아래로 프로그램의 내가 짚은곳 바로 이동하게 할 수
-   있는 링크달아줘」.
-   ⚠ **글자 하나까지 짚은 자리로 굴러가게는 아직 못 한다.** 프로그램 쪽이 그런 표를
-   받지 못한다. 그래서 **그 프로그램을 열고, 짚으셨던 자리를 글로 적어** 둔다.
-   되는 척하지 않는다. 글자까지 굴러가게 하려면 손잡이(shared/viggle.js)를 고쳐야 한다. */
+   있는 링크달아줘」 → 「짚은페이지로는 최소한 가줘야 되는거 아니냐」.
+   그래서 짚으셨을 때 켜져 있던 **페이지까지** 간다(손잡이가 vg페이지 를 받아 그 탭을
+   누른다). 글자 한 자리까지 굴러가지는 않는다 — 되는 척하지 않는다.
+   그리고 「주저리주저리 채팅」 으로 가는 길도 함께 만든다(vg지난=1). */
 const 앱주소인가 = u => /^https?:/i.test(u || '') && !/(^|\/\/)([^\/]*\.)?github\.com\//i.test(u);
 function 그프로그램(것){
   const id = String(것.자리 || '').startsWith('box:') ? 것.자리.slice(4) : '';
   if (!id) return null;
-  if (id === 'worktable') return { 지금이화면: true };   // 작업대는 지금 보고 있는 이 화면이다
+  if (id === 'worktable') {                            // 작업대는 지금 보고 있는 이 화면이다
+    const u = new URL(location.href);
+    u.searchParams.set('viggle', '1'); u.searchParams.set('box', 'worktable');
+    u.searchParams.set('name', '작업대'); u.searchParams.set('vg지난', '1');
+    return { 지금이화면: true, 채팅주소: u.toString() };
+  }
   const b = BOXES.find(x => x.id === id);
   if (!b) return null;
   /* 깃허브 저장소 주소는 프로그램이 아니다 — 코드가 있는 곳이다. 그것으로 보내지 않는다.
@@ -768,7 +773,11 @@ function 그프로그램(것){
      그 박스에 앱 주소가 없으면 안에 든 것 가운데서 찾는다(박스 안에 또 박스인 꼴). */
   const 쓸것 = 앱주소인가(b.link) ? b
     : BOXES.find(x => x.parent === b.id && 앱주소인가(x.link));
-  return 쓸것 ? { 박스: b, 열것: 쓸것, 주소: 손잡이붙이기(쓸것) } : { 박스: b, 열것: null, 주소: '' };
+  return 쓸것
+    ? { 박스: b, 열것: 쓸것,
+        주소: 손잡이붙이기(쓸것, { 'vg페이지': 것.페이지 || '' }),
+        채팅주소: 손잡이붙이기(쓸것, { 'vg지난': '1' }) }
+    : { 박스: b, 열것: null, 주소: '', 채팅주소: '' };
 }
 function 질문속(){
   const 것 = 시킨것.find(x => x.id === 열린질문);
@@ -786,9 +795,27 @@ function 질문속(){
       ? `<a class="row" id="그리로" href="${esc(p.주소)}" target="_blank" rel="noopener">
           <span class="ico">${ico('square-arrow-out-up-right',19)}</span>
           <span class="t">${esc(p.박스.name)} 열기${
-            것.짚은자리 ? `<i class="said">짚으신 자리로 굴러가지는 않습니다</i>` : ''}</span>
+            것.페이지 ? `<i class="said">${esc(것.페이지)} 페이지로 갑니다</i>`
+                      : `<i class="said">첫 화면으로 갑니다</i>`}</span>
         </a>`
-      : `<p class="empty">${esc(p.박스.name)} 에 열 주소가 없습니다</p>`);
+      : `<p class="empty">${esc(p.박스.name)} 에 열 주소가 없습니다</p>`)
+    /* 처리 내용은 **단 한 줄**. 사장님 말씀(10-01): 「내용은 단 한줄 만약 자세한
+       상황을 보고싶다면 … 주저리주저리 채팅위치로 갈 수 있는 링크 클릭」 */
+    + `<p class="said1" style="margin:12px 2px 6px">처리 · ${esc(처리한줄(것))}</p>`
+    + (p && p.채팅주소
+      ? `<a class="row" id="주저리" href="${esc(p.채팅주소)}" target="_blank" rel="noopener">
+          <span class="ico">${ico('message-square-code',19)}</span>
+          <span class="t">자세한 내용 보기<i class="said">오간 말이 다 있습니다</i></span>
+        </a>`
+      : '');
+}
+/* 그 지시가 어떻게 됐는지 한 줄. 적어 둔 결과가 있으면 그것을, 없으면 상태 말을 쓴다.
+   여러 줄로 적혀 있어도 한 줄로 눌러서 보여 준다 — 구구절절은 채팅에 있다. */
+function 처리한줄(것){
+  const 결 = String(것.결과 || '').replace(/\s+/g, ' ').trim();
+  if (결) return 결;
+  const st = 상태표[것.상태];
+  return st ? st.말 : (것.상태 || '아직 안 넘겼습니다');
 }
 async function 시킨것받기(){
   try { 시킨것 = await api('/api/asked'); 시킨것읽음 = true; }
@@ -1289,7 +1316,7 @@ async function 바로열기(b){
 }
 
 /* 바이글에서 열면 얹은 모습으로 — 프로그램 안에서 짚어 지시할 수 있게 표를 붙인다 */
-function 손잡이붙이기(b){
+function 손잡이붙이기(b, 더){
   if (b.plain) return b.link;                       // 바로가기 — 순수한 모습 그대로
   if (!/^https?:/i.test(b.link || '')) return b.link;
   const 부모 = BOXES.find(x => x.id === b.parent);
@@ -1298,6 +1325,8 @@ function 손잡이붙이기(b){
   u.searchParams.set('box', (부모 && 부모.id) || b.id);
   u.searchParams.set('vg', location.origin + location.pathname + '?take=1');
   if (부모) u.searchParams.set('name', 부모.name.replace(/pro$/, ''));
+  // 「내가 시킨 것」 이 더 붙이는 것 — 짚으셨던 페이지(vg페이지), 지난 지시 펼치기(vg지난)
+  if (더) for (const [k, v] of Object.entries(더)) if (v) u.searchParams.set(k, v);
   return u.toString();
 }
 
