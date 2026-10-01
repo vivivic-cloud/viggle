@@ -748,13 +748,45 @@ function 쓰신말씀(id){
   열린질문 = id;
   if (window.시킨것다시) window.시킨것다시();
 }
+/* 그 지시가 어느 프로그램 것인지 찾아, 그 프로그램을 여는 길을 만든다.
+   사장님 말씀(10-01): 「자 이질문 아래로 프로그램의 내가 짚은곳 바로 이동하게 할 수
+   있는 링크달아줘」.
+   ⚠ **글자 하나까지 짚은 자리로 굴러가게는 아직 못 한다.** 프로그램 쪽이 그런 표를
+   받지 못한다. 그래서 **그 프로그램을 열고, 짚으셨던 자리를 글로 적어** 둔다.
+   되는 척하지 않는다. 글자까지 굴러가게 하려면 손잡이(shared/viggle.js)를 고쳐야 한다. */
+const 앱주소인가 = u => /^https?:/i.test(u || '') && !/(^|\/\/)([^\/]*\.)?github\.com\//i.test(u);
+function 그프로그램(것){
+  const id = String(것.자리 || '').startsWith('box:') ? 것.자리.slice(4) : '';
+  if (!id) return null;
+  if (id === 'worktable') return { 지금이화면: true };   // 작업대는 지금 보고 있는 이 화면이다
+  const b = BOXES.find(x => x.id === id);
+  if (!b) return null;
+  /* 깃허브 저장소 주소는 프로그램이 아니다 — 코드가 있는 곳이다. 그것으로 보내지 않는다.
+     (처음에 작업대 줄이 github.com/…/worktable 로 가고 있었다.)
+     그 박스에 앱 주소가 없으면 안에 든 것 가운데서 찾는다(박스 안에 또 박스인 꼴). */
+  const 쓸것 = 앱주소인가(b.link) ? b
+    : BOXES.find(x => x.parent === b.id && 앱주소인가(x.link));
+  return 쓸것 ? { 박스: b, 열것: 쓸것, 주소: 손잡이붙이기(쓸것) } : { 박스: b, 열것: null, 주소: '' };
+}
 function 질문속(){
   const 것 = 시킨것.find(x => x.id === 열린질문);
   if (!것) { 열린질문 = null; return 시킨것속(); }
+  const p = 그프로그램(것);
   return `<div class="bar"><button class="tbtn" id="질문뒤로">${
       ico('chevron-left',15,2.4)} 목록</button></div>
     <p class="said1">${esc(것.한줄 || '')}</p>
-    <p class="myq">${esc(것.말 || '(적힌 말씀이 없습니다)')}</p>`;
+    <p class="myq">${esc(것.말 || '(적힌 말씀이 없습니다)')}</p>` +
+    (것.짚은자리 ? `<p class="said1" style="margin:12px 2px 6px">짚으신 자리 · ${
+      esc(것.짚은자리)}</p>` : '') +
+    (!p ? ''
+      : p.지금이화면 ? `<p class="empty">작업대 — 지금 보고 계신 이 화면입니다</p>`
+      : p.주소
+      ? `<a class="row" id="그리로" href="${esc(p.주소)}" target="_blank" rel="noopener">
+          <span class="ico">${ico('square-arrow-out-up-right',19)}</span>
+          <span class="t">${esc(p.박스.name)} 열기${
+            것.짚은자리 ? `<i class="said">짚으신 자리로 굴러가지는 않습니다</i>` : ''}</span>
+        </a>`
+      : `<p class="empty">${esc(p.박스.name)} 에 열 주소가 없습니다</p>`);
 }
 async function 시킨것받기(){
   try { 시킨것 = await api('/api/asked'); 시킨것읽음 = true; }
