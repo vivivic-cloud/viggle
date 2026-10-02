@@ -103,6 +103,11 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 .list.dense .row{flex-direction:column;gap:7px;border-radius:18px;padding:12px 8px}
 /* 내 질문 원문 — 쓰신 그대로 보인다. 줄바꿈도 그대로. 설명은 안 붙인다. */
 .said1{font-size:12px;color:var(--muted);font-weight:600;margin:4px 2px 8px}
+/* 오간 말을 이 자리에서 펼 때 — 집의 말풍선 그대로 쓰고, 짚으셨던 말만 테를 두른다 (10-02) */
+/* 이 칸은 집의 `.talk` 를 쓰지만 **flex:1 을 끈다** — 안 끄면 부모에 눌려 69px 로
+   쪼그라들어 말 한 줄도 안 보였다(10-02 재어 봄). 높이를 못 박는다. */
+.talk.said{flex:none;height:46vh;min-height:220px;overflow:auto;margin:8px 0 0;padding:2px}
+.talk.said .line.콕 .msg{outline:2px solid var(--red);outline-offset:2px}
 .myq{font-size:16px;line-height:1.65;white-space:pre-wrap;color:var(--body);
   background:var(--fill);border-radius:18px;padding:14px 16px;margin:0}
 /* 내가 시킨 것 — 줄은 .row 를 그대로 쓰고, 상태 표만 더한다. 새 모양은 없다. */
@@ -598,6 +603,10 @@ const MODES = [
 let MODE = 'home', BOXES = [], 개수 = 6, 촘촘 = false, 듣고있음 = false;
 let 시킨것개수 = 8;        // 「더 보기」 를 누르면 늘어난다
 let 열린질문 = null;       // 그 줄의 질문을 보고 있는 중이면 그 id
+/* 사장님 말씀(10-02, 「자세한 내용 보기」 를 짚으시고):
+   「왜 작업 내용이 아닌 프로그램 페이이지로 연결되죠?」
+   그래서 **프로그램으로 보내지 않는다.** 오간 말을 이 자리에서 그대로 편다. */
+let 오간말 = null;         // 그 질문의 오간 말을 폈으면 [말…], 읽는 중이면 '읽는중', 아니면 null
 
 /* ══ 그리기 ════════════════════════════════════════════════ */
 /* 박스의 무게는 그 안에 든 것까지 합쳐서 잰다 */
@@ -747,7 +756,7 @@ async function 시킨것보기(){
    쉽게 돌아갈 수 있는 내질문 원문이 보이게 해주면 되잖아」.
    전에는 판(…)으로 판을 통째로 갈아서 목록이 날아갔다. 그러지 않는다. */
 function 쓰신말씀(id){
-  열린질문 = id;
+  열린질문 = id; 오간말 = null;        // 다른 줄을 누르면 폈던 말은 접는다
   if (window.시킨것다시) window.시킨것다시();
 }
 /* 그 지시가 어느 프로그램 것인지 찾아, 그 프로그램을 여는 길을 만든다.
@@ -805,12 +814,36 @@ function 질문속(){
     /* 처리 내용은 **단 한 줄**. 사장님 말씀(10-01): 「내용은 단 한줄 만약 자세한
        상황을 보고싶다면 … 주저리주저리 채팅위치로 갈 수 있는 링크 클릭」 */
     + `<p class="said1" style="margin:12px 2px 6px">처리 · ${esc(처리한줄(것))}</p>`
-    + (p && p.채팅주소
-      ? `<a class="row" id="주저리" href="${esc(p.채팅주소)}" target="_blank" rel="noopener">
-          <span class="ico">${ico('message-square-code',19)}</span>
-          <span class="t">자세한 내용 보기<i class="said">오간 말이 다 있습니다</i></span>
-        </a>`
-      : '');
+    /* 오간 말 — **이 자리에서** 편다. 프로그램으로 보내지 않는다 (10-02 사장님 말씀).
+       짚으셨던 그 말에 붉은 테를 두르고 그리로 굴러간다. */
+    + 오간말칸(것);
+}
+/* 「자세한 내용 보기」 — 누르면 그 자리에서 오간 말을 펴고, 다시 누르면 접는다. */
+function 오간말칸(것){
+  if (오간말 === null)
+    return `<button class="row" id="오간말">
+      <span class="ico">${ico('message-square-code',19)}</span>
+      <span class="t">자세한 내용 보기<i class="said">오간 말이 다 있습니다</i></span></button>`;
+  if (오간말 === '읽는중')
+    return `<p class="empty">읽는 중…</p>`;
+  if (오간말 === '못읽음')
+    return `<button class="row" id="오간말">
+      <span class="ico">${ico('message-square-code',19)}</span>
+      <span class="t">못 읽었습니다 — 다시<i class="said">인터넷이 끊겼을 수 있습니다</i></span></button>`;
+  if (!오간말.length)
+    return `<button class="row" id="오간말접기">
+      <span class="ico">${ico('chevron-up',19)}</span><span class="t">접기</span></button>
+      <p class="empty">이 자리에 오간 말이 아직 없습니다</p>`;
+  // 짚으셨던 그 말 — 때가 1~2초 어긋날 수 있어 가장 가까운 것을 고른다 (손잡이와 같은 자)
+  let 콕 = null, 가까움 = 6;
+  오간말.forEach(m => { const d = Math.abs((m.at || 0) - (것.때 || 0));
+                        if (d <= 가까움) { 가까움 = d; 콕 = m; } });
+  return `<button class="row" id="오간말접기">
+      <span class="ico">${ico('chevron-up',19)}</span><span class="t">접기</span></button>
+    <div class="talk said" id="오간말들">` + 오간말.map(m =>
+      `<div class="line ${m.who === 나 || m.who === '나' ? 'me' : 'you'}${m === 콕 ? ' 콕' : ''}">
+        <span class="msg">${esc(m.text)}<span class="at">${esc(m.who)} · ${시각(m.at)}</span></span>
+      </div>`).join('') + `</div>`;
 }
 /* 그 지시가 어떻게 됐는지 한 줄. 적어 둔 결과가 있으면 그것을, 없으면 상태 말을 쓴다.
    여러 줄로 적혀 있어도 한 줄로 눌러서 보여 준다 — 구구절절은 채팅에 있다. */
@@ -1367,14 +1400,45 @@ document.addEventListener('click', e => {
   if (e.target.closest('#xbtn')) return 판닫기();
   /* 열린 자리가 없는 판(「내가 시킨 것」 따위)에서는 이 단추가 아무 일도 안 했다.
      사장님이 짚으셨다(09-30: 「뒤로가기 키도 안먹히고」). 자리가 없으면 그냥 닫는다. */
+  /* 오간 말 — 이 자리에서 펴고 접는다. 프로그램으로 안 보낸다 (10-02 사장님 말씀) */
+  if (e.target.closest('#오간말')){
+    const 것 = 시킨것.find(x => x.id === 열린질문);
+    if (!것) return;
+    오간말 = '읽는중'; if (window.시킨것다시) window.시킨것다시();
+    api('/api/devchat?area=' + encodeURIComponent(것.자리 || ''))
+      .then(말들 => {
+        오간말 = (Array.isArray(말들) ? 말들 : []).slice().sort((a, b) => (a.at || 0) - (b.at || 0));
+      })
+      .catch(() => { 오간말 = '못읽음'; })
+      .finally(() => {
+        if (window.시킨것다시) window.시킨것다시();
+        setTimeout(() => {
+          /* 짚으셨던 그 말로 굴러간다 — **그 칸만** 굴린다.
+             scrollIntoView 는 바깥(판·화면)까지 같이 끌어 화면이 흔들리고
+             그 말이 칸 밖에 서기도 했다. 칸의 scrollTop 을 바로 잡는다. */
+          const 칸 = document.getElementById('오간말들');
+          const 콕 = 칸 && 칸.querySelector('.line.콕');
+          if (!칸 || !콕) return;
+          /* 가운데가 아니라 **첫머리가 보이게** 세운다. 짚으신 말이 칸보다 길 때
+             가운데로 맞추면 말의 첫머리가 위로 잘려 무슨 말인지 안 보인다.
+             `offsetTop` 은 자리 잡힌 윗조각을 기준으로 재어 엉뚱한 값이 나온다 —
+             **눈에 보이는 자리 차이**로 셈한다(10-02 재어 봄). */
+          try { 칸.scrollIntoView({ block: 'center' }); } catch (e) {}   // 칸부터 눈앞에 올린다
+          const 차 = 콕.getBoundingClientRect().top - 칸.getBoundingClientRect().top - 12;
+          칸.scrollTop = Math.max(0, Math.min(칸.scrollHeight - 칸.clientHeight, 칸.scrollTop + 차));
+        }, 60);
+      });
+    return;
+  }
+  if (e.target.closest('#오간말접기')){ 오간말 = null; if (window.시킨것다시) window.시킨것다시(); return; }
   if (e.target.closest('#질문뒤로')){           // 질문 → 목록 (판은 그대로 둔다)
-    열린질문 = null;
+    열린질문 = null; 오간말 = null;
     if (window.시킨것다시) window.시킨것다시();
     return;
   }
   if (e.target.closest('#back')){
     if (열린질문){                               // 질문을 보고 있으면 먼저 목록으로
-      열린질문 = null;
+      열린질문 = null; 오간말 = null;
       if (window.시킨것다시) window.시킨것다시();
       return;
     }
