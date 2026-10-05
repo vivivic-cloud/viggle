@@ -50,7 +50,20 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 /* ── 줄 ─────────────────────────────────────────────────── */
 .bar{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
 .tbtn{display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:5px 0;
-  font-size:14px;cursor:pointer}
+  font-size:14px;cursor:pointer;position:relative}
+/* 10-04 사장님 말씀 — 「이거 또 왜 안되냐」. 짚으신 자리가 홈 머리줄 둘레였다
+   (「VIGGLE 홈 J Hello JUNPHB Make your day easy with me search yo」 — 통째로 쓸려 왔다).
+   그 줄을 재 보니 단추가 **30px** 이었다. 아이폰이 손가락으로 치는 가장 작은 자리는 44px 이다.
+   **보이는 모양은 한 톨도 안 바꾸고** 눌리는 자리만 넓힌다 — 안 보이는 ::after 로 덮어
+   `elementFromPoint` 로 잰 닿는 높이가 30 → 47px 이 된다(375·768 두 폭에서 그림은 픽셀까지 같다).
+
+   ⚠ **이것이 사장님이 말씀하신 그 탈이라고 단정하지 않는다.** 짚으신 자리가 덩어리로 와서
+   어느 것을 누르신 것인지 나는 모른다. 그 줄에서 **재서 모자란 것**이 이것 하나라 이것을 고쳤을 뿐이다.
+   (어느 것을 짚으셨는지 적어 두는 고침은 `shared/viggle.js` 의 `f08cac4` 에 있다 — 아직 main 밖이다.)
+   ⚠ 크로미움은 손가락 자리를 스스로 보정해서, **눌러 보는 시험으로는 고치기 전·후가 안 갈라진다.**
+   갈라지는 자는 닿는 높이 하나뿐이다 — 시험을 그걸로 짜라.
+   ⚠ `.bar` 의 아래 여백이 12px 이라 8px 은 그 안에 든다 — 아래 타일의 자리를 안 뺏는다(재서 봤다). */
+.tbtn::after{content:'';position:absolute;inset:-8px -6px}
 .tbtn.g{color:var(--muted)}
 
 /* ── 박스 타일 ──────────────────────────────────────────── */
@@ -131,7 +144,9 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 
 .setrow{display:flex;justify-content:center;margin:16px 0 0}
 .set{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--edge);
-  border-radius:999px;padding:9px 15px;font-size:13px;color:var(--soft);cursor:pointer}
+  border-radius:999px;padding:9px 15px;font-size:13px;color:var(--soft);cursor:pointer;position:relative}
+/* 같은 까닭 — 이 알약은 39px 이었다. 알약 모양은 그대로 두고 눌리는 자리만 45px 로. */
+.set::after{content:'';position:absolute;inset:-5px 0}
 
 /* ── 겹치는 판(모드/전체보기/검색/설정/대화) ─────────────── */
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;
