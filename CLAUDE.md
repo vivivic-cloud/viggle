@@ -51,6 +51,7 @@ VG_WHO=에이엠티 python3 tools/답하기.py "box:amt" "고쳤습니다 …"
 | `box:docs` | `vivivic-docs` | 구글드라이브 서류를 판정해 팀이 같이 본다 |
 | `box:workorder` | `vivivic-apps/작업지시서` | A4 여러 장 캔버스, 인쇄로 PDF |
 | `box:viggle` | `viggle` (이 저장소) | 작업대 자신 |
+| `box:clarify` | `vivivic-apps/벤더피아상품정리/제품명료화.html` | 벤더피아 상품정보·단품정보 엑셀을 담아 단품 기준으로 가려 규칙을 쌓는다. **인계 글 — 그 폴더 `CLAUDE.md` 맨 끝** |
 
 `vivivic-apps/shared/viggle.js` 는 프로그램 화면에 얹는 **손잡이**다.
 `?viggle=1` 일 때만 켜지고, 0.5초 길게 누르면 그 자리를 짚어 지시를 보낸다.
@@ -139,6 +140,7 @@ VG_WHO=에이엠티 python3 tools/답하기.py "box:amt" "고쳤습니다 …"
 | `box:cabinet-studio` | `session_01EKNRGFHGrx8LhDAjWNMSSY` |
 | `box:cartoon` | `session_015Rp7RfecbAP5SxPoqDzzY8` |
 | `box:boring` 보링변환 | `session_018ncbanhocH9LF9Efa6UWcE` |
+| `box:clarify` 제품명료화 | **아직 없다 — 관리자가 앉힌다.** 10-07 사장님이 바깥 대화에서 만들게 하시고 「앞으로 바이글이 코딩하고 관리하게 해줘」 하셨다 |
 | `box:worktable` 작업대 · `화면` | **내가(관리자) 직접 한다** — 작업대는 남에게 안 맡긴다 |
 
 **나머지 박스에는 작업자를 미리 앉히지 않는다.** 09-17 에 세어 보니 지시가
