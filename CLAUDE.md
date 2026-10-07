@@ -139,6 +139,9 @@ VG_WHO=에이엠티 python3 tools/답하기.py "box:amt" "고쳤습니다 …"
 | `box:cabinet-studio` | `session_01EKNRGFHGrx8LhDAjWNMSSY` |
 | `box:cartoon` | `session_015Rp7RfecbAP5SxPoqDzzY8` |
 | `box:boring` 보링변환 | `session_018ncbanhocH9LF9Efa6UWcE` |
+| `box:vendorpia` 벤더피아상품정리 | `session_01LiPrHwXnRSHXeXEVWRRvj4` |
+| `box:layout` 기계배치도 | `session_01Cs5yXeqDeWvfXRrKb7MBr8` |
+| `box:clarify` 제품명료화 | `session_019t25JnUq8CyrFqLQt89Hu7` |
 | `box:worktable` 작업대 · `화면` | **내가(관리자) 직접 한다** — 작업대는 남에게 안 맡긴다 |
 
 **나머지 박스에는 작업자를 미리 앉히지 않는다.** 09-17 에 세어 보니 지시가
