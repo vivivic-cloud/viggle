@@ -50,7 +50,20 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 /* ── 줄 ─────────────────────────────────────────────────── */
 .bar{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
 .tbtn{display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:5px 0;
-  font-size:14px;cursor:pointer}
+  font-size:14px;cursor:pointer;position:relative}
+/* 10-04 사장님 말씀 — 「이거 또 왜 안되냐」. 짚으신 자리가 홈 머리줄 둘레였다
+   (「VIGGLE 홈 J Hello JUNPHB Make your day easy with me search yo」 — 통째로 쓸려 왔다).
+   그 줄을 재 보니 단추가 **30px** 이었다. 아이폰이 손가락으로 치는 가장 작은 자리는 44px 이다.
+   **보이는 모양은 한 톨도 안 바꾸고** 눌리는 자리만 넓힌다 — 안 보이는 ::after 로 덮어
+   `elementFromPoint` 로 잰 닿는 높이가 30 → 47px 이 된다(375·768 두 폭에서 그림은 픽셀까지 같다).
+
+   ⚠ **이것이 사장님이 말씀하신 그 탈이라고 단정하지 않는다.** 짚으신 자리가 덩어리로 와서
+   어느 것을 누르신 것인지 나는 모른다. 그 줄에서 **재서 모자란 것**이 이것 하나라 이것을 고쳤을 뿐이다.
+   (어느 것을 짚으셨는지 적어 두는 고침은 `shared/viggle.js` 의 `f08cac4` 에 있다 — 아직 main 밖이다.)
+   ⚠ 크로미움은 손가락 자리를 스스로 보정해서, **눌러 보는 시험으로는 고치기 전·후가 안 갈라진다.**
+   갈라지는 자는 닿는 높이 하나뿐이다 — 시험을 그걸로 짜라.
+   ⚠ `.bar` 의 아래 여백이 12px 이라 8px 은 그 안에 든다 — 아래 타일의 자리를 안 뺏는다(재서 봤다). */
+.tbtn::after{content:'';position:absolute;inset:-8px -6px}
 .tbtn.g{color:var(--muted)}
 
 /* ── 박스 타일 ──────────────────────────────────────────── */
@@ -131,7 +144,9 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 
 .setrow{display:flex;justify-content:center;margin:16px 0 0}
 .set{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--edge);
-  border-radius:999px;padding:9px 15px;font-size:13px;color:var(--soft);cursor:pointer}
+  border-radius:999px;padding:9px 15px;font-size:13px;color:var(--soft);cursor:pointer;position:relative}
+/* 같은 까닭 — 이 알약은 39px 이었다. 알약 모양은 그대로 두고 눌리는 자리만 45px 로. */
+.set::after{content:'';position:absolute;inset:-5px 0}
 
 /* ── 겹치는 판(모드/전체보기/검색/설정/대화) ─────────────── */
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:60;
@@ -289,6 +304,14 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 .stamp.no{color:var(--red);opacity:1}
 .stamp.done{opacity:.75}
 .ear.off i{background:var(--red)}
+/* 쌓인 지시·답을 지우는 줄 — 지시함 머리줄 바로 아래 (10-03 사장님 말씀) */
+.devbar{display:flex;align-items:center;gap:8px;flex:none;padding:8px 0 0;font-size:12.5px;
+  color:var(--muted)}
+.devbar .cnt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.devbar button{flex:none;min-height:44px;padding:0 14px;border-radius:12px;
+  border:1px solid var(--edge);background:#fff;color:var(--red);font-size:13.5px;
+  font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.devbar button:disabled{color:var(--muted);opacity:.5;cursor:default}
 .empty{color:var(--muted);font-size:13.5px;padding:10px 2px}
 
 </style>
@@ -463,6 +486,24 @@ window.창고 = async function(path, body){
     const 다 = {};
     s.docs.forEach(d => { const v = d.data(); if (v.area) 다[v.area] = v.msgs || []; });
     return 다;
+  }
+
+  /* ── 그 자리에 쌓인 지시·답을 파이어베이스에서 **진짜로** 지운다 ──
+     사장님 말씀(10-03): 「각 프로그램별 지시함에 쌓여 화이어 베이스에 저장되는 지시와
+     답변을 완전히 삭제 할 수 있는 버튼을 만들어 주세요.」
+     자리(문서)는 남기고 글(msgs)만 비운다 — 문서를 지우면 화면이 깨진다.
+     「내가 시킨 것」(wt_asked)에 남은 그 자리 기록도 같이 지운다. */
+  if (path === '/api/devwipe'){
+    const area = body.area; if (!area) return { ok:false };
+    await setDoc(칸('wt_dev', 자리키(area)), { area, msgs: [], 잰때: Date.now() }, { merge: true });
+    const s = await getDocs(칸('wt_asked'));
+    const 지울것 = s.docs.filter(d => (d.data().자리 || '') === area);
+    if (지울것.length){
+      const b = writeBatch(db);
+      지울것.forEach(d => b.delete(칸('wt_asked', d.id)));
+      await b.commit();
+    }
+    return { ok:true, 글: 0, 시킨것: 지울것.length };
   }
 
   /* ── 내가 시킨 것 — 제 칸에 담는다(wt_asked). wt_dev 와 섞지 않는다 ── */
@@ -780,9 +821,18 @@ function 그프로그램(것){
   if (!b) return null;
   /* 깃허브 저장소 주소는 프로그램이 아니다 — 코드가 있는 곳이다. 그것으로 보내지 않는다.
      (처음에 작업대 줄이 github.com/…/worktable 로 가고 있었다.)
-     그 박스에 앱 주소가 없으면 안에 든 것 가운데서 찾는다(박스 안에 또 박스인 꼴). */
+     그 박스에 앱 주소가 없으면 안에 든 것 가운데서 찾는다(박스 안에 또 박스인 꼴).
+
+     ⚠ **「바로가기」(plain) 를 먼저 집으면 안 된다.** `손잡이붙이기` 는 plain 박스에
+     주소를 **맨몸 그대로** 돌려준다 — 짚으셨던 페이지(`vg페이지`)도 손잡이(`viggle=1`)도
+     안 붙는다. 그러면 「내가 짚은 곳으로 가는 링크」(10-01 사장님 말씀)가 첫 화면으로만 간다.
+     NRSpro 가 그랬다 — 아래 넷이 코드·개발자료·**바로가기**·프로그램열기 차례라
+     `find` 가 바로가기를 먼저 집어 `…/cabinet-studio/` 맨몸으로 갔다(관리자가 재서 잡았다).
+     에이엠티는 프로그램열기가 앞서 있어 우연히 맞았을 뿐이다 — 차례에 기대면 안 된다.
+     그래서 **plain 이 아닌 것을 먼저** 고르고, 그런 것이 없을 때만 plain 을 쓴다. */
+  const 안것 = BOXES.filter(x => x.parent === b.id && 앱주소인가(x.link));
   const 쓸것 = 앱주소인가(b.link) ? b
-    : BOXES.find(x => x.parent === b.id && 앱주소인가(x.link));
+    : (안것.find(x => !x.plain) || 안것[0]);
   return 쓸것
     ? { 박스: b, 열것: 쓸것,
         주소: 손잡이붙이기(쓸것, { 'vg페이지': 것.페이지 || '' }),
@@ -1267,9 +1317,11 @@ async function 개발대화(area, 짚은자리){
       <span class="nm">${esc(영역표시(area))}</span>
       <span class="ear" id="ear"><i></i>확인 중</span>
     </div>
+    ${지우기줄(msgs)}
     <div class="talk dev" id="tk">${개발말(msgs)}</div>
     ${입력칸('클로드에게 지시')}`;
   판열림(true);
+  지우기줄달기(area);
   입력칸달기(async t => {
     /* 짚으신 자리를 지시 앞에 붙인다 — 다른 프로그램이 보내는 꼴과 같게 맞춘다.
        그래야 나중에 무엇을 짚으셨는지 알아볼 수 있다. */
@@ -1283,6 +1335,38 @@ async function 개발대화(area, 짚은자리){
   });
   맨아래로();
   듣고있나().then(() => { const tk = $('tk'); if (tk) tk.innerHTML = 개발말(msgs, area); 맨아래로(); });
+}
+
+/* 쌓인 지시·답을 지우는 줄. 몇 개가 쌓였는지 보이고, 누르면 파이어베이스에서 지운다.
+   한 번 더 묻는다 — 되돌릴 수 없기 때문이다. (10-03 사장님 말씀) */
+function 지우기줄(msgs){
+  const n = msgs.length;
+  return `<div class="devbar">
+    <span class="cnt" id="dvcnt">${n ? '쌓인 지시·답 ' + n + '개' : '쌓인 것이 없습니다'}</span>
+    <button id="dvwipe"${n ? '' : ' disabled'}>${ico('trash-2',16)}모두 지우기</button>
+  </div>`;
+}
+function 지우기줄달기(area){
+  const b = $('dvwipe'); if (!b) return;
+  b.addEventListener('click', async () => {
+    const n = (await api('/api/devchat?area=' + encodeURIComponent(area))).length;
+    if (!n) return;
+    if (!confirm('이 자리에 쌓인 지시와 답 ' + n + '개를 파이어베이스에서 모두 지웁니다.\n'
+               + '「내가 시킨 것」 에 남은 이 자리 기록도 같이 지워집니다.\n\n'
+               + '되돌릴 수 없습니다. 지웁니까?')) return;
+    b.disabled = true; b.textContent = '지우는 중…';
+    try {
+      await api('/api/devwipe', { area });
+      DEV[area] = [];
+      시킨것 = (시킨것 || []).filter(x => (x.자리 || '') !== area);
+      await 개발새로(area);
+      const c = $('dvcnt'); if (c) c.textContent = '다 지웠습니다';
+      b.textContent = '모두 지웠습니다';
+    } catch (e) {
+      b.disabled = false; b.textContent = '못 지웠습니다 — 다시';
+      const c = $('dvcnt'); if (c) c.textContent = (e.code || e.message || '');
+    }
+  });
 }
 
 /* 맥이 지금 듣고 있는지 — 옛 지시에 sent 가 없을 때 도장의 기준이 된다 */
