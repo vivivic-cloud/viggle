@@ -9,8 +9,10 @@ KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
 뿌리  = f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
 여기  = os.path.dirname(os.path.abspath(__file__))
-눈금쪽 = os.path.join(여기, "본것", "지시.at")
-머리쪽 = os.path.join(여기, "본것", "머리.json")
+본것칸 = os.path.join(여기, "본것")
+os.makedirs(본것칸, exist_ok=True)      # ⚠ 이 칸은 git 에 안 올라간다 — 없으면 만든다
+눈금쪽 = os.path.join(본것칸, "지시.at")
+머리쪽 = os.path.join(본것칸, "머리.json")
 처음눈금 = 1791594184
 
 def 토큰():
