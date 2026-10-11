@@ -46,7 +46,10 @@ if os.path.exists(눈금쪽):
     try: 눈금 = int(open(눈금쪽).read().strip())
     except Exception: pass
 
-저장소 = {"apps": "/home/user/vivivic-apps", "cabinet": "/home/user/cabinet-studio", "viggle": "/home/user/viggle"}
+# ⚠ 서류관리는 **vivivic-docs** 에 올린다. 10-11 에 이것이 빠져 있어서 작업자가 세 번
+#   올렸는데 내가 하나도 못 봤다. **박스가 쓰는 저장소를 다 적어라.**
+저장소 = {"apps": "/home/user/vivivic-apps", "cabinet": "/home/user/cabinet-studio",
+        "viggle": "/home/user/viggle", "docs": "/home/user/vivivic-docs"}
 머리 = {}
 if os.path.exists(머리쪽):
     try: 머리 = json.load(open(머리쪽))
