@@ -917,7 +917,15 @@ function 그리기(){
   const 살아있는 = BOXES.filter(b => !b.parent);   // 하위 박스는 부모 안에서만 보인다
   const 쓴것 = [...살아있는].sort(정렬사용);
   const 총 = 쓴것.slice(0,4).reduce((n,b) => n + 무게(b).used, 0);
-  const 최근 = [...살아있는].sort(정렬최근);
+  /* 10-11 사장님: 「비비빅 - 구바이글에 나타나는 박스의 순서를 **실제 박스클릭순을 계산하여**
+     많이 사용하는 순으로 나타나게 하라」.
+     ⚠ 전에는 **마지막에 연 때**(touched)로 세웠다. 그러면 한 번 스친 박스가 맨 위에 오고,
+       날마다 쓰시는 박스가 아래로 밀린다. 이제 **연 횟수**(used)로 세운다 —
+       횟수가 같으면 최근에 연 것이 위다(`정렬사용` 이 그렇게 되어 있다).
+     ⚠ `used` 는 박스를 열 때마다 `/api/box {act:'use'}` 가 하나씩 올린다. 진짜 누른 수다.
+       `무게()` 가 **딸린 박스의 횟수까지 더해** 준다 — 「에이엠티pro」 를 열고 그 안
+       「프로그램열기」 를 눌러도 다 그 프로그램의 몫으로 쌓인다. */
+  const 최근 = [...살아있는].sort(정렬사용);
 
   if (MODE === 'dev')  return $('body').innerHTML = 개발판();
   if (MODE === 'todo') return $('body').innerHTML = 할일판(최근.filter(b => b.todo));
@@ -933,9 +941,9 @@ function 그리기(){
       return a.map((b,i) => 타일(b, i, 총, a.length - 1)).join('');
     })()}</div>
 
-    <div class="sec"><h2>최근 박스</h2>
+    <div class="sec"><h2>많이 쓰는 박스</h2>
       <button class="tbtn g" id="allbtn2">see all</button></div>
-    <div class="list ${촘촘?'dense':''}" data-area="최근박스">${
+    <div class="list ${촘촘?'dense':''}" data-area="많이쓰는박스">${
       최근.slice(0, 개수).map((b,i) => 줄(b,i)).join('') || `<p class="empty">${
         esc(window.박스탈 || '아직 없습니다')}</p>`}</div>
 
