@@ -1,0 +1,2302 @@
+{
+ "본뜬때": 1791659402,
+ "본체": [
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b8f8fcf0ec3",
+   "fields": {
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "touched": {
+     "integerValue": "1789192376"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "pen"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "used": {
+     "integerValue": "14"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "created": {
+     "integerValue": "1788941611"
+    },
+    "name": {
+     "stringValue": "작업지시서 커스텀"
+    },
+    "plain": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-10T05:17:16.413222Z",
+   "updateTime": "2026-09-12T05:52:56.889261Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bgg30zdsfd2",
+   "fields": {
+    "plain": {
+     "booleanValue": false
+    },
+    "used": {
+     "integerValue": "23"
+    },
+    "name": {
+     "stringValue": "ENGCHINA"
+    },
+    "created": {
+     "integerValue": "1789612018"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "icon": {
+     "stringValue": "file-spreadsheet"
+    },
+    "touched": {
+     "integerValue": "1790567006"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    }
+   },
+   "createTime": "2026-09-17T02:26:58.965164Z",
+   "updateTime": "2026-09-28T03:43:26.835245Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bkuhmed0ftq",
+   "fields": {
+    "touched": {
+     "integerValue": "1789077595"
+    },
+    "plain": {
+     "booleanValue": false
+    },
+    "name": {
+     "stringValue": "Cad to simple"
+    },
+    "used": {
+     "integerValue": "8"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "created": {
+     "integerValue": "1789034604"
+    },
+    "icon": {
+     "stringValue": "table-2"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "link": {
+     "stringValue": ""
+    }
+   },
+   "createTime": "2026-09-10T10:03:24.903633Z",
+   "updateTime": "2026-09-10T21:59:55.581789Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/cartoon",
+   "fields": {
+    "touched": {
+     "integerValue": "1789436216"
+    },
+    "used": {
+     "integerValue": "17"
+    },
+    "name": {
+     "stringValue": "cartoon"
+    },
+    "created": {
+     "integerValue": "1789279559"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "icon": {
+     "stringValue": "box"
+    },
+    "todo": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-13T06:06:02.112952Z",
+   "updateTime": "2026-09-15T01:36:58.906297Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/china-orders",
+   "fields": {
+    "name": {
+     "stringValue": "중국 발주pro"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "used": {
+     "integerValue": "3"
+    },
+    "touched": {
+     "integerValue": "1789612217"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "ship"
+    },
+    "tone": {
+     "stringValue": "dark"
+    },
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "link": {
+     "stringValue": ""
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.147226Z",
+   "updateTime": "2026-09-17T02:30:17.466986Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/ecount",
+   "fields": {
+    "used": {
+     "integerValue": "1"
+    },
+    "touched": {
+     "integerValue": "1791553224"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "name": {
+     "stringValue": "이카운트등록pro"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "icon": {
+     "stringValue": "table-2"
+    },
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "todo": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.068683Z",
+   "updateTime": "2026-10-09T13:40:24.723478Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/furniture-designer",
+   "fields": {
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "tone": {
+     "stringValue": "dark"
+    },
+    "icon": {
+     "stringValue": "pencil-ruler"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "used": {
+     "integerValue": "3"
+    },
+    "touched": {
+     "integerValue": "1791553313"
+    },
+    "name": {
+     "stringValue": "가구 디자이너pro"
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.504873Z",
+   "updateTime": "2026-10-09T13:41:54.001409Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/furniture-order-tool",
+   "fields": {
+    "used": {
+     "integerValue": "3"
+    },
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "name": {
+     "stringValue": "가구 발주 도구pro"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "touched": {
+     "integerValue": "1791645143"
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "icon": {
+     "stringValue": "layout-panel-left"
+    },
+    "todo": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.587015Z",
+   "updateTime": "2026-10-10T15:12:23.420516Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/lang-practice",
+   "fields": {
+    "tone": {
+     "stringValue": "dark"
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "icon": {
+     "stringValue": "message-circle"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "name": {
+     "stringValue": "언어 연습pro"
+    },
+    "used": {
+     "integerValue": "1"
+    },
+    "touched": {
+     "integerValue": "1789191499"
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.753985Z",
+   "updateTime": "2026-09-12T05:38:19.585742Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/panel",
+   "fields": {
+    "name": {
+     "stringValue": "panel-drafter"
+    },
+    "touched": {
+     "integerValue": "1790746404"
+    },
+    "used": {
+     "integerValue": "7"
+    },
+    "icon": {
+     "stringValue": "ruler"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "created": {
+     "integerValue": "1789189511"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "parent": {
+     "stringValue": ""
+    }
+   },
+   "createTime": "2026-09-12T05:05:13.696017Z",
+   "updateTime": "2026-09-30T05:33:24.776426Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/sentend",
+   "fields": {
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "audio-lines"
+    },
+    "kind": {
+     "stringValue": "program"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "touched": {
+     "integerValue": "1789034700"
+    },
+    "name": {
+     "stringValue": "sentendpro"
+    },
+    "used": {
+     "integerValue": "2"
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.847107Z",
+   "updateTime": "2026-09-10T10:05:00.929311Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/sync",
+   "fields": {
+    "kind": {
+     "stringValue": "program"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "parent": {
+     "stringValue": ""
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "refresh-cw"
+    },
+    "created": {
+     "integerValue": "1788720825"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788757354"
+    },
+    "name": {
+     "stringValue": "서류 동기화pro"
+    }
+   },
+   "createTime": "2026-09-10T05:17:25.229116Z",
+   "updateTime": "2026-09-10T05:17:25.229116Z"
+  }
+ ],
+ "딸린칸": [
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b0d5ca9cebc",
+   "fields": {
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/vivivic-apps/%EC%9D%B4%EC%B9%B4%EC%9A%B4%ED%8A%B8%EB%93%B1%EB%A1%9D/%EC%9D%B4%EC%B9%B4%EC%9A%B4%ED%8A%B8%EB%93%B1%EB%A1%9D.html"
+    },
+    "tone": {
+     "stringValue": "dark"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "parent": {
+     "stringValue": "ecount"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.896210Z",
+   "updateTime": "2026-09-10T05:17:21.896210Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b1270f56d97",
+   "fields": {
+    "created": {
+     "integerValue": "1788870496"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/furniture-designer/"
+    },
+    "parent": {
+     "stringValue": "furniture-designer"
+    },
+    "touched": {
+     "integerValue": "1788870496"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "tone": {
+     "stringValue": "dark"
+    }
+   },
+   "createTime": "2026-09-10T05:17:19.985335Z",
+   "updateTime": "2026-09-10T05:17:19.985335Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b151cc672cb",
+   "fields": {
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/furniture-designer/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "created": {
+     "integerValue": "1788915520"
+    },
+    "icon": {
+     "stringValue": "external-link"
+    },
+    "plain": {
+     "booleanValue": true
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "used": {
+     "integerValue": "1"
+    },
+    "touched": {
+     "integerValue": "1791553314"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "parent": {
+     "stringValue": "furniture-designer"
+    }
+   },
+   "createTime": "2026-09-10T05:17:16.976910Z",
+   "updateTime": "2026-10-09T13:41:54.951941Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b1828ddbe37",
+   "fields": {
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "parent": {
+     "stringValue": "sync"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "folder"
+    }
+   },
+   "createTime": "2026-09-10T05:17:20.994064Z",
+   "updateTime": "2026-09-10T05:17:20.994064Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b18c8c6fd10",
+   "fields": {
+    "tone": {
+     "stringValue": "light"
+    },
+    "touched": {
+     "integerValue": "1788870496"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/furniture-designer"
+    },
+    "created": {
+     "integerValue": "1788870496"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "parent": {
+     "stringValue": "furniture-designer"
+    },
+    "used": {
+     "integerValue": "0"
+    }
+   },
+   "createTime": "2026-09-10T05:17:19.901068Z",
+   "updateTime": "2026-09-10T05:17:19.901068Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b1eb11a01d1",
+   "fields": {
+    "used": {
+     "integerValue": "0"
+    },
+    "parent": {
+     "stringValue": "china-orders"
+    },
+    "created": {
+     "integerValue": "1788915520"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "plain": {
+     "booleanValue": true
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/vivivic-apps/china-orders/"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "touched": {
+     "integerValue": "1788915520"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "external-link"
+    }
+   },
+   "createTime": "2026-09-10T05:17:17.387400Z",
+   "updateTime": "2026-09-10T05:17:17.387400Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b33f1b72573",
+   "fields": {
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "touched": {
+     "integerValue": "1788870497"
+    },
+    "parent": {
+     "stringValue": "lang-practice"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "created": {
+     "integerValue": "1788870497"
+    },
+    "kind": {
+     "stringValue": "box"
+    }
+   },
+   "createTime": "2026-09-10T05:17:18.722500Z",
+   "updateTime": "2026-09-10T05:17:18.722500Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b3b04d2dfd3",
+   "fields": {
+    "used": {
+     "integerValue": "0"
+    },
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/vivivic-apps/vivivic_sync.html"
+    },
+    "parent": {
+     "stringValue": "sync"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "tone": {
+     "stringValue": "dark"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.151521Z",
+   "updateTime": "2026-09-10T05:17:21.151521Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b3f97fcdd0b",
+   "fields": {
+    "parent": {
+     "stringValue": "furniture-order-tool"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/furniture-order-tool"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "touched": {
+     "integerValue": "1788870496"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "created": {
+     "integerValue": "1788870496"
+    },
+    "name": {
+     "stringValue": "코드"
+    }
+   },
+   "createTime": "2026-09-10T05:17:19.495566Z",
+   "updateTime": "2026-09-10T05:17:19.495566Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b4568d3dfcc",
+   "fields": {
+    "plain": {
+     "booleanValue": true
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1789189511"
+    },
+    "parent": {
+     "stringValue": "panel"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/panel-drafter/"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "created": {
+     "integerValue": "1789189511"
+    },
+    "icon": {
+     "stringValue": "external-link"
+    }
+   },
+   "createTime": "2026-09-12T05:05:16.275695Z",
+   "updateTime": "2026-09-12T05:05:16.275695Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b54747a73b0",
+   "fields": {
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "parent": {
+     "stringValue": "furniture-designer"
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "created": {
+     "integerValue": "1788870496"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "touched": {
+     "integerValue": "1788870496"
+    }
+   },
+   "createTime": "2026-09-10T05:17:19.796450Z",
+   "updateTime": "2026-09-10T05:17:19.796450Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b55e52b7d7d",
+   "fields": {
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/vivivic-apps/tree/main/%EC%9D%B4%EC%B9%B4%EC%9A%B4%ED%8A%B8%EB%93%B1%EB%A1%9D"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "parent": {
+     "stringValue": "ecount"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "used": {
+     "integerValue": "0"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.809213Z",
+   "updateTime": "2026-09-10T05:17:21.809213Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b61400d57d9",
+   "fields": {
+    "tone": {
+     "stringValue": "white"
+    },
+    "parent": {
+     "stringValue": "panel"
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/panel-drafter"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "touched": {
+     "integerValue": "1789191065"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "created": {
+     "integerValue": "1789189511"
+    },
+    "used": {
+     "integerValue": "1"
+    }
+   },
+   "createTime": "2026-09-12T05:05:17.542391Z",
+   "updateTime": "2026-09-12T05:31:05.251208Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b6d6e3aece4",
+   "fields": {
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/vivivic-apps/vivivic_sync.html"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "created": {
+     "integerValue": "1788915520"
+    },
+    "icon": {
+     "stringValue": "external-link"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "parent": {
+     "stringValue": "sync"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788915520"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "plain": {
+     "booleanValue": true
+    }
+   },
+   "createTime": "2026-09-10T05:17:17.281538Z",
+   "updateTime": "2026-09-10T05:17:17.281538Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b7168763521",
+   "fields": {
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/vivivic-apps/tree/main/china-orders"
+    },
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "parent": {
+     "stringValue": "china-orders"
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "light"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.417152Z",
+   "updateTime": "2026-09-10T05:17:21.417152Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b84f9bb48f2",
+   "fields": {
+    "created": {
+     "integerValue": "1788870497"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "touched": {
+     "integerValue": "1788870497"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/lang-practice"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "parent": {
+     "stringValue": "lang-practice"
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "todo": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-10T05:17:18.811061Z",
+   "updateTime": "2026-09-10T05:17:18.811061Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b8ca8acafc0",
+   "fields": {
+    "touched": {
+     "integerValue": "1791553225"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/vivivic-apps/%EC%9D%B4%EC%B9%B4%EC%9A%B4%ED%8A%B8%EB%93%B1%EB%A1%9D/%EC%9D%B4%EC%B9%B4%EC%9A%B4%ED%8A%B8%EB%93%B1%EB%A1%9D.html"
+    },
+    "plain": {
+     "booleanValue": true
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "external-link"
+    },
+    "used": {
+     "integerValue": "1"
+    },
+    "created": {
+     "integerValue": "1788915520"
+    },
+    "parent": {
+     "stringValue": "ecount"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    }
+   },
+   "createTime": "2026-09-10T05:17:17.497902Z",
+   "updateTime": "2026-10-09T13:40:25.877148Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b934izjucep",
+   "fields": {
+    "tone": {
+     "stringValue": "white"
+    },
+    "parent": {
+     "stringValue": "bgg30zdsfd2"
+    },
+    "icon": {
+     "stringValue": "layout-grid"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "created": {
+     "integerValue": "1789612108"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "name": {
+     "stringValue": "영어"
+    },
+    "plain": {
+     "booleanValue": false
+    },
+    "used": {
+     "integerValue": "18"
+    },
+    "touched": {
+     "integerValue": "1790567000"
+    }
+   },
+   "createTime": "2026-09-17T02:28:28.394465Z",
+   "updateTime": "2026-09-28T03:43:20.839592Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b94d505be97",
+   "fields": {
+    "tone": {
+     "stringValue": "dark"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "parent": {
+     "stringValue": "lang-practice"
+    },
+    "touched": {
+     "integerValue": "1789191501"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/lang-practice/"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    },
+    "used": {
+     "integerValue": "1"
+    },
+    "created": {
+     "integerValue": "1788870497"
+    }
+   },
+   "createTime": "2026-09-10T05:17:18.887709Z",
+   "updateTime": "2026-09-12T05:38:21.270988Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b984ad991db",
+   "fields": {
+    "used": {
+     "integerValue": "0"
+    },
+    "parent": {
+     "stringValue": "lang-practice"
+    },
+    "created": {
+     "integerValue": "1788915521"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/lang-practice/"
+    },
+    "plain": {
+     "booleanValue": true
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "icon": {
+     "stringValue": "external-link"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "touched": {
+     "integerValue": "1788915521"
+    }
+   },
+   "createTime": "2026-09-10T05:17:16.628369Z",
+   "updateTime": "2026-09-10T05:17:16.628369Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b9ccda56d8e",
+   "fields": {
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "parent": {
+     "stringValue": "sentend"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "created": {
+     "integerValue": "1788870497"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "touched": {
+     "integerValue": "1788870497"
+    }
+   },
+   "createTime": "2026-09-10T05:17:18.370463Z",
+   "updateTime": "2026-09-10T05:17:18.370463Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b9ce06455ee",
+   "fields": {
+    "parent": {
+     "stringValue": "furniture-order-tool"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788915520"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "plain": {
+     "booleanValue": true
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/furniture-order-tool/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "created": {
+     "integerValue": "1788915520"
+    },
+    "icon": {
+     "stringValue": "external-link"
+    },
+    "todo": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-10T05:17:16.843300Z",
+   "updateTime": "2026-09-10T05:17:16.843300Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/b9f6d42c794",
+   "fields": {
+    "created": {
+     "integerValue": "1788870496"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788870496"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "parent": {
+     "stringValue": "furniture-order-tool"
+    }
+   },
+   "createTime": "2026-09-10T05:17:19.403605Z",
+   "updateTime": "2026-09-10T05:17:19.403605Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bb8147c343b",
+   "fields": {
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/vivivic-apps"
+    },
+    "parent": {
+     "stringValue": "sync"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.072808Z",
+   "updateTime": "2026-09-10T05:17:21.072808Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bc69b8fc3fe",
+   "fields": {
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/sentend/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "created": {
+     "integerValue": "1788870497"
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "dark"
+    },
+    "used": {
+     "integerValue": "1"
+    },
+    "touched": {
+     "integerValue": "1789034703"
+    },
+    "parent": {
+     "stringValue": "sentend"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    }
+   },
+   "createTime": "2026-09-10T05:17:18.549958Z",
+   "updateTime": "2026-09-10T10:05:06.092187Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bc83ac1ff01",
+   "fields": {
+    "parent": {
+     "stringValue": "panel"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/panel-drafter/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "touched": {
+     "integerValue": "1790746406"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "used": {
+     "integerValue": "7"
+    },
+    "created": {
+     "integerValue": "1789189511"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    }
+   },
+   "createTime": "2026-09-12T05:05:14.979404Z",
+   "updateTime": "2026-09-30T05:33:26.501362Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bd159dd8663",
+   "fields": {
+    "tone": {
+     "stringValue": "dark"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "parent": {
+     "stringValue": "china-orders"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/vivivic-apps/china-orders/"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "created": {
+     "integerValue": "1788870495"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.534154Z",
+   "updateTime": "2026-09-10T05:17:21.534154Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bd8d048c2d1",
+   "fields": {
+    "touched": {
+     "integerValue": "1791645144"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/furniture-order-tool/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "tone": {
+     "stringValue": "dark"
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "used": {
+     "integerValue": "3"
+    },
+    "created": {
+     "integerValue": "1788870496"
+    },
+    "parent": {
+     "stringValue": "furniture-order-tool"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    }
+   },
+   "createTime": "2026-09-10T05:17:19.612567Z",
+   "updateTime": "2026-10-10T15:12:24.896833Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/be4cb69c544",
+   "fields": {
+    "name": {
+     "stringValue": "코드"
+    },
+    "touched": {
+     "integerValue": "1788870497"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "parent": {
+     "stringValue": "sentend"
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "light"
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/sentend"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "created": {
+     "integerValue": "1788870497"
+    }
+   },
+   "createTime": "2026-09-10T05:17:18.455474Z",
+   "updateTime": "2026-09-10T05:17:18.455474Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/be7c1b8c93d",
+   "fields": {
+    "used": {
+     "integerValue": "0"
+    },
+    "parent": {
+     "stringValue": "sentend"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "touched": {
+     "integerValue": "1788915521"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/sentend/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "plain": {
+     "booleanValue": true
+    },
+    "created": {
+     "integerValue": "1788915521"
+    },
+    "icon": {
+     "stringValue": "external-link"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    }
+   },
+   "createTime": "2026-09-10T05:17:16.525642Z",
+   "updateTime": "2026-09-10T05:17:16.525642Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/be88353de26",
+   "fields": {
+    "tone": {
+     "stringValue": "white"
+    },
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "parent": {
+     "stringValue": "china-orders"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "used": {
+     "integerValue": "0"
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.325831Z",
+   "updateTime": "2026-09-10T05:17:21.325831Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bef7b31a971",
+   "fields": {
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "touched": {
+     "integerValue": "1788870495"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "parent": {
+     "stringValue": "ecount"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "created": {
+     "integerValue": "1788870495"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": ""
+    }
+   },
+   "createTime": "2026-09-10T05:17:21.729255Z",
+   "updateTime": "2026-09-10T05:17:21.729255Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/bf3621e9644",
+   "fields": {
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "parent": {
+     "stringValue": "panel"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "created": {
+     "integerValue": "1789189511"
+    },
+    "used": {
+     "integerValue": "2"
+    },
+    "touched": {
+     "integerValue": "1789191061"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    }
+   },
+   "createTime": "2026-09-12T05:05:18.800767Z",
+   "updateTime": "2026-09-12T05:31:01.558337Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/ct-code",
+   "fields": {
+    "tone": {
+     "stringValue": "white"
+    },
+    "touched": {
+     "integerValue": "1789280379"
+    },
+    "icon": {
+     "stringValue": "file-code-2"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "link": {
+     "stringValue": "https://github.com/vivivic-cloud/cartoon"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "name": {
+     "stringValue": "코드"
+    },
+    "created": {
+     "integerValue": "1789279559"
+    },
+    "parent": {
+     "stringValue": "cartoon"
+    },
+    "used": {
+     "integerValue": "1"
+    }
+   },
+   "createTime": "2026-09-13T06:06:06.082163Z",
+   "updateTime": "2026-09-13T06:19:40.018138Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/ct-docs",
+   "fields": {
+    "created": {
+     "integerValue": "1789279559"
+    },
+    "name": {
+     "stringValue": "개발자료"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "icon": {
+     "stringValue": "folder"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "touched": {
+     "integerValue": "1789279559"
+    },
+    "parent": {
+     "stringValue": "cartoon"
+    },
+    "link": {
+     "stringValue": ""
+    },
+    "kind": {
+     "stringValue": "box"
+    }
+   },
+   "createTime": "2026-09-13T06:06:07.423089Z",
+   "updateTime": "2026-09-13T06:06:07.423089Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/ct-link",
+   "fields": {
+    "plain": {
+     "booleanValue": true
+    },
+    "touched": {
+     "integerValue": "1789279559"
+    },
+    "used": {
+     "integerValue": "0"
+    },
+    "name": {
+     "stringValue": "바로가기"
+    },
+    "created": {
+     "integerValue": "1789279559"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/cartoon/"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "parent": {
+     "stringValue": "cartoon"
+    },
+    "todo": {
+     "booleanValue": false
+    },
+    "icon": {
+     "stringValue": "external-link"
+    }
+   },
+   "createTime": "2026-09-13T06:06:04.751784Z",
+   "updateTime": "2026-09-13T06:06:04.751784Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_boxes/ct-open",
+   "fields": {
+    "used": {
+     "integerValue": "22"
+    },
+    "touched": {
+     "integerValue": "1789436217"
+    },
+    "name": {
+     "stringValue": "프로그램열기"
+    },
+    "parent": {
+     "stringValue": "cartoon"
+    },
+    "link": {
+     "stringValue": "https://vivivic-cloud.github.io/cartoon/"
+    },
+    "kind": {
+     "stringValue": "box"
+    },
+    "tone": {
+     "stringValue": "white"
+    },
+    "created": {
+     "integerValue": "1789279559"
+    },
+    "icon": {
+     "stringValue": "monitor-play"
+    },
+    "todo": {
+     "booleanValue": false
+    }
+   },
+   "createTime": "2026-09-13T06:06:03.431787Z",
+   "updateTime": "2026-09-15T01:37:00.000647Z"
+  }
+ ],
+ "지시방": [
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_dev/box~3Abgg30zdsfd2",
+   "fields": {
+    "잰때": {
+     "integerValue": "1789614755288"
+    },
+    "area": {
+     "stringValue": "box:bgg30zdsfd2"
+    },
+    "msgs": {
+     "arrayValue": {
+      "values": [
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "나"
+          },
+          "답한때": {
+           "integerValue": "1789614556"
+          },
+          "sent": {
+           "booleanValue": true
+          },
+          "text": {
+           "stringValue": "아이콘에 세계 국기도 넣어줘"
+          },
+          "답한이": {
+           "stringValue": "클로드"
+          },
+          "at": {
+           "integerValue": "1789612094"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "at": {
+           "integerValue": "1789612327"
+          },
+          "답한이": {
+           "stringValue": "클로드"
+          },
+          "text": {
+           "stringValue": "이프로그램은 하루에 영어 문장 10개씩 생성해 주는 프로그램이야 자동으로 영어문장 생성해주거나 내가 직접 입력한 한국어 문장을 자연스런 영어로 변경해주는 프로그램 연결해 줄 수 있나?"
+          },
+          "답한때": {
+           "integerValue": "1789614755"
+          },
+          "sent": {
+           "booleanValue": true
+          },
+          "who": {
+           "stringValue": "나"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "at": {
+           "integerValue": "1789614556"
+          },
+          "맡은수": {
+           "integerValue": "1"
+          },
+          "text": {
+           "stringValue": "세계 국기 넣었습니다. 아이콘 판 '자주 쓰는 것' 바로 밑에 '국기' 묶음으로 31개 나라가 있습니다. 찾기 칸에 '한국' '중국' 처럼 우리말로 쳐도 나옵니다(그 칸에는 영문이라고 적혀 있지만 국기는 우리말도 받게 했습니다). 영어 문장 프로그램 건은 따로 말씀드리겠습니다."
+          },
+          "who": {
+           "stringValue": "클로드"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "text": {
+           "stringValue": "영어 문장 프로그램 — 됩니다. 두 가지가 서로 다른 일이라 나눠서 말씀드립니다. (1) 하루 10문장 자동 생성 — 이건 화면에 인공지능을 붙일 필요가 없습니다. 제가 매일 아침 10문장을 만들어 파이어베이스에 넣어 두면, 프로그램은 그것을 펼쳐 보이기만 하면 됩니다. 돈이 안 들고 열자마자 바로 뜹니다. (2) 제가 쓴 한국어를 그 자리에서 자연스러운 영어로 — 이건 누르는 그 순간 인공지능이 돌아야 하니 화면에 붙여야 합니다. 작업대가 이미 쓰는 파이어베이스(vivivic-4b7ef)에 Firebase AI Logic 을 켜면 열쇠가 화면에 드러나지 않고 폰에서 바로 됩니다. 글자라서 값은 얼마 안 나갑니다. 정해 주실 것이 하나 있습니다 — 작업대에 이미 '언어 연습(LangPick)' 이 있고 영어·일본어·중국어·베트남어 문장이 들어 있습니다. 다만 문장이 프로그램 안에 박혀 있어 늘지 않고 인공지능도 안 붙어 있습니다. ENGCHINA 를 새 프로그램으로 따로 만들까요, 아니면 언어 연습을 키워서 쓸까요? 말씀 주시면 바로 시작하고 전담 작업자도 그때 붙이겠습니다."
+          },
+          "who": {
+           "stringValue": "클로드"
+          },
+          "맡은수": {
+           "integerValue": "1"
+          },
+          "at": {
+           "integerValue": "1789614755"
+          }
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "createTime": "2026-09-17T02:28:14.639264Z",
+   "updateTime": "2026-09-17T03:12:36.595755Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_dev/box~3Acartoon",
+   "fields": {
+    "msgs": {
+     "arrayValue": {
+      "values": [
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "나"
+          },
+          "답한이": {
+           "stringValue": "클로드·cartoon"
+          },
+          "sent": {
+           "booleanValue": true
+          },
+          "at": {
+           "integerValue": "1789378262"
+          },
+          "text": {
+           "stringValue": "[cartoon · 그림] 이 첫 그림도 화면에서 삭제할 수 있게해줘"
+          },
+          "답한때": {
+           "integerValue": "1789378926"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "at": {
+           "integerValue": "1789378413"
+          },
+          "who": {
+           "stringValue": "나"
+          },
+          "답한때": {
+           "integerValue": "1789379412"
+          },
+          "sent": {
+           "booleanValue": true
+          },
+          "답한이": {
+           "stringValue": "클로드·cartoon"
+          },
+          "text": {
+           "stringValue": "[cartoon · 2장 파일 불러오기 페이지추가 ✕] 내가 이페이지에 작성한 내용이 짚어서 지시한 것처럼 작동하게 메세지 보내기 버튼을 만들어줘"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "맡은수": {
+           "integerValue": "1"
+          },
+          "at": {
+           "integerValue": "1789378926"
+          },
+          "who": {
+           "stringValue": "클로드·cartoon"
+          },
+          "text": {
+           "stringValue": "[cartoon 작업자] 크게 띄운 씨앗 그림의 ✕ — 만들어 올렸습니다 (278c70f). 배포 나갔습니다.\n\n■ ✕ 크기 — 숫자로\n 375px(폰): ✕ 32×32px, 그림은 343×514px. ✕ 가 덮는 넓이는 그림의 0.6%.\n 1280px(노트북): ✕ 32×32px, 그림은 201×301px. 덮는 넓이 1.7%.\n 자리는 그림 오른쪽 위 안쪽 4px. 그림 밖으로 삐져나가지 않습니다.\n 375px 에서 진짜 손가락 두드림(touch)으로 눌러 확인했습니다.\n\n■ 눌렀을 때\n · 삭제함으로만 옮깁니다. 저장통 파일은 그대로 남습니다 — 지우지 않았습니다.\n · 무대가 비고 박스 안 화면으로 돌아옵니다. 남은 장수도 맞게 줄어듭니다.\n · 그 그림에 딸려 있던 페이지는 건드리지 않습니다. 그대로 있습니다.\n · 삭제함에 뜨고, 되돌리면 원래 박스로 돌아옵니다.\n · 목록 칸의 ✕ 는 하던 대로 그대로입니다.\n\n■ 하다가 제 잘못 두 개를 찾아 같이 고쳤습니다\n 1. 박스 안 그림과 페이지에 딸린 그림이 반쪽으로 나오고 있었습니다. 제가 418a3a4 에서\n    「그림 반으로」 규칙을 너무 넓게 걸어서 엉뚱한 그림까지 반이 됐습니다.\n    잰 값 — 박스 안 칸 127px 인데 그림 63px, 페이지 딸린 칸 44px 인데 그림 21px.\n    고친 뒤 — 127 에 125, 44 에 42. 씨앗 그림은 201×301 그대로.\n    따로 커밋했습니다 (64e0728).\n 2. 씨앗을 지운 뒤 박스 안 화면이 옛것을 물고 있던 것. 시험 중에 나와서 같이 고쳤습니다.\n\n■ 못 한 것 / 안 되는 것\n · 폴더에서 온 그림에는 ✕ 가 붙지 않습니다. 그건 cartoon_refs 에 적힌 것이 아니라\n   삭제함에 넣을 자리가 없습니다. 올리신 그림에만 붙습니다.\n · 진짜 주소(vivivic-cloud.github.io)는 제 작업 상자에서 막혀 열지 못했습니다.\n   그래서 배포되는 파일 그대로를 그 주소인 척 띄워 확인했습니다. 코드는 같은 것입니다.\n\n■ 그림 AI 조사 보고는 이미 두 번 붙였습니다\n 처음 보고 하나, 그리고 사장님이 「니가 외부 AI 를 시켜서 결과를 가져와라」 라고\n 바로잡아 주신 뒤 고쳐 쓴 보고 하나. 못 보셨으면 다시 붙이겠습니다.\n 거기 적은 대로, 제가 기다리는 것은 **그림 AI 열쇠 하나**뿐입니다.\n 이 지시함에 적으시면 안 됩니다 — 새어 나갑니다. 제 작업 환경에 비밀값으로 넣어 주셔야 합니다."
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "클로드·cartoon"
+          },
+          "at": {
+           "integerValue": "1789379412"
+          },
+          "맡은수": {
+           "integerValue": "1"
+          },
+          "text": {
+           "stringValue": "[cartoon 작업자] 「메시지 보내기」 단추 — 만들어 올렸습니다 (cbfe101). 배포 나갔습니다.\n\n■ 어떻게 씁니까\n 페이지 칸에 글을 적으시고 그 아래 **검은 「메시지 보내기」 단추**를 누르시면,\n 적으신 그 글이 이 지시함에 사장님 말로 그대로 붙습니다. 여기 옮겨 적으실 것 없습니다.\n 자리는 「파일 불러오기 · 페이지추가」 아래 한 줄을 다 쓰는 자리입니다.\n\n■ 붙는 모양 — 실제로 붙여 본 것입니다\n   [cartoon · 2장] 여기에 강아지가 창밖을 보는 장면을 그려줘\n   — 박스: 가구공장 · 페이지: pgc46ran88xoq · 씨앗: ref:r1\n 뒷줄은 제가 붙입니다. 어느 박스 어느 페이지 이야기인지 알아야 그 자리에 넣어 드릴 수\n 있어서입니다. 딸린 그림이 있으면 몇 장인지도 같이 붙습니다.\n\n■ 함께 챙긴 것\n · 보내기 전에 적으신 글을 페이지에 **먼저 담습니다.** 보내다 끊겨도 글은 남습니다.\n · 빈칸으로 누르면 보내지 않고 「먼저 적어 주세요」 라고만 합니다 — 확인했습니다.\n · 누르는 동안 「보내는 중…」 으로 잠깁니다. 두 번 눌려 두 번 가지 않습니다.\n · **이어 붙이기(arrayUnion)만 합니다.** 앞선 지시와 붙은 답을 덮지 않습니다 —\n   시험에서 예전 지시가 글자 하나 안 바뀌고 그대로 남는 것을 확인했습니다.\n · 그림·박스·페이지 칸은 하나도 안 건드립니다. 밖으로 나가는 요청도 없습니다.\n\n■ 확인한 것\n · 1280px(노트북) · 375px(폰) 둘 다. 폰은 진짜 손가락 두드림으로 눌렀습니다.\n · 단추 168×32px, 두 화면 다 같고 가려지는 것 없고 가로로 넘치지 않습니다.\n · 화면이 쓰는 익명 로그인으로 이 지시함에 이어 붙일 수 있는지 진짜 서버에 대고\n   따로 확인했습니다 — 붙이기 200, 읽기 200. **버리는 칸에 넣고 지웠습니다**(지운 뒤 404).\n   사장님 지시함에는 시험 글을 넣지 않았습니다.\n\n■ 못 한 것\n · 진짜 주소(vivivic-cloud.github.io)는 제 작업 상자에서 막혀 열지 못했습니다.\n   배포되는 파일 그대로를 그 주소인 척 띄워 확인했습니다. 코드는 같은 것입니다.\n · 화면 쪽 시험은 파이어베이스를 흉내낸 것으로 했습니다. 서버 쪽은 위에 적은 대로\n   진짜 서버에 대고 따로 확인했습니다.\n\n■ 한 가지 미리 말씀드립니다\n 보내 주시면 제가 읽습니다만, **제가 항상 깨어 있는 것은 아닙니다.** 지금은 사장님이\n 저를 불러 주셔야 읽습니다. 보내 두시면 다음에 깰 때 순서대로 처리합니다."
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "클로드·cartoon"
+          },
+          "at": {
+           "integerValue": "1789379851"
+          },
+          "맡은수": {
+           "integerValue": "0"
+          },
+          "text": {
+           "stringValue": "[cartoon 작업자] 관리자님 지시 받아 보완했습니다 — 6db5722. app/index.html 과 index.html 같습니다.\n\n■ 빠뜨렸던 것 셋, 채웠습니다\n 1. `sent:true` — 손잡이가 넣는 표인데 제가 빠뜨렸습니다. 넣었습니다.\n 2. 글머리를 `[cartoon · 2장 페이지] …` 로 맞췄습니다.\n 3. 「09:41 보냄」 을 페이지에 작게 남깁니다. 페이지에 담아 두어 새로고침해도 남습니다.\n\n■ 「통째로 다시 쓰다 날려먹는다」 — 그 길을 아예 안 씁니다\n 손잡이는 읽고-고쳐-통째로 쓰기(PATCH)라 그 위험이 있습니다. 저는 **arrayUnion 으로\n 끝에 하나만 이어 붙입니다.** 읽지 않으니 읽기 실패로 빈 배열이 될 일이 없고,\n 다른 말은 서버가 손대지 않습니다.\n **진짜 서버에서 확인했습니다** — 버리는 칸에 「답한때·답한이 도장 찍힌 지시」와\n 「맡은수 붙은 답」 을 심어 두고 붙여 봤습니다. 2건 → 3건, **앞선 두 건은 글자 하나\n 안 바뀌었습니다.** 넣고 지웠습니다(지운 뒤 404). 사장님 지시함은 안 건드렸습니다.\n\n■ 붙은 뒤 다시 읽어 확인합니다\n 쓰고 → 다시 읽어 제 글이 있는지 봅니다 → 없으면 한 번만 더 → 그래도 없으면\n 「보내지 못했습니다」. **확인된 뒤에만 「보냈습니다」 가 뜹니다.**\n 쓰기를 일부러 막고 눌러 봤습니다 — 지시 3건 그대로, 「보내지 못했습니다 —\n 붙었는지 확인하지 못했습니다」, 적은 글 살아 있고 단추도 되살아났습니다.\n\n■ 시키신 확인 넷 (폰은 진짜 손가락 두드림, .click() 아님)\n 1. 적고 누름 → 알림 뜸 → `wt_dev/box~3Acartoon` 을 직접 읽으니 이렇게 들어 있었습니다:\n      { who:\"나\", text:\"[cartoon · 2장 페이지] 폰에서 보낸 지시\\n— 박스: 가구공장 ·\n        페이지: pgcv9sn18eu7l · 씨앗: ref:r1\", at:1789379599, sent:true }\n      who 는 '나', at 는 10자리 초, sent 는 true. area 는 'box:cartoon'.\n 2. 보내기 전 1건 → 보낸 뒤 2건. **딱 하나 늘었습니다.** 앞선 것 그대로.\n 3. 보낸 뒤 페이지 글 그대로 있습니다 — \"폰에서 보낸 지시\". 안 지웁니다.\n 4. 빈칸으로 누르면 안 보냅니다. 「적으신 것이 없습니다」 만 뜨고 건수 그대로(1건).\n 그리고 글을 고쳐 다시 눌러 보냈습니다 — 2건 → 3건, 고친 글로 들어갔습니다.\n\n■ 375px 에서 글 적는 칸 — 숫자\n 글 적는 칸 **168×64px** (세 줄쯤). 페이지 칸 220×202px.\n 1280px 에서도 똑같습니다 — 페이지 칸이 220px 고정이라 화면 폭에 안 흔들립니다.\n **짜부라지지 않았습니다.**\n 단추 배치는 제가 이렇게 정했습니다:\n  · 윗줄 — 「파일 불러오기」 「페이지추가」 둘이 나눠 씀\n  · 아랫줄 — 「메시지 보내기」 혼자 한 줄 다 씀 (168×32px, 검은 단추)\n 까닭: 셋을 한 줄에 넣으면 하나가 56px 이 되어 글자가 잘립니다. 보내기가 이 칸에서\n 제일 중한 일이라 눈에 띄게 아래 한 줄을 주었습니다. 글 적는 칸은 손대지 않았습니다.\n\n■ 그 밖에\n · 길게 누르기(손잡이)는 안 건드렸습니다.\n · `shared/viggle.js` 는 **읽기만** 했습니다. 한 줄도 안 고쳤습니다.\n · 그림·박스 칸에는 아무것도 안 씁니다. 밖으로 나가는 요청 없습니다. 가로 넘침 없습니다.\n · 앞서 고친 것 다 그대로입니다.\n · 한글 칸 이름(`잰때`)이 걱정되어 따로 봤습니다 — SDK 가 `[_a-zA-Z][_a-zA-Z0-9]*` 가\n   아닌 이름은 홑따옴표로 감싸 보냅니다(SDK 코드에서 직접 확인). 서버도 그 모양이라야\n   받습니다(감싸지 않고 보내니 400 이 났고, 감싸니 200). 그러니 맞습니다.\n\n■ 못 한 것\n · 진짜 주소(vivivic-cloud.github.io)는 이 작업 상자에서 막혀 열지 못했습니다.\n   화면 쪽 확인은 배포되는 파일 그대로를 그 주소인 척 띄우고 파이어베이스를 흉내내\n   했습니다. 서버 쪽(권한·arrayUnion·앞선 것 보존)은 진짜 서버에 대고 따로 했습니다.\n · **사장님 지시함에 시험 글을 넣어 보지는 않았습니다.** 버리는 칸으로만 했습니다.\n   넣기를 원하시면 말씀 주십시오.\n\n■ 「외부 그림 AI 조사 보고가 아직 안 왔다」 — 두 번 붙어 있습니다\n 이 자리(box:cartoon) 의 `msgs` 를 직접 읽어 확인했습니다.\n  · 39번째 · 09-14 09:09 · 「'외부 그림 잘 그리는 에이아이와 연결할 수 있나' — 조사만\n    했습니다…」 (열쇠 둘 곳, 요금제, 값, 갈림길 셋)\n  · 41번째 · 09-14 09:24 · 「앞 보고를 바로잡습니다…」 (사장님이 「니가 외부 AI 를\n    시켜서 결과를 가져와라」 라고 하신 뒤 고쳐 쓴 것. Blaze 전환 필요 없다고 취소)\n 둘 다 그대로 있습니다. 못 보셨으면 통째로 다시 붙이겠습니다 — 말씀만 주십시오.\n 기다리는 것은 여전히 **그림 AI 열쇠 하나**뿐입니다. 이 지시함에 적으시면 안 됩니다."
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "text": {
+           "stringValue": "[cartoon 작업자] 「이곳에 외부 그림 잘 그리는 에이아이와 연결시킬 수 있나?」 — 다시 조사했습니다.\n코드는 한 줄도 안 고쳤고 아무것도 올리지 않았습니다(6db5722 그대로, 트리 깨끗).\n열쇠도 계정도 요금제도 건드리지 않았습니다.\n\n**먼저 — 앞서 드린 값이 틀렸습니다. 아래 ③에서 바로잡습니다.** 죄송합니다.\n그리고 훨씬 나은 길을 하나 새로 찾았습니다. 그것부터 적습니다.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n한 줄 답 — 됩니다. 심부름꾼도 안 만들어도 됩니다.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n구글이 **「파이어베이스 AI 로직」** 이라는 것을 내놓았습니다. 화면에서 곧바로 그림 AI 를\n부르는데, **열쇠는 구글 쪽에 남고 화면에는 안 들어갑니다.** 구글이 중간 심부름꾼 노릇을\n대신 해 주는 것입니다. 앞 보고에서 「새 파일 하나(심부름꾼)를 만들어야 한다」 고 했는데,\n**그것은 안 만들어도 됩니다.** 카툰은 이미 파이어베이스를 쓰고 있어서 결이 맞습니다.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n① 열쇠를 어디에 두나\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n**화면 안에 넣으면 누구나 꺼내 볼 수 있습니다. 이건 확실합니다.**\n카툰은 깃허브에 얹힌 정적 화면이라 화면을 이루는 글이 통째로 보는 사람 컴퓨터로 내려갑니다.\n브라우저에서 「소스 보기」 한 번이면 다 보입니다. 숨길 자리가 없습니다.\n그 열쇠는 곧 돈입니다. 남이 가져가면 사장님 앞으로 그림값이 계속 나갑니다.\n\n지금 화면에 박혀 있는 파이어베이스 열쇠(AIzaSy…)는 **괜찮습니다.** 그건 비밀번호가 아니라\n「우리 집 주소」 같은 것이고 문단속은 파이어베이스 규칙이 따로 합니다.\n**그림 AI 열쇠는 성격이 다릅니다** — 그건 진짜 비밀번호입니다.\n\n→ 파이어베이스 AI 로직을 쓰면 이 걱정이 없어집니다. 구글 문서 그대로 옮기면\n  「열쇠가 서버에 남고 화면에 심기지 않는다」 고 되어 있습니다. 대신 **앱체크**라는\n  문단속을 켜야 하는데, 2026년 7월부터는 그것도 자동으로 켜집니다.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n② 파이어베이스 쪽 길\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n**지금 요금제 — 또 못 알아냈습니다.** 오늘 세 군데를 다시 찔러 봤는데 셋 다 401\n(주인 자격으로 로그인해야 한다) 로 거절했습니다. 밖에서는 볼 수 없게 막혀 있습니다.\n사장님이 콘솔 왼쪽 아래를 보시면 Spark(무료) 인지 Blaze(쓴 만큼) 인지 적혀 있습니다.\n\n**요금제를 바꿔야 하나 — 네, 바꾸셔야 합니다. 이번엔 확실합니다.**\n구글 문서에 이렇게 적혀 있습니다 — 「그림 만드는 모델은 **어느 길로 부르든** 쓴 만큼\n내는 Blaze 요금제라야 한다.」 앞 보고에서 「확실하지 않다」 고 했던 것을 오늘 확인했습니다.\n글만 다루는 것은 무료(Spark)로도 되지만 **그림은 안 됩니다.**\n\n**붙는 코드 (짐작입니다)**\n · 새 파일 — **없습니다.** 심부름꾼을 안 만들어도 됩니다.\n · 카툰 화면 — 40~60줄쯤. 페이지 칸에 「그림 만들기」 단추, 적으신 글과 씨앗 그림 보내기,\n   받은 그림을 그 페이지에 담기. 담는 자리·저장통·페이지는 이미 다 만들어져 있습니다.\n · 사장님 콘솔에서 켜실 것 — 요금제 Blaze, 그리고 앱체크.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n③ 돈 — **앞서 드린 값을 바로잡습니다**\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n앞 보고에서 이렇게 적었는데 **틀렸습니다**: 나노바나나2 Lite 55원 / 나노바나나2 110원 /\n나노바나나 Pro 215원. 오늘 다시 읽으니 값이 다릅니다.\n\n오늘 확인한 값 (1달러 1,400원쯤으로 셈, 환율은 그날그날 다릅니다)\n 나노바나나 2 Lite      한 장 $0.034  (~48원)   ← 1K 크기 기준\n 나노바나나 Pro         한 장 $0.134  (~188원)  ← 1K·2K, 4K 는 $0.24 (~336원)\n Imagen 4 Fast          한 장 $0.02   (~28원)\n Imagen 4               한 장 $0.04   (~56원)\n Imagen 4 Ultra         한 장 $0.06   (~84원)\n (옛 나노바나나 = 제미나이 2.5 플래시 이미지  한 장 $0.039 ~55원)\n **나노바나나 2(Lite 아닌 것) 한 장 값은 오늘 확인 못 했습니다.** 값표 쪽이 이 작업\n 상자에서 잘려 들어와 못 읽었습니다. 지어내지 않겠습니다.\n\n**파이어베이스 쪽 값**\n · 파이어베이스 AI 로직 **쓰는 것 자체는 공짜**입니다. 그림값만 나갑니다.\n · Blaze 는 **다달이 내는 기본요금이 없습니다.** 안 쓰면 0원입니다. 다만 카드를 걸어\n   두는 것이라 실수로 많이 쓰면 그만큼 나갑니다. 콘솔에서 한도(예산 알림)를 걸 수 있습니다.\n · 계정을 따로 만들 것 없습니다. 쓰던 구글·파이어베이스 그대로입니다.\n\n**구글 말고 다른 곳** — 값 확인 못 했습니다. 그리고 **제 작업 상자에서 아예 막혀 있습니다.**\n오늘 찔러 보니 OpenAI·Stability·Replicate·Flux 넷 다 연결 자체가 끊깁니다(회사 통신 규칙).\n구글만 열려 있습니다(열쇠 없이 찌르니 403 — 「열쇠를 쓰라」는 구글의 답).\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n④ 지금 당장 되는 것\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n**네, 이미 됩니다.** 밖에서(챗지피티든 어디든) 그림을 뽑아 폰에 저장하신 뒤 페이지 칸의\n「파일 불러오기」로 넣으시면 그 페이지에 붙습니다. 6579b82 로 올렸고 진짜 파일로\n확인했습니다. **돈도 안 들고 켤 것도 없습니다.** 손이 한 번 더 갈 뿐입니다.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n⑤ 사장님이 정하실 것 — 셋\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n**가. 지금대로 손으로 뽑아 불러오기**\n   드는 것 0원, 켤 것 없음, 오늘부터 됨. 아쉬운 것 — 그림마다 손이 한 번 더 감.\n\n**나. 화면 안에서 바로 그리게 하기 (파이어베이스 AI 로직)**\n   사장님이 하실 것 — 요금제를 Blaze 로 바꾸기(카드 등록, 안 쓰면 0원) + 앱체크 켜기.\n   드는 것 — 그림 한 장에 28~188원. 제가 붙일 것은 화면 40~60줄.\n   좋은 것 — 적으신 글 옆에서 바로 그림이 나옴. **열쇠가 새지 않음.**\n\n**다. 제가 대신 그려서 넣어 드리기**\n   사장님이 하실 것 — **그림 AI 열쇠 하나를 제 작업 자리에 비밀값으로** 넣어 주시기.\n   요금제 안 바꾸셔도 되고 화면도 안 고칩니다. 앞서 만든 「메시지 보내기」 로 지시를\n   보내시면 제가 받아 그려서 그 페이지에 담습니다.\n   아쉬운 것 — **제가 깨어 있을 때만 됩니다.** 즉시 나오지 않습니다.\n\n제 생각으로는 **나** 가 좋아 보입니다. 사장님이 누르시면 바로 나오고, 열쇠가 새지 않고,\n제가 자고 있어도 됩니다. 다만 **Blaze 로 바꾸는 것 하나는 사장님만 하실 수 있습니다.**\n싸게 시험만 해 보시려면 Imagen 4 Fast(한 장 28원쯤)로 몇 장 돌려 보시면 됩니다.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n확실하지 않은 것 · 못 한 것\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n1. 지금 요금제가 무엇인지 — **못 알아냈습니다.** 오늘도 401 로 막혔습니다.\n2. 나노바나나 2(Lite 아닌 것) 한 장 값 — **못 읽었습니다.**\n3. 어느 것이 카툰을 잘 그리나 — **순위 못 매깁니다.** 여기서 실제로 그려 비교한 것이\n   아닙니다. 다만 카툰은 여러 장에 걸쳐 같은 인물·같은 화풍이 이어지는 것이 중한데,\n   나노바나나 계열은 「그림을 넣고 이 옆 장면」 하고 고쳐 나가는 방식이라 그쪽에\n   맞습니다 — **이건 제 판단이지 확인한 사실이 아닙니다.**\n4. 값표는 오늘 읽은 것입니다. 구글이 바꾸면 달라집니다.\n5. 붙는 줄 수(40~60줄)는 **짐작**입니다.\n\n■ 앞서 이 물음에 두 번 답을 붙여 두었습니다 — 09-14 09:09 과 09:24, 이 자리 msgs 에\n  그대로 있습니다(직접 읽어 확인했습니다). 못 보셨을까 하여 이번엔 처음부터 다시 적고\n  틀린 값도 바로잡았습니다."
+          },
+          "who": {
+           "stringValue": "클로드·cartoon"
+          },
+          "at": {
+           "integerValue": "1789380828"
+          },
+          "맡은수": {
+           "integerValue": "0"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "sent": {
+           "booleanValue": true
+          },
+          "at": {
+           "integerValue": "1789393357"
+          },
+          "who": {
+           "stringValue": "나"
+          },
+          "text": {
+           "stringValue": "[cartoon · 2장 페이지] 자 이페이지에 첨부한 그림을 그려주는데 좌측에 제시한 그림체로 그려진 그림을 이곳에 그려서 올려봐바\n— 박스: (없음) · 페이지: pgc5m3az6v754 · 씨앗: ref:upcg52es0ylz1 · 딸린 그림 1장"
+          },
+          "답한이": {
+           "stringValue": "클로드·관리자"
+          },
+          "답한때": {
+           "integerValue": "1789398666"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "클로드·관리자"
+          },
+          "text": {
+           "stringValue": "[관리자] 2장 페이지에 그려서 올렸습니다. 페이지 여시면 붙어 있습니다.\n\n좌측 씨앗(「최소의 발견」 표지)의 그림체를 이렇게 읽었습니다 — 납작한 검은 실선 하나, 명암 없음, 그림자는 빗금이 아니라 까만 면 하나, 빛은 흰 면 하나, 바탕은 종이색. 첨부하신 방(의자·스툴·돌 놓인 낮은 단·큰 창·창밖 나무)을 그 어법으로 다시 세웠습니다. 첨부 그림의 빗금과 노란색은 표지 그림체가 아니라 뺐습니다.\n\n■ 어떻게 그렸는지 — 밝혀 둡니다\n저는 그림 AI 가 없습니다. 선을 좌표로 하나하나 찍어서 그렸습니다(벡터). 그래서 이런 납작한 선 그림은 되지만 **붓질·질감이 있는 그림, 사람·얼굴은 못 그립니다.** 이 표지가 선 그림이라서 가능했습니다.\n\n■ 무엇을 건드렸나\ncartoon_refs 에 새 그림 하나(upiq94vqajntm)를 담고 page 를 pgc5m3az6v754 로 달았습니다. 1200×1800 png. 다른 그림·페이지·박스는 하나도 안 건드렸습니다. 코드도 안 고쳤습니다.\n\n■ 빼시려면\n그림 오른쪽 위 ✕ 로 빼시면 삭제함으로 갑니다. 없어지지 않습니다.\n고칠 곳을 짚어 주시면(의자를 더 크게 · 빛을 더 길게 · 나무를 더 무성하게 같은 식) 다시 그리겠습니다."
+          },
+          "at": {
+           "integerValue": "1789398666"
+          },
+          "맡은수": {
+           "integerValue": "1"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "나"
+          },
+          "답한때": {
+           "integerValue": "1789438094"
+          },
+          "sent": {
+           "booleanValue": true
+          },
+          "at": {
+           "integerValue": "1789436373"
+          },
+          "text": {
+           "stringValue": "[cartoon · 2장 페이지] 옆에그림 처럼 그려달라고 한게 실력이 형편없던데\n— 박스: 나는 공장장이 되었다. · 페이지: pgcrjmnb068fk · 씨앗: ref:upc2996ki5y1d"
+          },
+          "답한이": {
+           "stringValue": "클로드·관리자"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "맡은수": {
+           "integerValue": "1"
+          },
+          "who": {
+           "stringValue": "클로드·관리자"
+          },
+          "at": {
+           "integerValue": "1789438094"
+          },
+          "text": {
+           "stringValue": "[관리자] 맞습니다. 형편없었습니다.\n\n왜 그런지 그대로 말씀드립니다. 저는 그림을 그릴 줄 모릅니다. 선을 좌표로 하나하나 찍어서 쌓은 것입니다 — 자로 재서 그은 것이지 그린 게 아닙니다. 방·창·의자처럼 납작한 선으로 된 것은 흉내가 좀 나지만 그 이상은 안 됩니다.\n\n그리고 박스 이름이 「나는 공장장이 되었다」 입니다. 사람이 나오고 여러 장에 걸쳐 같은 인물·같은 화풍이 이어져야 하는 것으로 봅니다. **그건 제가 이 방식으로는 못 합니다.** 몇 번을 다시 해도 못 합니다. 자로 그은 선으로 사람 얼굴은 안 나옵니다. 되는 척하지 않겠습니다.\n\n■ 이건 진짜 그림 AI 를 붙여야 하는 일입니다\n어제 조사해서 올린 「나」 안입니다.\n· 사장님이 하실 것 하나 — 파이어베이스 요금제를 「쓴 만큼 내는 것(Blaze)」 으로 바꾸기. 다달이 내는 기본요금 없고 안 쓰면 0원입니다. 콘솔 왼쪽 아래에 Spark 인지 Blaze 인지 적혀 있습니다.\n· 제가 할 것 — 페이지에 「그림 만들기」 단추 붙이기. 적으신 글과 옆 그림을 같이 보내서 그 화풍으로 받아 옵니다. 열쇠는 구글 쪽에 남고 화면에 안 들어갑니다.\n· 한 장에 28원 ~ 188원. 카툰처럼 앞 장을 이어 그리는 데는 나노바나나 계열이 맞습니다.\n요금제만 바꿔 주시면 나머지는 제가 합니다. 어디를 누르시면 되는지 화면으로 짚어 드리겠습니다.\n\n■ 지금 당장\n밖에서 뽑아서 「파일 불러오기」 로 넣으시는 게 제일 빠릅니다. 돈도 안 들고 켤 것도 없습니다.\n\n■ 제가 올린 그림\n2장 페이지의 그것은 ✕ 한 번이면 빠집니다. 빼 드릴까요? 말씀만 주십시오."
+          }
+         }
+        }
+       }
+      ]
+     }
+    },
+    "area": {
+     "stringValue": "box:cartoon"
+    },
+    "잰때": {
+     "integerValue": "1789438094319"
+    }
+   },
+   "createTime": "2026-09-13T06:11:14.055589Z",
+   "updateTime": "2026-10-03T04:25:04.458245Z"
+  },
+  {
+   "name": "projects/vivivic-4b7ef/databases/(default)/documents/artifacts/vivivic-4b7ef/public/data/wt_dev/box~3Apanel",
+   "fields": {
+    "area": {
+     "stringValue": "box:panel"
+    },
+    "msgs": {
+     "arrayValue": {
+      "values": [
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "클로드·판재도면기"
+          },
+          "at": {
+           "integerValue": "1789190020"
+          },
+          "text": {
+           "stringValue": "[파악 보고 — 아직 아무것도 안 고쳤습니다]\n\n■ 이 프로그램이 무엇을 하는 것인가\n왼쪽 표에 부품명·가로·세로·두께(mm) 넉 줄만 넣으면, 오른쪽에 그 판들이 3D로 바로 그려집니다.\n판은 바닥에 눕혀서 왼쪽부터 100mm 간격으로 나란히 놓입니다. 판을 톡 누르면 그 판이 밝아지고\n표의 그 줄도 같이 밝아지며, 오른쪽 아래에 가로·세로·두께가 뜹니다. 넣은 값은 폰 안에 저장돼서\n다시 열어도 그대로 있습니다. index.html 한 장이 전부이고, main 에 올리면 그게 바로 배포입니다.\n\n※ README 와 실제가 다릅니다. README 는 \"놓임·위치·반전·구멍\" 칸과 \"부품 집계\" 가 있다고 적혀\n  있는데, 지금 프로그램에는 그 다섯 가지가 하나도 없습니다(전부 0건). 지난번에 입력부를\n  부품명·가로·세로·두께로 줄이면서 README 만 옛말로 남은 것입니다. 사장님이 README 대로\n  알고 계시면 없는 기능을 찾으시게 됩니다.\n\n■ 폰(375px)에서 지금 어떤 모습인가 — 크로미움으로 잰 값\n· 좌우로 밀리지 않습니다. 문서 폭 375 = 화면 폭 375. 위아래로만 845px, 조금 스크롤됩니다.\n· 한 칸으로 잘 쌓입니다. 위에 입력 카드(폭 343 · 높이 260), 아래 3D 화면(폭 325 · 높이 422).\n· 판 번호 v0.3.0 이 맨 위 VIVIVIC 옆에 보입니다. 자바스크립트 오류는 한 건도 없습니다.\n\n■ 손가락으로 진짜 눌러서 잰 것 (크로미움 CDP 터치, 마우스 아님)\n잘 되는 것\n· 표 칸(68×36)을 톡 누르면 그 칸에 바로 커서가 들어갑니다.\n· \"+ 판 추가\"(301×40) 누르면 줄이 늘어납니다.\n· 판을 톡 누르면 골라지고 표의 줄도 같이 밝아집니다.\n· 궤도/이동/확대 단추를 누른 뒤 한 손가락으로 끌면 각각 돌고·움직이고·커집니다(전부 확인).\n\n안 되는 것 — 폰에서 제일 큰 문제\n· 두 손가락 오므리고 벌리기(핀치)로 확대가 안 됩니다. \"선택\" 상태에서 핀치하면 카메라 거리\n  변화 0, 아무 일도 안 일어납니다. \"궤도\" 상태에서 핀치하면 확대가 아니라 화면이 홱 돌아갑니다\n  (카메라가 804,-892 에서 1585,-93 으로 튐). 폰 쓰는 사람이 제일 먼저 하는 동작인데 그렇습니다.\n  까닭은 이 프로그램이 휠·휠버튼·Shift 로만 조작하게 돼 있어서, 손가락 두 개가 서로 덮어씁니다.\n· 그래서 확대하려면 반드시 \"확대\" 단추를 먼저 누르고 한 손가락으로 끌어야 합니다.\n\n눈에 띄는 것 몇 가지 더\n· \"맞춤\" 을 눌러도 폰에서는 판이 화면 밖으로 잘립니다. 판 한 장일 때 왼쪽 36px·오른쪽 20px,\n  세 장일 때 왼쪽 13px·오른쪽 37px 삐져나갑니다. 같은 것을 PC(1280) 에서 재면 0px, 딱 맞습니다.\n  화면이 세로로 길쭉할 때 가로를 안 따져서 그렇습니다.\n· 화면 아래 안내글이 \"휠버튼 드래그 · Shift+휠버튼 · 클릭 · Space / O / H / Z\" 입니다.\n  폰에는 휠도 Shift 도 자판도 없으니 폰에서는 쓸모가 없고, 두 줄(30px)을 차지합니다.\n  게다가 판을 고르면 오른쪽 아래 치수판이 그 위에 겹쳐 글자를 가립니다.\n· 단추가 손가락에 작습니다. 도구 단추 40×25, 표의 삭제 ✕ 25×25 입니다(애플 권장은 44×44).\n  위쪽 도구 단추 아홉 개가 두 줄로 접혀서 3D 화면 위쪽 16%(67px)를 덮고 있습니다.\n\n■ 판 번호는 어디에 두었나\n새로 넣지 않았습니다. 이미 있습니다 — 맨 위 왼쪽 \"VIVIVIC\" 바로 옆에 작은 회색 딱지로\n\"v0.3.0\" 이 붙어 있고, 폰 375px 화면 안에 들어옵니다(왼쪽에서 88px, 글자 9px). 지시가\n\"없으면 넣어라\" 였고 있었으므로, 요청 외에는 손대지 않는다는 규칙대로 그대로 두었습니다.\n다만 한 가지 말씀드립니다 — 이 번호는 손으로 적어 넣은 글자라 올릴 때마다 저절로 바뀌지\n않습니다. 지난 네 번의 손질 가운데 마지막 한 번에만 붙었고, 앞의 세 번은 번호가 없었습니다.\n새 것을 받으셨는지 확실히 아시려면, 고칠 때마다 이 번호를 올려 적는 규칙이 있어야 합니다.\n그렇게 할지는 사장님이 정해 주십시오.\n\n■ 확인한 방법\n크로미움(/opt/pw-browsers/chromium-1194)을 아이폰 크기 375×812, 터치 켜짐으로 띄워서\n화면 좌표를 직접 쟀고, 손가락 동작은 CDP 터치(touchStart/touchMove/touchEnd)로 한 손가락\n끌기와 두 손가락 핀치를 실제로 보내서 카메라가 어떻게 움직이는지 숫자로 확인했습니다.\n마우스로는 확인하지 않았습니다.\n\n못 한 것: 아이폰 사파리로는 여기서 확인할 수 없습니다. 위 값은 전부 크로미움에서 잰 것이라,\n사파리에서 조금 다를 수 있습니다. 특히 사파리의 두 손가락 동작과 100vh 처리는 다릅니다.\n\n■ 안 건드린 것\nindex.html, README.md 둘 다 한 글자도 고치지 않았습니다. main 에 올린 것 없습니다.\n(재보려고 three.js·tailwind 를 임시 폴더에 받아 사본으로만 시험했고, 원본은 그대로입니다.)\n고칠 것은 사장님이 정해 주시면 그것만 하겠습니다."
+          },
+          "맡은수": {
+           "integerValue": "0"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "sent": {
+           "booleanValue": true
+          },
+          "답한때": {
+           "integerValue": "1789193816"
+          },
+          "at": {
+           "integerValue": "1789191169"
+          },
+          "답한이": {
+           "stringValue": "클로드·panel-drafter"
+          },
+          "who": {
+           "stringValue": "나"
+          },
+          "text": {
+           "stringValue": "왜 이박스안의 프로그램등에는 짚어서 지시하기 같은 기능이 없는거야 작업대안의 모든 박스는 모든 기능이 동일해야지"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "who": {
+           "stringValue": "클로드·panel-drafter"
+          },
+          "text": {
+           "stringValue": "손잡이 붙였습니다. main 에 올라갔습니다 (9f57244).\n\n[한 것]\nindex.html 본문 끝, </body> 바로 앞에 공용 손잡이를 부르는 한 줄을 넣었습니다.\n판재 도면기는 vivivic-apps 바깥이라 상대경로로는 못 찾으므로 주소를 통째로 적었습니다.\n바뀐 것은 딱 세 줄(주석 1 · 빈 줄 1 · 스크립트 1)이고 그 밖엔 한 글자도 안 바꿨습니다.\n공용 손잡이 파일(shared/viggle.js)은 읽기만 하고 손대지 않았습니다.\n\n[잰 것 — 크로미움 375px, 터치 켬, 진짜 index.html 그대로]\n· ?viggle=1 없이 그냥 열면 아무것도 달라지지 않습니다.\n  손잡이가 덧붙인 요소 0개, 덮개 없음, 손잡이 스타일 안 들어감, 표 그대로 1줄.\n  손잡이 파일 첫머리의 'viggle=1 아니면 그냥 돌아간다' 가 실제로 작동합니다.\n· ?viggle=1 로 열면 켜집니다.\n  '길게 눌러 짚어서 지시' 안내 알약이 뜨고 손잡이 스타일이 들어갑니다.\n(샌드박스가 cdnjs·tailwind·github.io 를 막아서, 그 세 주소만 브라우저 바깥에서\n 가로채 같은 파일로 돌려주고 열었습니다. 앱 파일은 고치지 않았습니다.)\n\n[못 잰 것 — 되는 척하지 않겠습니다]\n· 길게 눌러 짚기 덮개가 실제로 뜨는지 확인 못 했습니다.\n  한 번 돌렸을 땐 덮개가 안 떴는데 그 실행은 제 시험틀이 틀려 있었습니다\n  (tailwind 를 잘못 물려 페이지에 오류가 나 있었습니다). 손가락 이벤트가 페이지까지\n  정말 닿는지 계측해서 '시험틀 탓인지 진짜 안 되는 건지' 가리려던 재실행이 막혔습니다.\n  그래서 된다고도 안 된다고도 말씀드릴 수 없습니다.\n· 3D 조작과 부딪히는지도 못 쟀습니다.\n  코드를 읽은 바로는 부딪힐 자리가 있습니다 — 손잡이는 10px 미만으로 0.5초 넘게\n  누르면 덮개를 띄우므로, 3D 를 아주 천천히 조금 돌릴 때 덮개가 끼어들 수 있습니다.\n  빠르게 휙 돌리면 10px 을 넘으니 괜찮을 것입니다. 짐작이지 잰 값이 아닙니다.\n  시키신 대로 3D 조작은 하나도 건드리지 않았습니다.\n· github.io 가 막혀 그 주소가 실제로 파일을 내주는지 여기서 확인 못 했습니다.\n  저장소에 shared/viggle.js 가 실재하는 것, 에이엠티가 같은 파일을 쓰는 것만 봤습니다.\n· 아이폰 사파리는 여기서 볼 수 없습니다.\n\n[사장님께서 폰에서 봐 주셔야 하는 것]\n1) 작업대에서 판재 도면기를 열어 화면을 0.5초 길게 눌러 보시고 짚기 덮개가 뜨는지.\n   이것이 제가 못 잰 바로 그것입니다. 안 뜨면 그렇다고만 알려 주십시오.\n2) 3D 판 위에서 천천히 조금 돌리실 때 덮개가 끼어드는지.\n   끼어들면 어떻게 할지 정해 주시면 그대로 하겠습니다. 제 마음대로 3D 조작을 죽이지 않았습니다.\n\n[그대로 둔 것]\n지난번에 찾은 것들 — 두 손가락 핀치 확대 안 되는 것, 맞춤 눌러도 판이 잘리는 것,\n단추가 손가락에 작은 것 — 시키신 대로 손대지 않았습니다."
+          },
+          "맡은수": {
+           "integerValue": "1"
+          },
+          "at": {
+           "integerValue": "1789193816"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "text": {
+           "stringValue": "이 프로그램에는 박스가 있는 화면이 없습니다. 0곳입니다. 그래서 「박스추가」 단추를 아무 데도 붙이지 않았습니다.\n\n[박스 있는 화면 — 0곳]\n판재도면기는 화면이 하나뿐입니다. 메뉴도 '판재 도면' 하나입니다(375px·1280px 둘 다 확인).\n그 한 화면은 왼쪽 '부품 치수' 입력 카드와 오른쪽 3D 그림, 이 둘이 전부입니다.\n저장해 둔 도면을 늘어놓는 자리도, 자료를 모아 두는 자리도 없습니다.\n\n[작업대와 견준 값]\n작업대(viggle/index.html)의 박스가 무엇인지 먼저 보고, 같은 잣대로 셌습니다.\n작업대는 wt_boxes 칸의 문서 하나가 박스 하나이고, 화면에는 FAB(id=fab)·목록 아래\nnewboxbtn·길게 눌렀을 때 '여기에 새 박스' 로 나옵니다.\n그 잣대(.fab #fab #newboxbtn .newbox [data-act=new] .box .boxes .tile .card-grid)로\n판재도면기를 재니 375px 0개, 1280px 0개입니다.\n'box' 라는 글자는 이 파일에 CSS box-shadow 로만 나옵니다. 박스라는 것 자체가 없습니다.\n\n[헷갈릴 만한 것 — 미리 갈라 둡니다]\n표의 줄과 '+ 판 추가' 단추가 박스처럼 보일 수 있습니다. 아닙니다.\n그 줄들은 한 장의 도면을 이루는 부품 치수(부품명·가로·세로·두께)이지, 사장님이\n만들어 정리하시는 박스가 아닙니다. 담기는 곳도 브라우저 안 한 칸(panel-drafter-v2)에\n'지금 그리는 도면 하나' 로만 들어가고, 새로 그리면 덮어씁니다. 도면을 여러 장 저장해\n늘어놓는 기능은 이 프로그램에 아직 없습니다.\n\n[어느 칸에 담았는지 — 안 만들었습니다]\n파이어스토어에 새 칸을 만들지 않았습니다. 박스가 없으니 담을 것이 없습니다.\nwt_boxes·wt_dev 에는 물론 아무것도 쓰지 않았습니다.\n(참고로 이 프로그램은 지금 파이어스토어를 아예 쓰지 않습니다 — firestore·firebase·fetch 0건.)\n\n[짚어서 지시 — 그대로입니다]\n코드를 한 글자도 바꾸지 않았으므로 9f57244 로 붙인 손잡이는 그대로입니다.\n열어서도 확인했습니다 — 손잡이 script 태그가 살아 있고(주소 그대로), 자바스크립트\n오류는 375px·1280px 둘 다 0건입니다. 좌우로 밀리지도 않습니다.\n\n[이번에 바꾼 것 — 없습니다]\n커밋 없습니다. 올린 것 없습니다. 집 규칙대로 '없으면 억지로 만들지 않는다' 를 지켰습니다.\n\n[사장님께서 정해 주셔야 할 것]\n도면을 여러 장 저장해서 늘어놓고 고르는 자리를 원하시면, 그때는 그 자리가 곧 박스 있는\n화면이 됩니다. 그 화면을 만들지 말지는 제가 정할 일이 아니라 사장님이 정하실 일입니다.\n시키시면 작업대 모양 그대로 베껴서 만들고 파이어스토어 새 칸에 담겠습니다.\n\n[못 한 것]\n아이폰 사파리로는 여기서 확인할 수 없습니다. 위 값은 크로미움에서 잰 것입니다."
+          },
+          "who": {
+           "stringValue": "클로드·판재도면기"
+          },
+          "at": {
+           "integerValue": "1789284775"
+          },
+          "맡은수": {
+           "integerValue": "0"
+          }
+         }
+        }
+       },
+       {
+        "mapValue": {
+         "fields": {
+          "at": {
+           "integerValue": "1789361406"
+          },
+          "who": {
+           "stringValue": "클로드·판재도면기"
+          },
+          "맡은수": {
+           "integerValue": "0"
+          },
+          "text": {
+           "stringValue": "없습니다. box:panel 에 답 안 한 지시 0건입니다.\n\n판번호 v0.3.0 · 판 9f57244 · 작업트리 0건 · main 과 차이 0건 (올릴 것 없음)\n짚어서 지시(0.5초 길게) 손잡이 그대로 살아 있습니다.\n「박스추가」는 이 프로그램에 박스 있는 화면이 0곳이라 붙일 데가 없었습니다 (어제 답함).\n\n기다리는 것 하나 — 「도면 여러 장 저장해 늘어놓는 자리」는 사장님 답을 기다리는 것이라\n손대지 않고 그대로 둡니다. 시키시면 작업대 모양 그대로 베껴 만들겠습니다.\n\n앞으로는 box:panel 에 지시가 오면 바로 하고 끝내고 올린 뒤 여기에 답 붙이겠습니다.\n\n(지금 밀린 3건은 box:cartoon · box:amt · box:cabinet-studio 자리 것이라 제 몫이 아닙니다.)"
+          }
+         }
+        }
+       }
+      ]
+     }
+    },
+    "잰때": {
+     "integerValue": "1789361406456"
+    }
+   },
+   "createTime": "2026-09-12T05:13:41.611197Z",
+   "updateTime": "2026-09-14T04:50:07.660610Z"
+  }
+ ]
+}
