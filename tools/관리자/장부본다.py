@@ -5,7 +5,7 @@ KEY="AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ="vivivic-4b7ef"
 뿌리=f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
 일꾼={"amt":"에이엠티","cabinet-studio":"NRS","clarify":"제품명료화","boring":"보링변환",
      "layout":"기계배치도","docs":"서류관리","johon":"조혼가구","vendorpia":"벤더피아상품정리",
-     "panel":"판재도면기","cartoon":"cartoon"}
+     "panel":"판재도면기","cartoon":"cartoon","ontology":"온톨로지"}
 def 토큰():
     r=urllib.request.urlopen(urllib.request.Request(
       f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
