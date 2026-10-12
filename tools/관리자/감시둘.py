@@ -50,6 +50,11 @@ if os.path.exists(눈금쪽):
 #   올렸는데 내가 하나도 못 봤다. **박스가 쓰는 저장소를 다 적어라.**
 저장소 = {"apps": "/home/user/vivivic-apps", "cabinet": "/home/user/cabinet-studio",
         "viggle": "/home/user/viggle", "docs": "/home/user/vivivic-docs"}
+# 사장님이 직접 보시는 프로그램 — 올라와도 나를 깨우지 않는다 (10-12 말씀:
+# 「동영시작업자는 내가 알아서 하는거고 … 너는 바이글안에 들어온 프로그램이나 신경써」).
+# ⚠ 눈금(머리)은 그래도 앞으로 민다 — 안 밀면 같은 것에 영영 다시 깨어난다.
+# ⚠ 바뀐 파일이 **전부** 이 폴더 안일 때만 건너뛴다. 한 줄이라도 밖을 건드리면 깨어난다.
+안볼폴더 = ("동영상업로드/",)
 머리 = {}
 if os.path.exists(머리쪽):
     try: 머리 = json.load(open(머리쪽))
@@ -79,7 +84,7 @@ while True:
     except Exception as e:
         print(f"[감시] 지시 못 읽음 — {e}", flush=True)
     try:
-        난것 = []
+        난것 = []; 밀렸나 = False
         for 이름, 길 in 저장소.items():
             if not os.path.isdir(길): continue
             subprocess.run(["git","-C",길,"fetch","-q","origin"], capture_output=True, timeout=120)
@@ -88,10 +93,17 @@ while True:
             if 새 and 머리.get(이름) and 새 != 머리[이름]:
                 글 = subprocess.run(["git","-C",길,"log","-1","--pretty=%h %s",새],
                                     capture_output=True, text=True).stdout.strip()
-                난것.append(f"올라왔다 · {이름} · {글}")
+                # ⚠ core.quotepath=false 없으면 git 이 한글 길을 "\353..." 로 내놓는다
+                #   (10-12 에 내 자가 여기서 빨갰다). 이 토막을 빼지 마라.
+                칸들 = [c for c in subprocess.run(
+                    ["git","-C",길,"-c","core.quotepath=false","diff","--name-only",머리[이름],새],
+                    capture_output=True, text=True).stdout.split("\n") if c.strip()]
+                넘김 = bool(칸들) and all(c.startswith(안볼폴더) for c in 칸들)
+                if not 넘김: 난것.append(f"올라왔다 · {이름} · {글}")
+            if 새 and 새 != 머리.get(이름): 밀렸나 = True
             머리[이름] = 새 or 머리.get(이름)
+        if 밀렸나: json.dump(머리, open(머리쪽, "w"))
         if 난것:
-            json.dump(머리, open(머리쪽, "w"))
             for g in 난것: print(g[:300], flush=True)
             print("[감시 끝 — 관리자가 받았다. 처리한 뒤 다시 걸어라]", flush=True); sys.exit(0)
     except Exception as e:
