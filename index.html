@@ -214,6 +214,10 @@ h1{margin:0 0 4px;font-size:38px;line-height:1.06;letter-spacing:-1.5px;font-wei
 
 /* 전체보기 */
 .allgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+/* 지우기 ✕ — 손가락이 닿게 44px. 정리중일 때만 뜬다 */
+.delx{position:absolute;top:0;right:0;width:44px;height:44px;display:grid;place-items:center;
+  font-size:17px;font-weight:700;color:#fff;background:var(--red);border-radius:0 20px 0 20px;z-index:2}
+.allgrid.tidy .abox{opacity:.96}
 .abox{position:relative;border-radius:20px;border:1px solid var(--edge);background:#fff;
   padding:14px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:10px}
 .abox.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -686,6 +690,7 @@ const MODES = [
 ];
 let MODE = 'home', BOXES = [], 개수 = 6, 촘촘 = false, 듣고있음 = false;
 let 시킨것개수 = 8;        // 「더 보기」 를 누르면 늘어난다
+let 정리중 = false;        // 「모든 박스」 판에서 지우기를 켜 둔 중인가 (10-13 사장님 말씀)
 let 열린질문 = null;       // 그 줄의 질문을 보고 있는 중이면 그 id
 /* 사장님 말씀(10-02, 「자세한 내용 보기」 를 짚으시고):
    「왜 작업 내용이 아닌 프로그램 페이이지로 연결되죠?」
@@ -995,11 +1000,17 @@ function 그리기(){
     </div>`;
 }
 
+/* 사장님 10-13: 「비비빅(구 바이글) 프로그램 박스 삭제 버튼은 언제 만들어 주는거야」.
+   지우는 길은 톱니(박스설정) 안에 있었는데 폰에서 찾기 어려우셨다. 그래서 **모든 박스**
+   판에 「정리」 를 둔다 — 켜면 네모마다 ✕ 가 뜨고, 누르면 한 번 묻고 지운다.
+   ⚠ 지우는 것은 못 되돌린다. **반드시 묻는다.** 속에 든 박스도 같이 지워지므로 그 수를 적어 보인다. */
 function 전체판(list){
   return `<div class="bar"><button class="tbtn" id="searchbtn">${ico('search',15,2)} search your's</button>
-    <span class="tbtn g">${list.length}개 · 사용량순</span></div>
-    <div class="allgrid" data-area="모든박스">
+    <span class="tbtn g">${list.length}개 · 사용량순</span>
+    <button class="tbtn${정리중 ? '' : ' g'}" id="tidybtn">${ico('trash-2',15)} ${정리중 ? '정리 끝' : '정리'}</button></div>
+    <div class="allgrid${정리중 ? ' tidy' : ''}" data-area="모든박스">
       ${list.map(b => `<button class="abox ${b.tone}" data-open="${b.id}">
+        ${정리중 ? `<span class="delx" data-del="${b.id}" role="button" aria-label="지우기">✕</span>` : ''}
         ${b.todo ? '<span class="red"></span>' : ''}
         <span>${ico(b.icon, 22)}</span>
         <span class="nm">${esc(b.name)}${(() => { const p = 자리표(b);
@@ -1172,6 +1183,28 @@ const 아이콘묶음 = [
   ['그 밖', ['image','camera','video','mic','globe','key','lock','search','lightbulb','rocket',
     'database','code-xml','cpu','cloud','link','download','upload','archive','trash-2','wand-sparkles']],
 ];
+
+/* 지우기 전에 묻는다. 못 되돌리는 일이라 **반드시 거친다.**
+   속에 든 박스도 같이 지워진다(창고층 delete 가 parent 로 묶어 지운다) — 그 수를 적어 보인다. */
+function 지움판(id){
+  const b = BOXES.find(x => x.id === id); if (!b) return;
+  const 안것 = BOXES.filter(x => x.parent === b.id);
+  판(`<h4>지울까요?</h4>
+    <p style="font-size:19px;font-weight:700;letter-spacing:-.4px;margin:0 0 6px">${esc(b.name)}</p>
+    <p style="color:var(--soft);margin:0 0 4px">${무게(b).used}회 열었습니다</p>
+    ${안것.length ? `<p style="color:var(--red);font-weight:700;margin:0 0 4px">안에 든 박스 ${안것.length}개도 같이 지워집니다 — ${
+      esc(안것.map(x => x.name).join(' · '))}</p>` : ''}
+    <p style="color:var(--muted);font-size:13.5px;margin:0 0 14px">되돌릴 수 없습니다.</p>
+    <button class="go" id="delno" style="background:#fff;color:var(--ink);border:1px solid var(--edge)">그만</button>
+    <button class="go" id="delyes" style="background:var(--red);color:#fff;margin-top:8px">지웁니다</button>`);
+  $('delno').addEventListener('click', () => 판닫기());
+  $('delyes').addEventListener('click', async e => {
+    const 단 = e.currentTarget; 단.disabled = true; 단.textContent = '지우는 중…';
+    try { await api('/api/box', { act: 'delete', id }); }
+    catch (err) { 단.disabled = false; 단.textContent = '못 지웠습니다 — 다시'; return; }
+    판닫기(); await 불러오기(); 그리기();
+  });
+}
 
 function 박스판(b, 부모){
   const 새것 = !b;
@@ -1647,6 +1680,9 @@ document.addEventListener('click', e => {
     시킨것개수 += 12;
     if (window.시킨것다시) window.시킨것다시(); else 그리기();
     return; }
+  const x = e.target.closest('[data-del]');          // ⚠ data-open 보다 먼저 — ✕ 는 네모 안에 있다
+  if (x){ e.stopPropagation(); e.preventDefault(); return 지움판(x.dataset.del); }
+  if (e.target.closest('#tidybtn')){ 정리중 = !정리중; 그리기(); return; }
   const o = e.target.closest('[data-open]');
   if (o){
     const b = BOXES.find(x => x.id === o.dataset.open);
