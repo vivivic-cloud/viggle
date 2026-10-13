@@ -377,6 +377,18 @@ const app = initializeApp({
 });
 const auth = getAuth(app), db = getFirestore(app);
 const 뿌리 = ['artifacts', 'vivivic-4b7ef', 'public', 'data'];
+
+/* ══ 공유 판 ══════════════════════════════════════════════
+   사장님 10-13 말씀: 「내 바이글 구성말고 그에게 필요한 프로그램 박스만 보여주면서
+   공유하려해」. 그래서 주소의 `?판=` 으로 **다른 박스 칸**을 본다.
+     없으면            wt_boxes          ← 사장님 판. 전과 똑같다
+     ?판=공유 이면      wt_boxes_공유      ← 그 사람 판. 사장님 박스가 **한 개도** 안 보인다
+   ⚠ 글자·숫자·밑줄만 받는다 — 딴 칸으로 새지 않게.
+   ⚠ 이건 **화면이 보는 칸을 가르는 것**이지 화베 규칙이 아니다. 규칙을 조이는 것은
+     사장님이 정하실 일이라 손대지 않았다. */
+const 판이름 = (new URLSearchParams(location.search).get('판') || '')
+                 .replace(/[^0-9A-Za-z_가-힣]/g, '').slice(0, 24);
+const 박스칸 = 판이름 ? 'wt_boxes_' + 판이름 : 'wt_boxes';
 const 칸 = (이름, id) => id ? doc(db, ...뿌리, 이름, id) : collection(db, ...뿌리, 이름);
 
 const 지금 = () => Math.floor(Date.now() / 1000);
@@ -395,7 +407,7 @@ const 빈손 = s => s.empty && s.metadata.fromCache;
 async function 박스받기(){
   if (박스들) return 박스들;
   let s;
-  try { s = await getDocs(칸('wt_boxes')); }
+  try { s = await getDocs(칸(박스칸)); }
   catch (e){ window.박스탈 = '파이어베이스가 거절했습니다 — ' + (e.code || e.message); return []; }
   if (빈손(s)){                          // 굳히지 않는다 — 다음 차례에 다시 받는다
     window.박스탈 = '파이어베이스에 아직 못 닿았습니다';
@@ -405,7 +417,7 @@ async function 박스받기(){
   박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
   return 박스들;
 }
-onSnapshot(칸('wt_boxes'), s => {        // 다른 기기에서 고쳐도 따라온다
+onSnapshot(칸(박스칸), s => {        // 다른 기기에서 고쳐도 따라온다
   if (빈손(s)) return;                   // 빈손으로 덮지 않는다
   박스들 = s.docs.map(d => ({ ...d.data(), id: d.id }));
   window.박스탈 = '';
@@ -438,28 +450,28 @@ window.창고 = async function(path, body){
                   plain: !!body.plain, used: 0, touched: t, todo: false,
                   kind: body.kind || 'box', created: t };
       const id = 새id();
-      await setDoc(칸('wt_boxes', id), x);
+      await setDoc(칸(박스칸, id), x);
       박스들 = null;
       return { ok: true, box: { ...x, id } };
     }
     const id = body.id; if (!id) return { ok: false };
-    if (act === 'use')    await updateDoc(칸('wt_boxes', id), { used: ((await 하나(id)).used || 0) + 1, touched: t });
+    if (act === 'use')    await updateDoc(칸(박스칸, id), { used: ((await 하나(id)).used || 0) + 1, touched: t });
     else if (act === 'update'){
       const 넣을것 = { touched: t };
       ['name','icon','tone','parent','link','plain'].forEach(k => { if (k in body) 넣을것[k] = body[k]; });
-      await updateDoc(칸('wt_boxes', id), 넣을것);
+      await updateDoc(칸(박스칸, id), 넣을것);
     }
-    else if (act === 'todo') await updateDoc(칸('wt_boxes', id), { todo: !!body.on });
-    else if (act === 'done') await updateDoc(칸('wt_boxes', id), { todo: false });
+    else if (act === 'todo') await updateDoc(칸(박스칸, id), { todo: !!body.on });
+    else if (act === 'done') await updateDoc(칸(박스칸, id), { todo: false });
     else if (act === 'delete'){
       const 다 = await 박스받기();
       const b = writeBatch(db);
-      다.filter(x => x.id === id || x.parent === id).forEach(x => b.delete(칸('wt_boxes', x.id)));
+      다.filter(x => x.id === id || x.parent === id).forEach(x => b.delete(칸(박스칸, x.id)));
       await b.commit();
     }
     else if (act === 'merge'){
       const b = writeBatch(db);
-      (body.ids || []).forEach(x => b.update(칸('wt_boxes', x), { parent: id }));
+      (body.ids || []).forEach(x => b.update(칸(박스칸, x), { parent: id }));
       await b.commit();
     }
     else return { ok: false };
@@ -517,7 +529,7 @@ window.창고 = async function(path, body){
   return {};
 };
 
-const 하나 = async id => { const d = await getDoc(칸('wt_boxes', id)); return d.exists() ? d.data() : {}; };
+const 하나 = async id => { const d = await getDoc(칸(박스칸, id)); return d.exists() ? d.data() : {}; };
 
 /* ── 짚어서 보낸 지시를 받는 자리 (?take=1) ────────────────── */
 async function 짚은것받기(표){
@@ -1534,7 +1546,11 @@ function 손잡이붙이기(b, 더){
   const u = new URL(b.link);
   u.searchParams.set('viggle', '1');
   u.searchParams.set('box', (부모 && 부모.id) || b.id);
-  u.searchParams.set('vg', location.origin + location.pathname + '?take=1');
+  u.searchParams.set('vg', location.origin + location.pathname
+                          + '?take=1' + (판이름 ? '&판=' + encodeURIComponent(판이름) : ''));
+  // 누가 짚었는지 — 공유 판에서 열 때만 실린다(shared/viggle.js 가 `보낸이` 로 적는다)
+  const 누구 = (new URLSearchParams(location.search).get('누구') || '').trim().slice(0, 24);
+  if (누구) u.searchParams.set('누구', 누구);
   if (부모) u.searchParams.set('name', 부모.name.replace(/pro$/, ''));
   // 「내가 시킨 것」 이 더 붙이는 것 — 짚으셨던 페이지(vg페이지), 지난 지시 펼치기(vg지난)
   if (더) for (const [k, v] of Object.entries(더)) if (v) u.searchParams.set(k, v);
