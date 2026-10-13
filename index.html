@@ -1583,7 +1583,7 @@ function 손잡이붙이기(b, 더){
   const u = new URL(b.link);
   u.searchParams.set('viggle', '1');
   u.searchParams.set('box', (부모 && 부모.id) || b.id);
-  const 판 = window.판이름 || '';
+  const 판 = 지금판이름;
   u.searchParams.set('vg', location.origin + location.pathname
                           + '?take=1' + (판 ? '&판=' + encodeURIComponent(판) : ''));
   // 누가 짚었는지 — 공유 판에서 열 때만 실린다(shared/viggle.js 가 `보낸이` 로 적는다)
@@ -1594,6 +1594,12 @@ function 손잡이붙이기(b, 더){
   if (더) for (const [k, v] of Object.entries(더)) if (v) u.searchParams.set(k, v);
   return u.toString();
 }
+
+/* 이 아래(화면 코드)는 **평범한 script** 라 모듈 칸보다 **먼저** 돈다.
+   그래서 모듈이 얹어 두는 window.판이름 을 믿으면 안 된다 — 그때는 아직 없다.
+   (10-13 에 그걸로 공유 판 짚기 끄기가 안 먹었다.) 주소에서 바로 읽는다. */
+const 지금판이름 = (new URLSearchParams(location.search).get('판') || '')
+                     .replace(/[^0-9A-Za-z_가-힣]/g, '').slice(0, 24);
 
 /* ══ 짚어서 지시하기 ══════════════════════════════════════
    사장님이 네 번 짚으셨다(09-30~10-01): 「다른 프로그램처럼 영역이 선택되고
@@ -1612,6 +1618,11 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 (() => {
   const 표 = new URLSearchParams(location.search);
   if (표.get('take') === '1') return;              // 짚은 것을 받는 화면에는 안 붙인다
+  /* ⚠ 공유 판(?판=…)에서는 **판 자체에 손잡이를 안 붙인다.**
+     사장님 10-13: 「이중에서 벤더피아 연동만 그가 짚어서 지시 할 수 있어」.
+     붙이면 그분이 판 아무 데나 짚어 `box:worktable` 로 보내게 되고, 보낸이도 안 달린다.
+     박스를 눌러 프로그램으로 들어가면 손잡이붙이기() 가 거기서 켜 준다(누구= 까지 싣는다). */
+  if (지금판이름) return;
   if (표.get('viggle') !== '1'){
     표.set('viggle', '1');
     if (!표.get('box'))  표.set('box', 'worktable');   // 작업대 일은 작업대 자리로
