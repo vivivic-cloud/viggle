@@ -389,6 +389,10 @@ const 뿌리 = ['artifacts', 'vivivic-4b7ef', 'public', 'data'];
 const 판이름 = (new URLSearchParams(location.search).get('판') || '')
                  .replace(/[^0-9A-Za-z_가-힣]/g, '').slice(0, 24);
 const 박스칸 = 판이름 ? 'wt_boxes_' + 판이름 : 'wt_boxes';
+/* ⚠ 아래 화면 코드는 **딴 script 칸**이라 이 상수가 안 보인다.
+   10-13 에 그걸 잊고 손잡이붙이기() 에서 그냥 `판이름` 을 썼다가
+   「판이름 is not defined」 로 **박스가 하나도 안 열렸다.** 그래서 창에 얹어 둔다. */
+window.판이름 = 판이름;
 const 칸 = (이름, id) => id ? doc(db, ...뿌리, 이름, id) : collection(db, ...뿌리, 이름);
 
 const 지금 = () => Math.floor(Date.now() / 1000);
@@ -1546,8 +1550,9 @@ function 손잡이붙이기(b, 더){
   const u = new URL(b.link);
   u.searchParams.set('viggle', '1');
   u.searchParams.set('box', (부모 && 부모.id) || b.id);
+  const 판 = window.판이름 || '';
   u.searchParams.set('vg', location.origin + location.pathname
-                          + '?take=1' + (판이름 ? '&판=' + encodeURIComponent(판이름) : ''));
+                          + '?take=1' + (판 ? '&판=' + encodeURIComponent(판) : ''));
   // 누가 짚었는지 — 공유 판에서 열 때만 실린다(shared/viggle.js 가 `보낸이` 로 적는다)
   const 누구 = (new URLSearchParams(location.search).get('누구') || '').trim().slice(0, 24);
   if (누구) u.searchParams.set('누구', 누구);
