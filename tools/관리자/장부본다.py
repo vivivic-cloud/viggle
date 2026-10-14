@@ -6,6 +6,9 @@ KEY="AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ="vivivic-4b7ef"
 일꾼={"amt":"에이엠티","cabinet-studio":"NRS","clarify":"제품명료화","boring":"보링변환",
      "layout":"기계배치도","docs":"서류관리","johon":"조혼가구","vendorpia":"벤더피아상품정리",
      "panel":"판재도면기","cartoon":"cartoon","ontology":"온톨로지",
+     # 10-14 사장님: 「채팅에 동영상 업로드 프로그램 비비빅에 박스 만들어줘」 →
+     # 박스 video(동영상업로드) 를 세우고 그 쪽을 맡던 방을 전담 작업자로 달았다.
+     "video":"동영상업로드",
      # 10-12 사장님이 담으라 하신 박스 — 배송관리업로드.html(벤더피아 배송 연동).
      # 박스 id 가 사장님이 손수 만드신 것이라 글자가 random 이다. 바꾸지 마라.
      "bbohq715mc5":"밴더피아연동"}
