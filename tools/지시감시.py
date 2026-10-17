@@ -6,6 +6,7 @@
 내보내지 않고, 그 뒤에 새로 들어온 것만 알린다.
 """
 import json, os, sys, time, urllib.request, urllib.parse
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
@@ -14,11 +15,7 @@ PROJ = "vivivic-4b7ef"
 
 
 def 토큰():
-    r = urllib.request.urlopen(urllib.request.Request(
-        f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-        json.dumps({"returnSecureToken": True}).encode(),
-        {"Content-Type": "application/json"}))
-    return json.load(r)["idToken"], time.time()
+    return 열쇠(), time.time()
 
 
 def 풀기(v):

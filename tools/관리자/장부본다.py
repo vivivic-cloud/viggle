@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """안 끝난 지시와 박스를 센다. (상자가 다시 뜨면 /tmp 가 날아가므로 viggle/tools 로 옮길 것)"""
 import json, sys, time, urllib.request
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 KEY="AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ="vivivic-4b7ef"
 뿌리=f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
 일꾼={"amt":"에이엠티","cabinet-studio":"NRS","clarify":"제품명료화","boring":"보링변환",
@@ -16,10 +19,7 @@ KEY="AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ="vivivic-4b7ef"
      # 박스 id 가 사장님이 손수 만드신 것이라 글자가 random 이다. 바꾸지 마라.
      "bbohq715mc5":"밴더피아연동"}
 def 토큰():
-    r=urllib.request.urlopen(urllib.request.Request(
-      f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-      json.dumps({"returnSecureToken":True}).encode(),{"Content-Type":"application/json"}))
-    return json.load(r)["idToken"]
+    return 열쇠()
 def 풀기(v):
     k=next(iter(v))
     if k=="arrayValue": return [풀기(x) for x in v[k].get("values",[])]

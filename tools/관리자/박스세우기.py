@@ -12,14 +12,14 @@
 ⚠ 새 프로그램은 **셋**을 다 갖춰야 한다 — 박스 · 손잡이 · 전담 작업자. 이것은 그 첫째다.
 """
 import json, sys, time, urllib.parse, urllib.request
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 KEY = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ = "vivivic-4b7ef"
 뿌리 = f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
 
 def 토큰():
-    r = urllib.request.urlopen(urllib.request.Request(
-        f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-        json.dumps({"returnSecureToken": True}).encode(), {"Content-Type": "application/json"}))
-    return json.load(r)["idToken"]
+    return 열쇠()
 
 def 세우기(tok, 박스id, 이름, 아이콘):
     이제 = int(time.time())

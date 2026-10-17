@@ -9,14 +9,14 @@
 ⚠ 이 칸은 `vp_` 가 아니다 — 스캔하는 프로그램이 여럿이라 다 읽을 수 있어야 한다.
 """
 import json, sys, urllib.parse, urllib.request
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 KEY="AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ="vivivic-4b7ef"
 뿌리=f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
 칸=urllib.parse.quote("큐알규칙")
 def 토큰():
-    r=urllib.request.urlopen(urllib.request.Request(
-      f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-      json.dumps({"returnSecureToken":True}).encode(),{"Content-Type":"application/json"}))
-    return json.load(r)["idToken"]
+    return 열쇠()
 def 풀기(v):
     k=next(iter(v))
     return int(v[k]) if k=="integerValue" else v[k]

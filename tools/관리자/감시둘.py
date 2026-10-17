@@ -4,6 +4,9 @@
 ⚠ 상자가 다시 뜨면 /tmp 가 통째로 날아간다(10-10 에 실제로 겪었다).
    그래서 **본 눈금은 파일에** 남기고, 그 파일도 없으면 아래 처음값에서 이어 간다."""
 import json, os, subprocess, sys, time, urllib.request
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
@@ -16,11 +19,7 @@ os.makedirs(본것칸, exist_ok=True)      # ⚠ 이 칸은 git 에 안 올라�
 처음눈금 = 1791594184
 
 def 토큰():
-    r = urllib.request.urlopen(urllib.request.Request(
-        f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-        json.dumps({"returnSecureToken": True}).encode(),
-        {"Content-Type": "application/json"}))
-    return json.load(r)["idToken"], time.time()
+    return 열쇠(), time.time()
 
 def 풀기(v):
     k = next(iter(v))

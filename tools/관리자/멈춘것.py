@@ -13,12 +13,12 @@
 닫는 것은 `장부찍기.py <id> <상태> "<한 줄>"`.
 """
 import json, urllib.request, time
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 KEY="AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"; PROJ="vivivic-4b7ef"
 뿌리=f"https://firestore.googleapis.com/v1/projects/{PROJ}/databases/(default)/documents/artifacts/{PROJ}/public/data"
-r=urllib.request.urlopen(urllib.request.Request(
-    f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-    json.dumps({"returnSecureToken":True}).encode(),{"Content-Type":"application/json"}))
-t=json.load(r)["idToken"]
+t=열쇠()
 d=json.load(urllib.request.urlopen(urllib.request.Request(뿌리+"/wt_asked?pageSize=300",headers={"Authorization":"Bearer "+t})))
 이제=time.time(); 줄=[]
 for doc in d.get("documents",[]):

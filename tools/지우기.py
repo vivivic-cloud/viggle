@@ -11,6 +11,7 @@
 **`--진짜` 를 붙이기 전에는 한 글자도 안 지운다.**
 """
 import json, sys, urllib.request, urllib.parse
+from 열쇠 import 열쇠          # 열쇠는 한 벌만 탄다 (10-16 막힌 일)
 
 KEY  = "AIzaSyB9X_hzd2D3goQ7oenK53Pz805P1c7oSqs"
 PROJ = "vivivic-4b7ef"
@@ -19,10 +20,7 @@ PROJ = "vivivic-4b7ef"
 
 
 def 토큰():
-    r = urllib.request.urlopen(urllib.request.Request(
-        f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={KEY}",
-        json.dumps({"returnSecureToken": True}).encode(), {"Content-Type": "application/json"}))
-    return json.load(r)["idToken"]
+    return 열쇠()
 
 
 def 부르기(길, tok, 어떻게="GET", 몸=None):
