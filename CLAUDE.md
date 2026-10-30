@@ -195,3 +195,32 @@ Cad to simple·작업지시서 커스텀)은 **한 건도 온 적이 없다.** �
   넓은 화면으로도 일하신다. 다만 `wt_boxes`·`wt_dev`·`confirmed_orders`·`cutting_plans`
   에는 쓰지 않는다. 프로그램마다 제 칸을 만든다.
 - **화면은 폰(375px) 기준**, 마우스·넓은 화면(1280px)도 함께 본다.
+
+## 프로그램 박스 세우는 법 — 영림원외주입력 (10-30)
+
+사장님 말씀: *「현재 개발중 입력폼 바이글에 박스형태의 프로그램으로 나타나게 해줘」*
+
+**박스는 코드가 아니라 파이어스토어 `wt_boxes` 에 있다.** `index.html` 은 고칠 것 없다 —
+쓰면 작업대가 곧바로 그린다(새로고침도 필요 없음, 실시간 구독).
+
+세운 것 — `youngrim` 「영림원외주입력」 (`kind: program`, 아이콘 `file-input`) 과 그 아래 넷:
+
+| id | 이름 | 아이콘 | link | plain |
+|---|---|---|---|---|
+| `yr-open` | 프로그램열기 | `monitor-play` | 앱 주소(`…/영림원외주입력/영림원외주입력.html`) | false |
+| `yr-link` | 바로가기 | `external-link` | 같은 앱 주소 | **true** |
+| `yr-code` | 코드 | `file-code-2` | `github.com/vivivic-cloud/vivivic-apps/tree/main/영림원외주입력` | false |
+| `yr-docs` | 개발자료 | `folder` | 빈칸 | false |
+
+하는 법:
+1. `python3 tools/관리자/박스세우기.py <id> "<이름>" <아이콘>` — 위 박스(부모).
+2. 아래 넷은 납품내역(`de-*`)·밴더피아연동(`vl-*`)을 본떠 같은 칸으로 POST
+   (`name·kind:"box"·icon·tone:"white"·link·parent·plain·todo·used·created·touched`).
+   주소는 한글을 `urllib.parse.quote` 로 싸서 넣는다.
+
+함정:
+- 아이콘 이름은 `shared/lucide.min.js` 에 있어야 한다(없으면 빈 칸). PascalCase 로 grep 해 본다.
+- 홈 첫 화면은 많이 쓴 박스만 보인다. 새 박스는 **show all** 맨 끝(「새 박스」 앞)에 있다.
+- 라이브 확인: `프로그램열기` → `…영림원외주입력.html?viggle=1&box=youngrim…` 로 열리고 폼이 뜬 것까지 쟀다.
+- 입력폼에는 아직 손잡이(`viggle.js`) 줄이 없다 — 그 폼 쪽 일이라 여기서 안 넣었다.
+- 전담 작업자는 아직 없다. 규칙대로 **첫 지시가 오면** 그때 세운다.
