@@ -224,3 +224,26 @@ Cad to simple·작업지시서 커스텀)은 **한 건도 온 적이 없다.** �
 - 라이브 확인: `프로그램열기` → `…영림원외주입력.html?viggle=1&box=youngrim…` 로 열리고 폼이 뜬 것까지 쟀다.
 - 입력폼에는 아직 손잡이(`viggle.js`) 줄이 없다 — 그 폼 쪽 일이라 여기서 안 넣었다.
 - 전담 작업자는 아직 없다. 규칙대로 **첫 지시가 오면** 그때 세운다.
+
+## 공유판 sil 에 박스 세우는 법 — 납품내역 (10-31)
+
+사장님 말씀: *「바이글 공유판sil 에 납품내역 프로그램 박스 추가해줘」*
+
+**「sil」 은 오타가 아니다.** 공유판 주소가 `?판=공유&누구=sil` 이다(사장님 판의 `shared`
+「공유판 · sil」 박스가 그리로 연다). 공유판은 **`wt_boxes_공유`** 칸을 본다 — `wt_boxes` 가 아니다.
+`박스세우기.py` 는 `wt_boxes` 에만 쓰므로 **공유판에는 못 쓴다.**
+
+세운 것 (`wt_boxes_공유`) — 반품스캔 `sh-return*` 을 그대로 본떠 칸을 베꼈다:
+
+| id | 이름 | 아이콘 | link | plain |
+|---|---|---|---|---|
+| `sh-delivery` | 납품내역 (program) | `truck` | 빈칸 | false |
+| `sh-delivery-open` | 프로그램열기 | `monitor-play` | `…/납품내역/납품내역.html` | false |
+| `sh-delivery-link` | 바로가기 | `external-link` | 같은 주소 | **true** |
+| `sh-delivery-code` | 코드 | `file-code-2` | `github.com/…/vivivic-apps/tree/main/납품내역` | false |
+| `sh-delivery-docs` | 개발자료 | `folder` | 빈칸 | false |
+
+- 공유판 박스 id 는 `sh-<영문>` 꼴. 짚은 지시는 **`box:sh-delivery`** 자리로 쌓인다(사장님 판 `box:delivery` 와 다른 자리).
+- 납품내역 앱에는 손잡이(`viggle.js`)가 이미 들어 있다.
+- 전담 작업자는 없다. 규칙대로 **첫 지시가 오면** 세운다.
+- 함정: 공유판의 옛 박스(`sh-amt`·`sh-johon` 등)는 전부 `plain: true` 라 짚기가 안 걸린다 — **본으로 삼지 말고 `sh-return`·`vendorlink` 를 본뜬다**(읽어라.md ⑰).
