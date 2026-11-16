@@ -53,6 +53,7 @@ VG_WHO=에이엠티 python3 tools/답하기.py "box:amt" "고쳤습니다 …"
 | `box:viggle` | `viggle` (이 저장소) | 작업대 자신 |
 | `box:howser` | `vivivic-apps/하우저연동` | 하우저(howser.co.kr) 위에 덧씌우는 크롬 확장 「하우저 보기」. 크롬 컴퓨터 전용 — 「프로그램열기」는 설치 안내를 연다 |
 | `box:workstatus` | `vivivic-apps/작업현황` | 작업자 방들이 한 일·사장님 확인할 것을 한 화면에 모은 대시보드. 자료(`data.json`)는 예약 작업 「작업현황 갱신」이 30분마다 다시 쓴다 — 인계 글 `vivivic-apps/작업현황/CLAUDE.md` |
+| `box:baljuyeok` | `vivivic-apps/발주역입력/재단.html` | 에이엠티 재단 세부내역(월별) · 보드매입현황 — 두 쪽은 화면 위 탭으로 오간다. **인계 글 — 그 폴더 `CLAUDE.md`** |
 | `box:clarify` | `vivivic-apps/벤더피아상품정리/제품명료화.html` | 벤더피아 상품정보·단품정보 엑셀을 담아 단품 기준으로 가려 규칙을 쌓는다. **인계 글 — 그 폴더 `CLAUDE.md` 맨 끝** |
 
 `vivivic-apps/shared/viggle.js` 는 프로그램 화면에 얹는 **손잡이**다.
@@ -281,3 +282,19 @@ Cad to simple·작업지시서 커스텀)은 **한 건도 온 적이 없다.** �
 - 라이브 확인(11-15): 모든 박스 맨 끝에 「작업현황」이 다른 박스와 같은 모양으로 뜨고, 누르면 안쪽 네 칸과 「순수 프로그램」 주소(`…/vivivic-apps/작업현황/`)가 보인다.
 - 안쪽 칸 차례는 사용량순이라 처음엔 「코드」가 앞이다. 「프로그램열기」를 한 번 쓰면 앞으로 온다.
 - 작업현황 화면에는 손잡이(`viggle.js`)를 안 넣었다(시키지 않음). 전담 작업자는 아직 없다 — 첫 지시가 오면 세운다.
+
+## 프로그램 박스 세우는 법 — 발주역입력 (11-16)
+
+사장님 말씀: 「프로그램 바이글에 박스로 올려 줘」(재단 세부내역 · 보드매입현황).
+`wt_boxes` 에 `baljuyeok` 「발주역입력」(`kind: program`, 아이콘 `clipboard-pen`) + 아래 넷 — 작업현황 `ws-*` 꼴 그대로(`index.html` 은 안 고쳤다):
+
+| id | 이름 | 아이콘 | link | plain |
+|---|---|---|---|---|
+| `by-open` | 프로그램열기 | `monitor-play` | `…/vivivic-apps/발주역입력/재단.html` | false |
+| `by-link` | 바로가기 | `external-link` | 같은 주소 | **true** |
+| `by-code` | 코드 | `file-code-2` | `github.com/vivivic-cloud/vivivic-apps/tree/main/발주역입력` | false |
+| `by-docs` | 개발자료 | `folder` | `…/blob/main/발주역입력/CLAUDE.md` | false |
+
+- 박스는 하나 — 보드매입현황은 재단 화면 위 탭으로 간다.
+- 라이브 확인(11-16): 「모든 박스」 맨 끝(「새 박스」 앞)에 같은 모양으로 뜨고, 프로그램열기 → `재단.html?viggle=1&box=baljuyeok…` 로 열려 9월 표가 떴다.
+- 두 화면에 손잡이(`viggle.js`)는 이미 들어 있다. 전담 작업자는 아직 없다 — 첫 지시가 오면 세운다.
